@@ -61,7 +61,7 @@ final class Config
    * constants during GWT and/or closure compiler phases and thus allow elimination of
    * code during production variants of the runtime.
    */
-  private interface Provider
+  interface Provider
   {
     boolean verboseErrorMessages();
 

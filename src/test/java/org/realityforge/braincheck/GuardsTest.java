@@ -20,7 +20,7 @@ public class GuardsTest
   public void fail_verboseErrorMessages_false()
     throws Exception
   {
-    getConfigProvider().setVerboseErrorMessages( false );
+    BrainCheckTestUtil.setVerboseErrorMessages( false );
 
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.fail( () -> "My Failure Reason" ) );
@@ -32,7 +32,7 @@ public class GuardsTest
   public void fail_checkInvariants_false()
     throws Exception
   {
-    getConfigProvider().setCheckInvariants( false );
+    BrainCheckTestUtil.setCheckInvariants( false );
 
     // No failure
     Guards.fail( () -> "My Failure Reason" );
@@ -75,7 +75,7 @@ public class GuardsTest
   public void invariant_verboseErrorMessages_false()
     throws Exception
   {
-    getConfigProvider().setVerboseErrorMessages( false );
+    BrainCheckTestUtil.setVerboseErrorMessages( false );
 
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.invariant( () -> false, () -> "My Failure Reason" ) );
@@ -87,7 +87,7 @@ public class GuardsTest
   public void invariant_checkInvariants_false()
     throws Exception
   {
-    getConfigProvider().setCheckInvariants( false );
+    BrainCheckTestUtil.setCheckInvariants( false );
 
     // No failure
     Guards.invariant( () -> false, () -> "My Failure Reason" );
@@ -130,7 +130,7 @@ public class GuardsTest
   public void apiInvariant_verboseErrorMessages_false()
     throws Exception
   {
-    getConfigProvider().setVerboseErrorMessages( false );
+    BrainCheckTestUtil.setVerboseErrorMessages( false );
 
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.apiInvariant( () -> false, () -> "My Failure Reason" ) );
@@ -142,7 +142,7 @@ public class GuardsTest
   public void apiInvariant_checkapiInvariants_false()
     throws Exception
   {
-    getConfigProvider().setCheckApiInvariants( false );
+    BrainCheckTestUtil.setCheckApiInvariants( false );
 
     // No failure
     Guards.apiInvariant( () -> false, () -> "My Failure Reason" );
