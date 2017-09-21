@@ -10,6 +10,8 @@ checks can be compiled out in production environments either by the JIT or the G
 
 The simplest way to use Braincheck is to;
 
+* Review the [javadocs](http://realityforge.org/braincheck/).
+
 * Add the BrainCheck dependencies into the build system. i.e.
 
 ```xml
@@ -25,7 +27,7 @@ The simplest way to use Braincheck is to;
   development build. You can also explicitly set the configuration properties to control which parts
   of the application are optimized away during builds. See the configuration properties section below.
 
-* Add invariant checks to your code to verify various conditions:
+* Add invariant checks to your code to verify various conditions.
 
 ```java
 import static org.realityforge.braincheck.Guards.*;
