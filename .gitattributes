@@ -2,6 +2,7 @@
 * -text
 *.html text
 *.java text
+*.json text
 *.md text
 *.rake text
 *.xml text
@@ -9,6 +10,7 @@
 *.yml text
 .gitattributes text
 .gitignore text
+.node-version text
 .ruby-version text
 Gemfile text
 LICENSE text
