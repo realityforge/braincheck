@@ -6,7 +6,6 @@ import org.jetbrains.annotations.Contract;
 
 /**
  * A utility class used to perform assertions and invariant checks.
- * The invariants
  */
 public final class Guards
 {
