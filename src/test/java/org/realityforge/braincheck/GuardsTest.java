@@ -92,4 +92,59 @@ public class GuardsTest
     // No failure
     Guards.invariant( () -> false, () -> "My Failure Reason" );
   }
+
+  @Test
+  public void apiInvariant_passed()
+    throws Exception
+  {
+    Guards.apiInvariant( () -> true, () -> "My Failure Reason" );
+  }
+
+  @Test
+  public void apiInvariant_failed()
+    throws Exception
+  {
+    final IllegalStateException exception =
+      expectThrows( IllegalStateException.class, () -> Guards.apiInvariant( () -> false, () -> "My Failure Reason" ) );
+
+    assertEquals( exception.getMessage(), "My Failure Reason" );
+  }
+
+  @Test
+  public void apiInvariant_condition_throws_exception()
+    throws Exception
+  {
+    final IllegalStateException exception =
+      expectThrows( IllegalStateException.class, () -> Guards.apiInvariant( () -> {
+        throw new RuntimeException( "X" );
+      }, () -> "My Failure Reason" ) );
+
+    final String message = exception.getMessage();
+    assertTrue( message.startsWith( "Error checking condition.\n" +
+                                    "Message: My Failure Reason\n" +
+                                    "Throwable:\n" +
+                                    "java.lang.RuntimeException: X" ) );
+  }
+
+  @Test
+  public void apiInvariant_verboseErrorMessages_false()
+    throws Exception
+  {
+    getConfigProvider().setVerboseErrorMessages( false );
+
+    final IllegalStateException exception =
+      expectThrows( IllegalStateException.class, () -> Guards.apiInvariant( () -> false, () -> "My Failure Reason" ) );
+
+    assertEquals( exception.getMessage(), null );
+  }
+
+  @Test
+  public void apiInvariant_checkapiInvariants_false()
+    throws Exception
+  {
+    getConfigProvider().setCheckApiInvariants( false );
+
+    // No failure
+    Guards.apiInvariant( () -> false, () -> "My Failure Reason" );
+  }
 }

@@ -23,6 +23,11 @@ final class Config
     return c_provider.checkInvariants();
   }
 
+  static boolean checkApiInvariants()
+  {
+    return c_provider.checkApiInvariants();
+  }
+
   @TestOnly
   static Provider getProvider()
   {
@@ -42,10 +47,12 @@ final class Config
       "true".equals( System.getProperty( "braincheck.verbose_error_messages", development ? "true" : "false" ) );
     final boolean checkInvariants =
       "true".equals( System.getProperty( "braincheck.check_invariants", development ? "true" : "false" ) );
+    final boolean checkApiInvariants =
+      "true".equals( System.getProperty( "braincheck.check_api_invariants", development ? "true" : "false" ) );
 
     return System.getProperty( "braincheck.dynamic_provider", "false" ).equals( "true" ) ?
-           new DynamicProvider( verboseErrorMessages, checkInvariants ) :
-           new StaticProvider( verboseErrorMessages, checkInvariants );
+           new DynamicProvider( verboseErrorMessages, checkInvariants, checkApiInvariants ) :
+           new StaticProvider( verboseErrorMessages, checkInvariants, checkApiInvariants );
   }
 
   /**
@@ -59,6 +66,8 @@ final class Config
     boolean verboseErrorMessages();
 
     boolean checkInvariants();
+
+    boolean checkApiInvariants();
   }
 
   /**
@@ -71,11 +80,15 @@ final class Config
   {
     private boolean _verboseErrorMessages;
     private boolean _checkInvariants;
+    private boolean _checkApiInvariants;
 
-    DynamicProvider( final boolean verboseErrorMessages, final boolean checkInvariants )
+    DynamicProvider( final boolean verboseErrorMessages,
+                     final boolean checkInvariants,
+                     final boolean checkApiInvariants )
     {
       _verboseErrorMessages = verboseErrorMessages;
       _checkInvariants = checkInvariants;
+      _checkApiInvariants = checkApiInvariants;
     }
 
     void setVerboseErrorMessages( final boolean verboseErrorMessages )
@@ -88,6 +101,11 @@ final class Config
       _checkInvariants = checkInvariants;
     }
 
+    void setCheckApiInvariants( final boolean checkApiInvariants )
+    {
+      _checkApiInvariants = checkApiInvariants;
+    }
+
     @Override
     public boolean verboseErrorMessages()
     {
@@ -98,6 +116,12 @@ final class Config
     public boolean checkInvariants()
     {
       return _checkInvariants;
+    }
+
+    @Override
+    public boolean checkApiInvariants()
+    {
+      return _checkApiInvariants;
     }
   }
 
@@ -111,11 +135,15 @@ final class Config
   {
     private final boolean _verboseErrorMessages;
     private final boolean _checkInvariants;
+    private final boolean _checkApiInvariants;
 
-    StaticProvider( final boolean verboseErrorMessages, final boolean checkInvariants )
+    StaticProvider( final boolean verboseErrorMessages,
+                    final boolean checkInvariants,
+                    final boolean checkApiInvariants )
     {
       _verboseErrorMessages = verboseErrorMessages;
       _checkInvariants = checkInvariants;
+      _checkApiInvariants = checkApiInvariants;
     }
 
     @Override
@@ -128,6 +156,12 @@ final class Config
     public boolean checkInvariants()
     {
       return _checkInvariants;
+    }
+
+    @Override
+    public boolean checkApiInvariants()
+    {
+      return _checkApiInvariants;
     }
   }
 }

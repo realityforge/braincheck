@@ -16,4 +16,7 @@
 
   <define-property name="braincheck.check_invariants" values="true,false"/>
   <set-property name="braincheck.check_invariants" value="false"/>
+
+  <define-property name="braincheck.check_api_invariants" values="true,false"/>
+  <set-property name="braincheck.check_api_invariants" value="false"/>
 </module>

@@ -15,6 +15,34 @@ public final class Guards
   }
 
   /**
+   * Check an api invariant in the code base.
+   * The invariant condition should return true if the library user is using the api correctly. This invariant
+   * should be disabled in production environments but users of the library may choose to enable it when using
+   * the library.
+   *
+   * <p>If the condition is false then an {@link IllegalStateException} is thrown.
+   * The invariant check will be skipped unless the configuration setting {@link Config#checkInvariants()}
+   * is true. A null message is used rather than supplied message unless {@link Config#verboseErrorMessages()}
+   * is true.</p>
+   *
+   * @param condition the condition to check.
+   * @param message   the message supplier used if verbose messages enabled.
+   * @throws IllegalStateException if condition returns false.
+   */
+  public static void apiInvariant( @Nonnull final Supplier<Boolean> condition,
+                                   @Nonnull final Supplier<String> message )
+  {
+    if ( Config.checkApiInvariants() )
+    {
+      boolean conditionResult = isConditionTrue( condition, message );
+      if ( !conditionResult )
+      {
+        fail( message );
+      }
+    }
+  }
+
+  /**
    * Check an invariant in code base.
    * The invariant condition should always return true. Returning false indicates that the host application
    * or library has an unexpected bug. These invariant checks may be compute intensive as they will likely

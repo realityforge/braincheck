@@ -13,6 +13,7 @@ public abstract class AbstractBraincheckTest
     final Config.DynamicProvider provider = getConfigProvider();
     provider.setVerboseErrorMessages( true );
     provider.setCheckInvariants( true );
+    provider.setCheckApiInvariants( true );
   }
 
   @AfterMethod
@@ -22,6 +23,7 @@ public abstract class AbstractBraincheckTest
     final Config.DynamicProvider provider = getConfigProvider();
     provider.setVerboseErrorMessages( false );
     provider.setCheckInvariants( false );
+    provider.setCheckApiInvariants( false );
   }
 
   @Nonnull
