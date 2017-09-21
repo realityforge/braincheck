@@ -5,7 +5,7 @@ import org.jetbrains.annotations.TestOnly;
 /**
  * Location of all compile time configuration settings for the toolkit.
  */
-final class Config
+public final class Config
 {
   private static final Provider c_provider = createProvider();
 
@@ -13,17 +13,32 @@ final class Config
   {
   }
 
-  static boolean verboseErrorMessages()
+  /**
+   * Return true if invariant failures will include a detail message.
+   *
+   * @return true if invariant failures will include a detail message.
+   */
+  public static boolean verboseErrorMessages()
   {
     return c_provider.verboseErrorMessages();
   }
 
-  static boolean checkInvariants()
+  /**
+   * Return true if invariants will be checked.
+   *
+   * @return true if invariants will be checked.
+   */
+  public static boolean checkInvariants()
   {
     return c_provider.checkInvariants();
   }
 
-  static boolean checkApiInvariants()
+  /**
+   * Return true if apiInvariants will be checked.
+   *
+   * @return true if apiInvariants will be checked.
+   */
+  public static boolean checkApiInvariants()
   {
     return c_provider.checkApiInvariants();
   }
