@@ -48,16 +48,16 @@ public final class BrainCheckTestUtil
    * Generate an exception if the provider is not a DynamicProvider.
    */
   @Nonnull
-  private static Config.DynamicProvider getConfigProvider()
+  private static BrainCheckConfig.DynamicProvider getConfigProvider()
   {
-    final Config.Provider provider = Config.getProvider();
-    if( !(provider instanceof Config.DynamicProvider ))
+    final BrainCheckConfig.Provider provider = BrainCheckConfig.getProvider();
+    if ( !( provider instanceof BrainCheckConfig.DynamicProvider ) )
     {
       final String message =
         "To use BrainCheckTestUtil you need to ensure that the system property 'braincheck.dynamic_provider' " +
         "is set to true. This slows down configuration checking and should only be enabled in test environments.";
       throw new IllegalStateException( message );
     }
-    return (Config.DynamicProvider) provider;
+    return (BrainCheckConfig.DynamicProvider) provider;
   }
 }

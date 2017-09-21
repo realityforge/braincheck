@@ -20,8 +20,8 @@ public final class Guards
    * the library.
    *
    * <p>If the condition is false then an {@link IllegalStateException} is thrown.
-   * The invariant check will be skipped unless the configuration setting {@link Config#checkInvariants()}
-   * is true. A null message is used rather than supplied message unless {@link Config#verboseErrorMessages()}
+   * The invariant check will be skipped unless the configuration setting {@link BrainCheckConfig#checkInvariants()}
+   * is true. A null message is used rather than supplied message unless {@link BrainCheckConfig#verboseErrorMessages()}
    * is true.</p>
    *
    * @param condition the condition to check.
@@ -31,7 +31,7 @@ public final class Guards
   public static void apiInvariant( @Nonnull final Supplier<Boolean> condition,
                                    @Nonnull final Supplier<String> message )
   {
-    if ( Config.checkApiInvariants() )
+    if ( BrainCheckConfig.checkApiInvariants() )
     {
       boolean conditionResult = isConditionTrue( condition, message );
       if ( !conditionResult )
@@ -48,8 +48,8 @@ public final class Guards
    * be disabled in production environments.
    *
    * <p>If the condition is false then an {@link IllegalStateException} is thrown.
-   * The invariant check will be skipped unless the configuration setting {@link Config#checkInvariants()}
-   * is true. A null message is used rather than supplied message unless {@link Config#verboseErrorMessages()}
+   * The invariant check will be skipped unless the configuration setting {@link BrainCheckConfig#checkInvariants()}
+   * is true. A null message is used rather than supplied message unless {@link BrainCheckConfig#verboseErrorMessages()}
    * is true.</p>
    *
    * @param condition the condition to check.
@@ -59,7 +59,7 @@ public final class Guards
   public static void invariant( @Nonnull final Supplier<Boolean> condition,
                                 @Nonnull final Supplier<String> message )
   {
-    if ( Config.checkInvariants() )
+    if ( BrainCheckConfig.checkInvariants() )
     {
       if ( !isConditionTrue( condition, message ) )
       {
@@ -92,8 +92,8 @@ public final class Guards
 
   /**
    * Throw an IllegalStateException with supplied detail message.
-   * The exception is not thrown unless {@link Config#checkInvariants()} is true.
-   * The exception will ignore the supplied message unless {@link Config#verboseErrorMessages()} is true.
+   * The exception is not thrown unless {@link BrainCheckConfig#checkInvariants()} is true.
+   * The exception will ignore the supplied message unless {@link BrainCheckConfig#verboseErrorMessages()} is true.
    *
    * @param message the message supplier used if verbose messages enabled.
    * @throws IllegalStateException when called.
@@ -101,9 +101,9 @@ public final class Guards
   @Contract( "_ -> fail" )
   public static void fail( @Nonnull final Supplier<String> message )
   {
-    if ( Config.checkInvariants() )
+    if ( BrainCheckConfig.checkInvariants() )
     {
-      if ( Config.verboseErrorMessages() )
+      if ( BrainCheckConfig.verboseErrorMessages() )
       {
         throw new IllegalStateException( BrainCheckUtil.safeGetString( message ) );
       }

@@ -5,11 +5,11 @@ import org.jetbrains.annotations.TestOnly;
 /**
  * Location of all compile time configuration settings for the toolkit.
  */
-public final class Config
+public final class BrainCheckConfig
 {
   private static final Provider c_provider = createProvider();
 
-  private Config()
+  private BrainCheckConfig()
   {
   }
 
