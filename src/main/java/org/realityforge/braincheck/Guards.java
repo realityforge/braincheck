@@ -1,4 +1,4 @@
-package org.realityforge.arez;
+package org.realityforge.braincheck;
 
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
@@ -16,9 +16,10 @@ public final class Guards
 
   /**
    * Check an invariant in code base.
+   * The invariant represent
    * If the condition is false then an {@link IllegalStateException} is thrown.
-   * The invariant check will be skipped unless the configuration setting {@link ArezConfig#checkInvariants()}
-   * is true. A null message is used rather than supplied message unless {@link ArezConfig#verboseErrorMessages()}
+   * The invariant check will be skipped unless the configuration setting {@link Config#checkInvariants()}
+   * is true. A null message is used rather than supplied message unless {@link Config#verboseErrorMessages()}
    * is true.
    *
    * @param condition the condition to check.
@@ -28,7 +29,7 @@ public final class Guards
   public static void invariant( @Nonnull final Supplier<Boolean> condition,
                                 @Nonnull final Supplier<String> message )
   {
-    if ( ArezConfig.checkInvariants() )
+    if ( Config.checkInvariants() )
     {
       boolean conditionResult = false;
       try
@@ -38,8 +39,8 @@ public final class Guards
       catch ( final Throwable t )
       {
         fail( () -> "Error checking condition.\n" +
-                    "Message: " + ArezUtil.safeGetString( message ) + "\n" +
-                    "Throwable:\n" + ThrowableUtil.throwableToString( t ) );
+                    "Message: " + BrainCheckUtil.safeGetString( message ) + "\n" +
+                    "Throwable:\n" + BrainCheckUtil.throwableToString( t ) );
       }
       if ( !conditionResult )
       {
@@ -50,8 +51,8 @@ public final class Guards
 
   /**
    * Throw an IllegalStateException with supplied detail message.
-   * The exception is not thrown unless {@link ArezConfig#checkInvariants()} is true.
-   * The exception will ignore the supplied message unless {@link ArezConfig#verboseErrorMessages()} is true.
+   * The exception is not thrown unless {@link Config#checkInvariants()} is true.
+   * The exception will ignore the supplied message unless {@link Config#verboseErrorMessages()} is true.
    *
    * @param message the message supplier used if verbose messages enabled.
    * @throws IllegalStateException when called.
@@ -59,11 +60,11 @@ public final class Guards
   @Contract( "_ -> fail" )
   public static void fail( @Nonnull final Supplier<String> message )
   {
-    if ( ArezConfig.checkInvariants() )
+    if ( Config.checkInvariants() )
     {
-      if ( ArezConfig.verboseErrorMessages() )
+      if ( Config.verboseErrorMessages() )
       {
-        throw new IllegalStateException( ArezUtil.safeGetString( message ) );
+        throw new IllegalStateException( BrainCheckUtil.safeGetString( message ) );
       }
       else
       {

@@ -1,10 +1,10 @@
-package org.realityforge.arez;
+package org.realityforge.braincheck;
 
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class GuardsTest
-  extends AbstractArezTest
+  extends AbstractBraincheckTest
 {
   @Test
   public void fail()

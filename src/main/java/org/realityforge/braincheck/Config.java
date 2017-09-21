@@ -1,15 +1,15 @@
-package org.realityforge.arez;
+package org.realityforge.braincheck;
 
 import org.jetbrains.annotations.TestOnly;
 
 /**
  * Location of all compile time configuration settings for the toolkit.
  */
-final class ArezConfig
+final class Config
 {
   private static final Provider c_provider = createProvider();
 
-  private ArezConfig()
+  private Config()
   {
   }
 
@@ -31,19 +31,19 @@ final class ArezConfig
 
   private static Provider createProvider()
   {
-    final String environment = System.getProperty( "arez.environment", "production" );
+    final String environment = System.getProperty( "braincheck.environment", "production" );
     if ( !"production".equals( environment ) && !"development".equals( environment ) )
     {
-      final String message = "System property 'arez.environment' is set to invalid property " + environment;
+      final String message = "System property 'braincheck.environment' is set to invalid property " + environment;
       throw new IllegalStateException( message );
     }
     final boolean development = environment.equals( "development" );
     final boolean verboseErrorMessages =
-      "true".equals( System.getProperty( "arez.verbose_error_messages", development ? "true" : "false" ) );
+      "true".equals( System.getProperty( "braincheck.verbose_error_messages", development ? "true" : "false" ) );
     final boolean checkInvariants =
-      "true".equals( System.getProperty( "arez.check_invariants", development ? "true" : "false" ) );
+      "true".equals( System.getProperty( "braincheck.check_invariants", development ? "true" : "false" ) );
 
-    return System.getProperty( "arez.dynamic_provider", "false" ).equals( "true" ) ?
+    return System.getProperty( "braincheck.dynamic_provider", "false" ).equals( "true" ) ?
            new DynamicProvider( verboseErrorMessages, checkInvariants ) :
            new StaticProvider( verboseErrorMessages, checkInvariants );
   }

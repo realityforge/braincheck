@@ -24,11 +24,11 @@ define 'braincheck' do
   compile.with PROVIDED_DEPS,
                COMPILE_DEPS
 
-  gwt_enhance(project, %w(org.realityforge.arez.Arez org.realityforge.arez.ArezDev))
+  gwt_enhance(project, %w(org.realityforge.braincheck.BrainCheck org.realityforge.braincheck.BrainCheckDev))
 
   test.using :testng
   test.with TEST_DEPS
-  test.options[:properties] = { 'arez.dynamic_provider' => 'true', 'arez.logger' => 'proxy', 'arez.environment' => 'development' }
+  test.options[:properties] = { 'braincheck.dynamic_provider' => 'true', 'braincheck.environment' => 'development' }
   test.options[:java_args] = ['-ea']
 
   package(:jar)
@@ -37,6 +37,6 @@ define 'braincheck' do
 
   iml.excluded_directories << project._('tmp/gwt')
 
-  ipr.add_default_testng_configuration(:jvm_args => '-ea -Darez.dynamic_provider=true -Darez.logger=proxy -Darez.environment=development')
+  ipr.add_default_testng_configuration(:jvm_args => '-ea -Dbraincheck.dynamic_provider=true -Dbraincheck.environment=development')
   ipr.add_component_from_artifact(:idea_codestyle)
 end

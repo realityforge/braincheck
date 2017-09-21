@@ -1,4 +1,4 @@
 /**
  * This package contains the core Braincheck library.
  */
-package org.realityforge.arez;
+package org.realityforge.braincheck;

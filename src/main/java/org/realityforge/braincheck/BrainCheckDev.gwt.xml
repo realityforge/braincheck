@@ -1,5 +1,5 @@
 <module>
-  <inherits name="org.realityforge.arez.Arez"/>
+  <inherits name="org.realityforge.braincheck.BrainCheck"/>
 
   <set-property name="arez.environment" value="development"/>
 
