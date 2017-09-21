@@ -1,8 +1,8 @@
 <module>
   <inherits name="org.realityforge.braincheck.BrainCheck"/>
 
-  <set-property name="arez.environment" value="development"/>
+  <set-property name="braincheck.environment" value="development"/>
 
-  <set-property name="arez.verbose_error_messages" value="true"/>
-  <set-property name="arez.check_invariants" value="true"/>
+  <set-property name="braincheck.verbose_error_messages" value="true"/>
+  <set-property name="braincheck.check_invariants" value="true"/>
 </module>
