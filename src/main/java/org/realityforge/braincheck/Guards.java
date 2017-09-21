@@ -34,22 +34,33 @@ public final class Guards
   {
     if ( Config.checkInvariants() )
     {
-      boolean conditionResult = false;
-      try
-      {
-        conditionResult = condition.get();
-      }
-      catch ( final Throwable t )
-      {
-        fail( () -> "Error checking condition.\n" +
-                    "Message: " + BrainCheckUtil.safeGetString( message ) + "\n" +
-                    "Throwable:\n" + BrainCheckUtil.throwableToString( t ) );
-      }
-      if ( !conditionResult )
+      if ( !isConditionTrue( condition, message ) )
       {
         fail( message );
       }
     }
+  }
+
+  /**
+   * Return the result of specified condition.
+   * If there is an error resolving condition then fail or return false depending on config settings.
+   *
+   * @return the result of specified condition.
+   */
+  private static boolean isConditionTrue( @Nonnull final Supplier<Boolean> condition,
+                                          @Nonnull final Supplier<String> message )
+  {
+    try
+    {
+      return condition.get();
+    }
+    catch ( final Throwable t )
+    {
+      fail( () -> "Error checking condition.\n" +
+                  "Message: " + BrainCheckUtil.safeGetString( message ) + "\n" +
+                  "Throwable:\n" + BrainCheckUtil.throwableToString( t ) );
+    }
+    return false;
   }
 
   /**
