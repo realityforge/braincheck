@@ -16,11 +16,14 @@ public final class Guards
 
   /**
    * Check an invariant in code base.
-   * The invariant represent
-   * If the condition is false then an {@link IllegalStateException} is thrown.
+   * The invariant condition should always return true. Returning false indicates that the host application
+   * or library has an unexpected bug. These invariant checks may be compute intensive as they will likely
+   * be disabled in production environments.
+   *
+   * <p>If the condition is false then an {@link IllegalStateException} is thrown.
    * The invariant check will be skipped unless the configuration setting {@link Config#checkInvariants()}
    * is true. A null message is used rather than supplied message unless {@link Config#verboseErrorMessages()}
-   * is true.
+   * is true.</p>
    *
    * @param condition the condition to check.
    * @param message   the message supplier used if verbose messages enabled.
