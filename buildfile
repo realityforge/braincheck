@@ -6,7 +6,7 @@ COMPILE_DEPS = []
 OPTIONAL_DEPS = []
 TEST_DEPS = [:guiceyloops]
 
-desc 'Braincheck: A very simply invariant check library'
+desc 'BrainCheck: A very simply invariant verification library'
 define 'braincheck' do
   project.group = 'org.realityforge.braincheck'
   compile.options.source = '1.8'
