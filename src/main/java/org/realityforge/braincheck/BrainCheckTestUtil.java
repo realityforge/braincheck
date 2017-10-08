@@ -7,6 +7,7 @@ import org.jetbrains.annotations.TestOnly;
  * Utility class for interacting with BrainCheck in tests.
  */
 @TestOnly
+@GwtIncompatible
 public final class BrainCheckTestUtil
 {
   private BrainCheckTestUtil()
