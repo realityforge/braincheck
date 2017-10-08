@@ -1,5 +1,6 @@
 package org.realityforge.braincheck;
 
+import java.lang.reflect.Field;
 import javax.annotation.Nonnull;
 import org.jetbrains.annotations.TestOnly;
 
@@ -21,7 +22,7 @@ public final class BrainCheckTestUtil
    */
   public static void setVerboseErrorMessages( final boolean verboseErrorMessages )
   {
-    getConfigProvider().setVerboseErrorMessages( verboseErrorMessages );
+    setConstant( "VERBOSE_ERROR_MESSAGES", verboseErrorMessages );
   }
 
   /**
@@ -31,7 +32,7 @@ public final class BrainCheckTestUtil
    */
   public static void setCheckInvariants( final boolean checkInvariants )
   {
-    getConfigProvider().setCheckInvariants( checkInvariants );
+    setConstant( "CHECK_INVARIANTS", checkInvariants );
   }
 
   /**
@@ -41,24 +42,24 @@ public final class BrainCheckTestUtil
    */
   public static void setCheckApiInvariants( final boolean checkApiInvariants )
   {
-    getConfigProvider().setCheckApiInvariants( checkApiInvariants );
+    setConstant( "CHECK_API_INVARIANTS", checkApiInvariants );
   }
 
   /**
-   * Return the underlying config provider.
-   * Generate an exception if the provider is not a DynamicProvider.
+   * Set the specified field name on BrainCheckConfig.
    */
-  @Nonnull
-  private static BrainCheckConfig.DynamicProvider getConfigProvider()
+  @SuppressWarnings( "NonJREEmulationClassesInClientCode" )
+  private static void setConstant( @Nonnull final String fieldName, final boolean value )
   {
-    final BrainCheckConfig.Provider provider = BrainCheckConfig.getProvider();
-    if ( !( provider instanceof BrainCheckConfig.DynamicProvider ) )
+    try
     {
-      final String message =
-        "To use BrainCheckTestUtil you need to ensure that the system property 'braincheck.dynamic_provider' " +
-        "is set to true. This slows down configuration checking and should only be enabled in test environments.";
-      throw new IllegalStateException( message );
+      final Field field = BrainCheckConfig.class.getDeclaredField( fieldName );
+      field.setAccessible( true );
+      field.set( null, value );
     }
-    return (BrainCheckConfig.DynamicProvider) provider;
+    catch ( NoSuchFieldException | IllegalAccessException e )
+    {
+      throw new IllegalStateException( "Unable to change constant " + fieldName, e );
+    }
   }
 }
