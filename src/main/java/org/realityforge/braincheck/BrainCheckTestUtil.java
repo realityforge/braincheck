@@ -2,7 +2,7 @@ package org.realityforge.braincheck;
 
 import java.lang.reflect.Field;
 import javax.annotation.Nonnull;
-import org.jetbrains.annotations.TestOnly;
+import org.realityforge.anodoc.TestOnly;
 
 /**
  * Utility class for interacting with BrainCheck in tests.
