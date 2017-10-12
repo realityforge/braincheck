@@ -2,7 +2,6 @@ package org.realityforge.braincheck;
 
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
-import org.jetbrains.annotations.Contract;
 
 /**
  * A utility class used to perform assertions and invariant checks.
@@ -98,7 +97,6 @@ public final class Guards
    * @param message the message supplier used if verbose messages enabled.
    * @throws IllegalStateException when called.
    */
-  @Contract( "_ -> fail" )
   public static void fail( @Nonnull final Supplier<String> message )
   {
     if ( BrainCheckConfig.checkInvariants() )
