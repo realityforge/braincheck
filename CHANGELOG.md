@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Issue a `debugger` javascript command when GWT compiling code and an assertion fails. Use super-sourcing to
+  ensure code has no GWT dependency.
 * Add rake task to automate publishing to maven central.
 * Introduce `BrainCheckTestUtil.resetConfig(boolean productionMode)` utility method that resets the configuration
   to either development or production mode. Useful to simplify test setup.

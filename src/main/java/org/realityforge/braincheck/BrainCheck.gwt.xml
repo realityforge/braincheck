@@ -1,7 +1,8 @@
 <module>
   <inherits name="com.google.gwt.core.Core"/>
 
-  <source path=""/>
+  <source path="" includes="*.java"/>
+  <super-source path="sprsrc" />
 
   <!--
     These properties are all defined in org.realityforge.braincheck.BrainCheckConfig
