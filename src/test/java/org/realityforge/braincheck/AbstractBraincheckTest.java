@@ -9,17 +9,13 @@ public abstract class AbstractBraincheckTest
   protected void beforeTest()
     throws Exception
   {
-    BrainCheckTestUtil.setVerboseErrorMessages( true );
-    BrainCheckTestUtil.setCheckInvariants( true );
-    BrainCheckTestUtil.setCheckApiInvariants( true );
+    BrainCheckTestUtil.resetConfig( false );
   }
 
   @AfterMethod
   protected void afterTest()
     throws Exception
   {
-    BrainCheckTestUtil.setVerboseErrorMessages( false );
-    BrainCheckTestUtil.setCheckInvariants( false );
-    BrainCheckTestUtil.setCheckApiInvariants( false );
+    BrainCheckTestUtil.resetConfig( true );
   }
 }

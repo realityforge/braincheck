@@ -16,6 +16,27 @@ public final class BrainCheckTestUtil
   }
 
   /**
+   * Reset the state of BrainCheck config to either production or development state.
+   *
+   * @param productionMode true to set it to production mode configuration, false to set it to development mode config.
+   */
+  public static void resetConfig( final boolean productionMode )
+  {
+    if ( productionMode )
+    {
+      setVerboseErrorMessages( false );
+      setCheckInvariants( false );
+      setCheckApiInvariants( false );
+    }
+    else
+    {
+      setVerboseErrorMessages( true );
+      setCheckInvariants( true );
+      setCheckApiInvariants( true );
+    }
+  }
+
+  /**
    * Configure the verbose error messages setting.
    *
    * @param verboseErrorMessages the verbose error messages setting.

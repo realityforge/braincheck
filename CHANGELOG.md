@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+* Introduce `BrainCheckTestUtil.resetConfig(boolean productionMode)` utility method that resets the configuration
+  to either development or production mode. Useful to simplify test setup.
+
 ## 1.2.0:
 
 * Replace usage of `org.jetbrains:annotations:jar` dependency with `org.realityforge.anodoc:anodoc:jar`.
