@@ -1,5 +1,7 @@
 # Change Log
 
+## Unreleased
+
 ## 1.3.0
 
 * Issue a `debugger` javascript command when GWT compiling code and an assertion fails. Use super-sourcing to
