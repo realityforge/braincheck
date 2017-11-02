@@ -50,7 +50,7 @@ class MyClass
 ```
 
 * You can also modify the invariant configuration in tests by setting system property
-  `braincheck.dynamic_provider` to `true` and interacting with the `BrainCheckTestUtil`
+  `braincheck.environment` to `development` and interacting with the `BrainCheckTestUtil`
   class. i.e.
 
 ```java
