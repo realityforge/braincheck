@@ -14,5 +14,5 @@ artifacts:
   guiceyloops: org.realityforge.guiceyloops:guiceyloops:jar:0.92
 
   # GWT deps
-  gwt_user: com.google.gwt:gwt-user:jar:2.8.1
-  gwt_dev: com.google.gwt:gwt-dev:jar:2.8.1
+  gwt_user: com.google.gwt:gwt-user:jar:2.8.2
+  gwt_dev: com.google.gwt:gwt-dev:jar:2.8.2
