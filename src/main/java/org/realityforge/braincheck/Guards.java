@@ -32,8 +32,8 @@ public final class Guards
   {
     if ( BrainCheckConfig.checkApiInvariants() )
     {
-      boolean conditionResult = isConditionTrue( condition, message );
-      if ( !conditionResult )
+      final boolean conditionTrue = isConditionTrue( condition, message );
+      if ( !conditionTrue )
       {
         fail( message );
       }
