@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+* Eliminate `braincheck.environment` configuration property as does not seem to add any value. It also seems
+  to limit the effectiveness of the GWT 2.8.2 compilers optimizer as not all unused code is removed.
+
 ## 1.3.0
 
 * Issue a `debugger` javascript command when GWT compiling code and an assertion fails. Use super-sourcing to

@@ -28,7 +28,7 @@ define 'braincheck' do
 
   test.using :testng
   test.with TEST_DEPS
-  test.options[:properties] = { 'braincheck.environment' => 'development' }
+  test.options[:properties] = { 'braincheck.verbose_error_messages' => 'true', 'braincheck.check_invariants' => 'true', 'braincheck.check_api_invariants' => 'true' }
   test.options[:java_args] = ['-ea']
 
   package(:jar)
@@ -37,7 +37,7 @@ define 'braincheck' do
 
   iml.excluded_directories << project._('tmp/gwt')
 
-  ipr.add_default_testng_configuration(:jvm_args => '-ea -Dbraincheck.environment=development')
+  ipr.add_default_testng_configuration(:jvm_args => '-ea -Dbraincheck.verbose_error_messages=true -Dbraincheck.check_invariants=true -Dbraincheck.check_api_invariants=true')
   ipr.add_component_from_artifact(:idea_codestyle)
 end
 

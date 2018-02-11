@@ -5,16 +5,12 @@ package org.realityforge.braincheck;
  */
 public final class BrainCheckConfig
 {
-  private static boolean PRODUCTION_ENVIRONMENT =
-    System.getProperty( "braincheck.environment", "production" ).equals( "production" );
   private static boolean VERBOSE_ERROR_MESSAGES =
-    System.getProperty( "braincheck.verbose_error_messages", PRODUCTION_ENVIRONMENT ? "false" : "true" ).
-      equals( "true" );
+    "true".equals( System.getProperty( "braincheck.verbose_error_messages" ) );
   private static boolean CHECK_INVARIANTS =
-    System.getProperty( "braincheck.check_invariants", PRODUCTION_ENVIRONMENT ? "false" : "true" ).equals( "true" );
+    "true".equals( System.getProperty( "braincheck.check_invariants" ) );
   private static boolean CHECK_API_INVARIANTS =
-    System.getProperty( "braincheck.check_api_invariants", PRODUCTION_ENVIRONMENT ? "false" : "true" ).
-      equals( "true" );
+    "true".equals( System.getProperty( "braincheck.check_api_invariants" ) );
 
   private BrainCheckConfig()
   {
