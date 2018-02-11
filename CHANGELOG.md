@@ -1,5 +1,7 @@
 # Change Log
 
+## Unreleased
+
 ## 1.4.0
 
 * Mark `BrainCheckConfig.PRODUCTION_ENVIRONMENT` and use it to control whether can modify values
