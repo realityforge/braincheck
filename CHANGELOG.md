@@ -4,6 +4,8 @@
 
 * Eliminate `braincheck.environment` configuration property as does not seem to add any value. It also seems
   to limit the effectiveness of the GWT 2.8.2 compilers optimizer as not all unused code is removed.
+* Duplicate `BrainCheckConfig` as a super-sourced class so the configuration fields can be explicitly marked
+  as final. This should not be needed but it helps the GWT compiler optimize code out more effectively.
 
 ## 1.3.0
 
