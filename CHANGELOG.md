@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+* Mark `BrainCheckConfig.PRODUCTION_ENVIRONMENT` and use it to control whether can modify values
+  using the `BrainCheckTestUtil` class.
+
 ## 1.3.0
 
 * Issue a `debugger` javascript command when GWT compiling code and an assertion fails. Use super-sourcing to

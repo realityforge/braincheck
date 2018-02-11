@@ -5,7 +5,7 @@ package org.realityforge.braincheck;
  */
 public final class BrainCheckConfig
 {
-  private static boolean PRODUCTION_ENVIRONMENT =
+  private static final boolean PRODUCTION_ENVIRONMENT =
     System.getProperty( "braincheck.environment", "production" ).equals( "production" );
   private static boolean VERBOSE_ERROR_MESSAGES =
     System.getProperty( "braincheck.verbose_error_messages", PRODUCTION_ENVIRONMENT ? "false" : "true" ).
@@ -18,6 +18,16 @@ public final class BrainCheckConfig
 
   private BrainCheckConfig()
   {
+  }
+
+  /**
+   * Return true if BrainCheck is running in production mode.
+   *
+   * @return true if BrainCheck is running in production mode.
+   */
+  static boolean isProductionEnvironment()
+  {
+    return PRODUCTION_ENVIRONMENT;
   }
 
   /**
