@@ -60,7 +60,8 @@ public final class Guards
   {
     if ( BrainCheckConfig.checkInvariants() )
     {
-      if ( !isConditionTrue( condition, message ) )
+      final boolean conditionTrue = isConditionTrue( condition, message );
+      if ( !conditionTrue )
       {
         fail( message );
       }
