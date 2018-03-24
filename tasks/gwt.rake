@@ -4,8 +4,7 @@ require 'buildr/gwt'
 # Enhance the Buildr project to compile gwt sources.
 # For each of the supplied gwt modules, this task will create
 # a synthetic gwt module that includes a single entrypoint to
-# compile against. It will also create a gwt classifier jar
-# that includes all the sources.
+# compile against. It will also include all the sources in the jar.
 #
 def gwt_enhance(project, gwt_modules)
   base_synthetic_module_dir = project._(:generated, :synthetic_gwt_module, :main, :resources)
@@ -31,7 +30,7 @@ CONTENT
                 { :java_args => %w(-Xms512M -Xmx1024M), :dependencies => dependencies })
   end
 
-  project.package(:jar, :classifier => :gwt).tap do |j|
+  project.package(:jar).tap do |j|
     j.include("#{project._(:source, :main, :java)}/*")
   end
 
