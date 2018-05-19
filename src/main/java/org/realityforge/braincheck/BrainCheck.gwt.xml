@@ -1,6 +1,5 @@
 <module>
   <source path='' includes='*.java'/>
-  <super-source path='sprsrc' />
 
   <!--
     These properties are all defined in org.realityforge.braincheck.BrainCheckConfig

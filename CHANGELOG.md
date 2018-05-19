@@ -3,6 +3,9 @@
 ## Unreleased
 
 * Removed unnecessary `com.google.gwt.core.Core` inherit from the `BrainCheck.gwt.xml` GWT module.
+* Remove `super-source` construct for compatibility with GWT 3.x. Reimplemented the debugger call-out
+  using jsinterop and a check against a compile time constant that should only be present in GWT
+  environment.
 
 ## 1.5.0
 

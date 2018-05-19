@@ -101,7 +101,7 @@ public final class Guards
   {
     if ( BrainCheckConfig.checkInvariants() )
     {
-      AssertUtil.debugger();
+      AssertUtil.pauseIfDebuggerActive();
       if ( BrainCheckConfig.verboseErrorMessages() )
       {
         throw new IllegalStateException( BrainCheckUtil.safeGetString( message ) );
