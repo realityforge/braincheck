@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Removed unnecessary `com.google.gwt.core.Core` inherit from the `BrainCheck.gwt.xml` GWT module.
+
 ## 1.5.0
 
 * Remove gwt classifier from artifacts.
