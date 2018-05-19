@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.6.0
 
 * Removed unnecessary `com.google.gwt.core.Core` inherit from the `BrainCheck.gwt.xml` GWT module.
 * Remove `super-source` construct for compatibility with GWT 3.x. Reimplemented the debugger call-out
