@@ -1,9 +1,9 @@
 <module>
-  <inherits name="org.realityforge.braincheck.BrainCheck"/>
+  <inherits name='org.realityforge.braincheck.BrainCheck'/>
 
-  <set-property name="braincheck.environment" value="development"/>
+  <set-property name='braincheck.environment' value='development'/>
 
-  <set-property name="braincheck.verbose_error_messages" value="true"/>
-  <set-property name="braincheck.check_invariants" value="true"/>
-  <set-property name="braincheck.check_api_invariants" value="true"/>
+  <set-property name='braincheck.verbose_error_messages' value='true'/>
+  <set-property name='braincheck.check_invariants' value='true'/>
+  <set-property name='braincheck.check_api_invariants' value='true'/>
 </module>
