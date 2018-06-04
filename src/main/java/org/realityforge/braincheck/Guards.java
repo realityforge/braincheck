@@ -101,7 +101,16 @@ public final class Guards
   {
     if ( BrainCheckConfig.checkInvariants() )
     {
-      AssertUtil.pauseIfDebuggerActive();
+      /*
+       * This flag will only be present and set when GWT is compiling the source code and the relevant
+       * compile time property is defined. Thus this will be false in normal jre runtime environment.
+       * This has to be checked outside of the AssertUtil class otherwise the GWT2.x compiler will not
+       * remove the AssertUtil type.
+       */
+      if ( "ENABLED".equals( System.getProperty( "jre.debugMode" ) ) )
+      {
+        AssertUtil.debugger();
+      }
       if ( BrainCheckConfig.verboseErrorMessages() )
       {
         throw new IllegalStateException( BrainCheckUtil.safeGetString( message ) );

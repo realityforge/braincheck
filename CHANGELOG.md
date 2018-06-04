@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+* Work-around limitations of GWT2.x compiler that was failing to eliminate the type of `AssertUtil`
+  even though no reference was made to code in production mode. This involved moving guard inline
+  into `Guards` class. This results in a slight performance degradation in a JRE environment when
+  an invariant fails. This is should be a rare occurrence and the ability to eliminate the type in
+  GWT mode was considered an acceptable trade-off.
+
 ## 1.6.0
 
 * Removed unnecessary `com.google.gwt.core.Core` inherit from the `BrainCheck.gwt.xml` GWT module.
