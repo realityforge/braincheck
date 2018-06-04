@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.7.0
 
 * Work-around limitations of GWT2.x compiler that was failing to eliminate the type of `AssertUtil`
   even though no reference was made to code in production mode. This involved moving guard inline
