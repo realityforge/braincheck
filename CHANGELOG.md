@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.8.0
 
 * Remove dependency on the `org.realityforge.anodoc:anodoc:jar` artifact.
 * Change the dependency on the `com.google.jsinterop:jsinterop-annotations:jar` to being transitive.
