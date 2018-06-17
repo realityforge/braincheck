@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+* Replace usage of the `com.google.code.findbugs:jsr305:jar` dependency with the
+  `org.realityforge.javax.annotation:javax.annotation:jar` dependency as the former includes code that
+  is incompatible with J2CL compiler.
+
 ## 1.8.0
 
 * Remove dependency on the `org.realityforge.anodoc:anodoc:jar` artifact.

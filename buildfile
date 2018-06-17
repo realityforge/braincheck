@@ -14,11 +14,11 @@ define 'braincheck' do
   pom.add_github_project('realityforge/braincheck')
   pom.add_developer('realityforge', 'Peter Donald')
 
-  pom.include_transitive_dependencies << artifact(:javax_jsr305)
+  pom.include_transitive_dependencies << artifact(:javax_annotation)
   pom.include_transitive_dependencies << artifact(:jsinterop_annotations)
   pom.dependency_filter = Proc.new {|dep| dep[:scope].to_s != 'test'}
 
-  compile.with :javax_jsr305,
+  compile.with :javax_annotation,
                :jsinterop_annotations
 
   gwt_enhance(project)
