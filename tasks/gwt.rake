@@ -38,5 +38,8 @@ CONTENT
   gwt_modules.each do |gwt_module|
     config[gwt_module] = false
   end
-  project.iml.add_gwt_facet(config, :settings => { :compilerMaxHeapSize => '1024' }, :gwt_dev_artifact => :gwt_dev)
+  project.iml.add_gwt_facet(config, :settings => {
+    :compilerMaxHeapSize => '1024',
+    :compilerParameters => '-draftCompile -localWorkers 2 -strict'
+  }, :gwt_dev_artifact => :gwt_dev)
 end
