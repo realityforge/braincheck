@@ -1,5 +1,7 @@
 # Change Log
 
+## Unreleased
+
 ## 1.9.0
 
 * Replace usage of the `com.google.code.findbugs:jsr305:jar` dependency with the
