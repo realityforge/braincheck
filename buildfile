@@ -21,6 +21,7 @@ define 'braincheck' do
 
   pom.provided_dependencies.concat PROVIDED_DEPS
   pom.include_transitive_dependencies << artifact(:javax_jsr305)
+  pom.include_transitive_dependencies << artifact(:jsinterop_annotations)
 
   compile.with PROVIDED_DEPS,
                COMPILE_DEPS
