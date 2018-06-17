@@ -21,7 +21,7 @@ define 'braincheck' do
   compile.with :javax_jsr305,
                :jsinterop_annotations
 
-  gwt_enhance(project, %w(org.realityforge.braincheck.BrainCheck org.realityforge.braincheck.BrainCheckDev))
+  gwt_enhance(project)
 
   test.using :testng
   test.with :guiceyloops
