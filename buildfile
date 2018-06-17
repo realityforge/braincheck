@@ -1,11 +1,6 @@
 require 'buildr/git_auto_version'
 require 'buildr/gpg'
 
-PROVIDED_DEPS = [:javax_jsr305, :jsinterop_annotations]
-COMPILE_DEPS = []
-OPTIONAL_DEPS = []
-TEST_DEPS = [:guiceyloops]
-
 desc 'BrainCheck: A very simply invariant verification library'
 define 'braincheck' do
   project.group = 'org.realityforge.braincheck'
@@ -22,13 +17,13 @@ define 'braincheck' do
   pom.include_transitive_dependencies << artifact(:javax_jsr305)
   pom.include_transitive_dependencies << artifact(:jsinterop_annotations)
 
-  compile.with PROVIDED_DEPS,
-               COMPILE_DEPS
+  compile.with :javax_jsr305,
+               :jsinterop_annotations
 
   gwt_enhance(project, %w(org.realityforge.braincheck.BrainCheck org.realityforge.braincheck.BrainCheckDev))
 
   test.using :testng
-  test.with TEST_DEPS
+  test.with :guiceyloops
   test.options[:properties] = { 'braincheck.environment' => 'development' }
   test.options[:java_args] = ['-ea']
 
