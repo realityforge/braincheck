@@ -1,5 +1,7 @@
 # Change Log
 
+## Unreleased
+
 ## 1.8.0
 
 * Remove dependency on the `org.realityforge.anodoc:anodoc:jar` artifact.
