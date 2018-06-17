@@ -19,7 +19,6 @@ define 'braincheck' do
   pom.add_github_project('realityforge/braincheck')
   pom.add_developer('realityforge', 'Peter Donald')
 
-  pom.provided_dependencies.concat PROVIDED_DEPS
   pom.include_transitive_dependencies << artifact(:javax_jsr305)
   pom.include_transitive_dependencies << artifact(:jsinterop_annotations)
 

@@ -5,6 +5,9 @@
 * Remove dependency on the `org.realityforge.anodoc:anodoc:jar` artifact.
 * Change the dependency on the `com.google.jsinterop:jsinterop-annotations:jar` to being transitive.
 * Change the dependency on the `com.google.code.findbugs:jsr305:jar` to being transitive.
+* Move the `com.google.jsinterop:jsinterop-annotations:jar` dependency and the
+  `com.google.code.findbugs:jsr305:jar` dependency to being `compile` scope rather than `provided`
+  scope as it seems to fit into the J2CL vision better.
 
 ## 1.7.0
 
