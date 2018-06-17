@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Remove dependency on the `org.realityforge.anodoc:anodoc:jar` artifact.
+
 ## 1.7.0
 
 * Work-around limitations of GWT2.x compiler that was failing to eliminate the type of `AssertUtil`

@@ -2,12 +2,10 @@ package org.realityforge.braincheck;
 
 import java.lang.reflect.Field;
 import javax.annotation.Nonnull;
-import org.realityforge.anodoc.TestOnly;
 
 /**
  * Utility class for interacting with BrainCheck in tests.
  */
-@TestOnly
 @GwtIncompatible
 public final class BrainCheckTestUtil
 {
