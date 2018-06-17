@@ -20,6 +20,7 @@ define 'braincheck' do
   pom.add_developer('realityforge', 'Peter Donald')
 
   pom.provided_dependencies.concat PROVIDED_DEPS
+  pom.include_transitive_dependencies << artifact(:javax_jsr305)
 
   compile.with PROVIDED_DEPS,
                COMPILE_DEPS

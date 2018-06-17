@@ -3,6 +3,7 @@
 ## Unreleased
 
 * Remove dependency on the `org.realityforge.anodoc:anodoc:jar` artifact.
+* Change the dependency on the `com.google.code.findbugs:jsr305:jar` to being transitive.
 
 ## 1.7.0
 
