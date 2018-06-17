@@ -8,6 +8,8 @@
 * Move the `com.google.jsinterop:jsinterop-annotations:jar` dependency and the
   `com.google.code.findbugs:jsr305:jar` dependency to being `compile` scope rather than `provided`
   scope as it seems to fit into the J2CL vision better.
+* Remove the `test` scoped dependencies from the generated POMs. The POMs are only intended for
+  consumption and do not need to contain dependency details about how the project was built.
 
 ## 1.7.0
 

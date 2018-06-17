@@ -16,6 +16,7 @@ define 'braincheck' do
 
   pom.include_transitive_dependencies << artifact(:javax_jsr305)
   pom.include_transitive_dependencies << artifact(:jsinterop_annotations)
+  pom.dependency_filter = Proc.new {|dep| dep[:scope].to_s != 'test'}
 
   compile.with :javax_jsr305,
                :jsinterop_annotations
