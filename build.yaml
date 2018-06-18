@@ -9,7 +9,7 @@ artifacts:
 
   jsinterop_annotations: com.google.jsinterop:jsinterop-annotations:jar:1.0.2
 
-  javax_jsr305: org.realityforge.javax.annotation:javax.annotation:jar:1.0.0
+  javax_annotation: org.realityforge.javax.annotation:javax.annotation:jar:1.0.0
   javax_annotation: org.realityforge.javax.annotation:javax.annotation:jar:1.0.0
 
   guiceyloops: org.realityforge.guiceyloops:guiceyloops:jar:0.92
