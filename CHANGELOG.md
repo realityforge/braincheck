@@ -1,5 +1,7 @@
 # Change Log
 
+## Unreleased
+
 ## 1.11.0
 
 * Fix bug introduced in `1.10.0` with compile time constants other than `braincheck.environment` in
