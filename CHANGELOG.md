@@ -12,7 +12,7 @@
   comparisons for results returned from `System.getProperty(...)` in GWT2.x and J2CL environments and
   using normal `equals()` method in JRE. It should be noted that for this to work correctly in the J2CL
   environment, the properties still need to defined via code such as:
-  `/** @define {string} */goog.define('braincheck.environment', 'production');`
+  `/** @define {string} */ goog.define('braincheck.environment', 'production');`
 
 ## 1.9.0
 
