@@ -19,7 +19,7 @@ The simplest way to use Braincheck is to;
 <dependency>
    <groupId>org.realityforge.braincheck</groupId>
    <artifactId>braincheck</artifactId>
-   <version>1.0.5</version>
+   <version>1.11.0</version>
 </dependency>
 ```
 
