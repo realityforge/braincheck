@@ -77,21 +77,24 @@ public final class BrainCheckConfig
     @Override
     boolean verboseErrorMessages()
     {
-      return "true" == System.getProperty( "braincheck.verbose_error_messages" );
+      return "true".equals( System.getProperty( "braincheck.verbose_error_messages",
+                                                PRODUCTION_ENVIRONMENT ? "false" : "true" ) );
     }
 
     @GwtIncompatible
     @Override
     boolean checkInvariants()
     {
-      return "true" == System.getProperty( "braincheck.check_invariants" );
+      return "true".equals( System.getProperty( "braincheck.check_invariants",
+                                                PRODUCTION_ENVIRONMENT ? "false" : "true" ) );
     }
 
     @GwtIncompatible
     @Override
     boolean checkApiInvariants()
     {
-      return "true" == System.getProperty( "braincheck.check_api_invariants" );
+      return "true".equals( System.getProperty( "braincheck.check_api_invariants",
+                                                PRODUCTION_ENVIRONMENT ? "false" : "true" ) );
     }
   }
 

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+* Fix bug introduced in `1.10.0` with compile time constants other than `braincheck.environment` in
+  JRE mode being incorrectly interpreted.
+
 ## 1.10.0
 
 * Compile-time constants work differently between the JRE, J2CL and GWT2.x environments. Adopt an
