@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.10.0
 
 * Compile-time constants work differently between the JRE, J2CL and GWT2.x environments. Adopt an
   approach that has the same effective outcome across all environments. This involves using instance
