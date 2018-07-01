@@ -3,18 +3,21 @@ package org.realityforge.braincheck;
 /**
  * Location of all compile time configuration settings for the toolkit.
  */
+@SuppressWarnings( "StringEquality" )
 public final class BrainCheckConfig
 {
-  private static final boolean PRODUCTION_ENVIRONMENT =
-    System.getProperty( "braincheck.environment", "production" ).equals( "production" );
-  private static boolean VERBOSE_ERROR_MESSAGES =
-    System.getProperty( "braincheck.verbose_error_messages", PRODUCTION_ENVIRONMENT ? "false" : "true" ).
-      equals( "true" );
-  private static boolean CHECK_INVARIANTS =
-    System.getProperty( "braincheck.check_invariants", PRODUCTION_ENVIRONMENT ? "false" : "true" ).equals( "true" );
-  private static boolean CHECK_API_INVARIANTS =
-    System.getProperty( "braincheck.check_api_invariants", PRODUCTION_ENVIRONMENT ? "false" : "true" ).
-      equals( "true" );
+  /**
+   * The provider abstraction is needed due to limitations in the way J2CL performs dead-code elimination.
+   * In J2CL the code <code>"production" == System.getProperty( "braincheck.environment" )</code> will return
+   * true when values match while this will not work in JRE mode but will work with later versions of GWT2.x
+   * it seems. Using a pair of classes with @GwtIncompatible allows us to have the best of both worlds.
+   */
+  private static final ConfigProvider PROVIDER = new ConfigProvider();
+
+  private static final boolean PRODUCTION_ENVIRONMENT = PROVIDER.isProductionEnvironment();
+  private static boolean VERBOSE_ERROR_MESSAGES = PROVIDER.verboseErrorMessages();
+  private static boolean CHECK_INVARIANTS = PROVIDER.checkInvariants();
+  private static boolean CHECK_API_INVARIANTS = PROVIDER.checkApiInvariants();
 
   private BrainCheckConfig()
   {
@@ -58,5 +61,61 @@ public final class BrainCheckConfig
   public static boolean checkApiInvariants()
   {
     return CHECK_API_INVARIANTS;
+  }
+
+  private static final class ConfigProvider
+    extends AbstractConfigProvider
+  {
+    @GwtIncompatible
+    @Override
+    boolean isProductionEnvironment()
+    {
+      return System.getProperty( "braincheck.environment", "production" ).equals( "production" );
+    }
+
+    @GwtIncompatible
+    @Override
+    boolean verboseErrorMessages()
+    {
+      return "true" == System.getProperty( "braincheck.verbose_error_messages" );
+    }
+
+    @GwtIncompatible
+    @Override
+    boolean checkInvariants()
+    {
+      return "true" == System.getProperty( "braincheck.check_invariants" );
+    }
+
+    @GwtIncompatible
+    @Override
+    boolean checkApiInvariants()
+    {
+      return "true" == System.getProperty( "braincheck.check_api_invariants" );
+    }
+  }
+
+  @SuppressWarnings( "unused" )
+  private static abstract class AbstractConfigProvider
+  {
+    boolean isProductionEnvironment()
+    {
+      return "production" == System.getProperty( "braincheck.environment" );
+    }
+
+    boolean verboseErrorMessages()
+    {
+      return "true" == System.getProperty( "braincheck.verbose_error_messages" );
+    }
+
+    boolean checkInvariants()
+    {
+      return "true" == System.getProperty( "braincheck.check_invariants" );
+    }
+
+    boolean checkApiInvariants()
+    {
+      return "true" == System.getProperty( "braincheck.check_api_invariants" );
+    }
   }
 }

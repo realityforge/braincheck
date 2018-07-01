@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+* Compile-time constants work differently between the JRE, J2CL and GWT2.x environments. Adopt an
+  approach that has the same effective outcome across all environments. This involves using instance
+  comparisons for results returned from `System.getProperty(...)` in GWT2.x and J2CL environments and
+  using normal `equals()` method in JRE. It should be noted that for this to work correctly in the J2CL
+  environment, the properties still need to defined via code such as:
+  `/** @define {string} */goog.define('braincheck.environment', 'production');`
+
 ## 1.9.0
 
 * Replace usage of the `com.google.code.findbugs:jsr305:jar` dependency with the
