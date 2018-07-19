@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.12.0
 
 * Add the `@define` configuration for the compile-time constants that is required for the
   closure compiler to correctly process constants at compile time.
