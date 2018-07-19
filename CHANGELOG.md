@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+* Add the `@define` configuration for the compile-time constants that is required for the
+  closure compiler to correctly process constants at compile time.
+
 ## 1.11.0
 
 * Fix bug introduced in `1.10.0` with compile time constants other than `braincheck.environment` in
