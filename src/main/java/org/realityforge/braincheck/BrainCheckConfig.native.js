@@ -1,3 +1,3 @@
 // Ensure that @defines are included so that they can specified at compile time for the closure compiler
 /** @suppress {extraRequire} */
-let jsinterop = goog.require('braincheck');
+let braincheck = goog.require('braincheck');
