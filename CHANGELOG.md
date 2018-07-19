@@ -36,7 +36,7 @@
 * Remove the `test` scoped dependencies from the generated POMs. The POMs are only intended for
   consumption and do not need to contain dependency details about how the project was built.
 * Remove GWT dependencies and GWT as a dependency in the POM as these dependencies are incompatible
-  with J2CL and are not actually required but instead artifacts of GWT compilation process. 
+  with J2CL and are not actually required but instead artifacts of GWT compilation process.
 
 ## 1.7.0
 
