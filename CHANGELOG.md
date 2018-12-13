@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Remove deployment from TravisCI infrastructure as it is no longer feasible.
+
 ## 1.12.0
 
 * Add the `@define` configuration for the compile-time constants that is required for the
