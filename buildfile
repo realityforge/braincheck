@@ -1,5 +1,6 @@
 require 'buildr/git_auto_version'
 require 'buildr/gpg'
+require 'buildr/gwt'
 
 desc 'BrainCheck: A very simply invariant verification library'
 define 'braincheck' do
