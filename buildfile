@@ -33,8 +33,6 @@ define 'braincheck' do
   package(:sources)
   package(:javadoc)
 
-  iml.excluded_directories << project._('tmp/gwt')
-
   ipr.add_default_testng_configuration(:jvm_args => '-ea -Dbraincheck.environment=development')
   ipr.add_component_from_artifact(:idea_codestyle)
 end
