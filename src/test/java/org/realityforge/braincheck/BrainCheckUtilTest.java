@@ -7,14 +7,12 @@ public class BrainCheckUtilTest
 {
   @Test
   public void safeGetString()
-    throws Exception
   {
     assertEquals( BrainCheckUtil.safeGetString( () -> "My String" ), "My String" );
   }
 
   @Test
   public void safeGetString_generatesError()
-    throws Exception
   {
     final String text = BrainCheckUtil.safeGetString( () -> {
       throw new RuntimeException( "X" );
@@ -25,7 +23,6 @@ public class BrainCheckUtilTest
 
   @Test
   public void throwableToString()
-    throws Exception
   {
     final String text = BrainCheckUtil.throwableToString( new RuntimeException( "X" ) );
     assertTrue( text.startsWith( "java.lang.RuntimeException: X\n" ) );

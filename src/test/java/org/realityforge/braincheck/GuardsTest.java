@@ -8,7 +8,6 @@ public class GuardsTest
 {
   @Test
   public void fail()
-    throws Exception
   {
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.fail( () -> "My Failure Reason" ) );
@@ -18,7 +17,6 @@ public class GuardsTest
 
   @Test
   public void fail_verboseErrorMessages_false()
-    throws Exception
   {
     BrainCheckTestUtil.setVerboseErrorMessages( false );
 
@@ -30,7 +28,6 @@ public class GuardsTest
 
   @Test
   public void fail_checkInvariants_false()
-    throws Exception
   {
     BrainCheckTestUtil.setCheckInvariants( false );
 
@@ -40,14 +37,12 @@ public class GuardsTest
 
   @Test
   public void invariant_passed()
-    throws Exception
   {
     Guards.invariant( () -> true, () -> "My Failure Reason" );
   }
 
   @Test
   public void invariant_failed()
-    throws Exception
   {
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.invariant( () -> false, () -> "My Failure Reason" ) );
@@ -57,7 +52,6 @@ public class GuardsTest
 
   @Test
   public void invariant_condition_throws_exception()
-    throws Exception
   {
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.invariant( () -> {
@@ -73,7 +67,6 @@ public class GuardsTest
 
   @Test
   public void invariant_verboseErrorMessages_false()
-    throws Exception
   {
     BrainCheckTestUtil.setVerboseErrorMessages( false );
 
@@ -85,7 +78,6 @@ public class GuardsTest
 
   @Test
   public void invariant_checkInvariants_false()
-    throws Exception
   {
     BrainCheckTestUtil.setCheckInvariants( false );
 
@@ -95,14 +87,12 @@ public class GuardsTest
 
   @Test
   public void apiInvariant_passed()
-    throws Exception
   {
     Guards.apiInvariant( () -> true, () -> "My Failure Reason" );
   }
 
   @Test
   public void apiInvariant_failed()
-    throws Exception
   {
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.apiInvariant( () -> false, () -> "My Failure Reason" ) );
@@ -112,7 +102,6 @@ public class GuardsTest
 
   @Test
   public void apiInvariant_condition_throws_exception()
-    throws Exception
   {
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.apiInvariant( () -> {
@@ -128,7 +117,6 @@ public class GuardsTest
 
   @Test
   public void apiInvariant_verboseErrorMessages_false()
-    throws Exception
   {
     BrainCheckTestUtil.setVerboseErrorMessages( false );
 
@@ -140,7 +128,6 @@ public class GuardsTest
 
   @Test
   public void apiInvariant_checkapiInvariants_false()
-    throws Exception
   {
     BrainCheckTestUtil.setCheckApiInvariants( false );
 
