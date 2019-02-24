@@ -134,4 +134,15 @@ public class GuardsTest
     // No failure
     Guards.apiInvariant( () -> false, () -> "My Failure Reason" );
   }
+
+  @Test
+  public void apiInvariant_checkInvariants_false()
+  {
+    BrainCheckTestUtil.setCheckInvariants( false );
+
+    final IllegalStateException exception =
+      expectThrows( IllegalStateException.class, () -> Guards.apiInvariant( () -> false, () -> "My Failure Reason" ) );
+
+    assertEquals( exception.getMessage(), "My Failure Reason" );
+  }
 }

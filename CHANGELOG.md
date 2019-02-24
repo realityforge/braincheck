@@ -3,6 +3,10 @@
 ## Unreleased
 
 * Remove deployment from TravisCI infrastructure as it is no longer feasible.
+* If `BrainCheckConfig.checkInvariants()` returned `false` and `BrainCheckConfig.checkApiInvariants()`
+  returned `true` and `Guards.apiInvariant()` had false invariant then no invariant failure
+  would be triggered. This has been fixed by ensuring that the failure code is only marked as
+  dead code if it is not used.
 
 ## 1.12.0
 

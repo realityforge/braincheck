@@ -35,7 +35,7 @@ public final class Guards
       boolean conditionResult = isConditionTrue( condition, message );
       if ( !conditionResult )
       {
-        fail( message );
+        doFail( message );
       }
     }
   }
@@ -62,7 +62,7 @@ public final class Guards
     {
       if ( !isConditionTrue( condition, message ) )
       {
-        fail( message );
+        doFail( message );
       }
     }
   }
@@ -82,9 +82,9 @@ public final class Guards
     }
     catch ( final Throwable t )
     {
-      fail( () -> "Error checking condition.\n" +
-                  "Message: " + BrainCheckUtil.safeGetString( message ) + "\n" +
-                  "Throwable:\n" + BrainCheckUtil.throwableToString( t ) );
+      doFail( () -> "Error checking condition.\n" +
+                    "Message: " + BrainCheckUtil.safeGetString( message ) + "\n" +
+                    "Throwable:\n" + BrainCheckUtil.throwableToString( t ) );
     }
     return false;
   }
@@ -101,24 +101,29 @@ public final class Guards
   {
     if ( BrainCheckConfig.checkInvariants() )
     {
-      /*
-       * This flag will only be present and set when GWT is compiling the source code and the relevant
-       * compile time property is defined. Thus this will be false in normal jre runtime environment.
-       * This has to be checked outside of the AssertUtil class otherwise the GWT2.x compiler will not
-       * remove the AssertUtil type.
-       */
-      if ( "ENABLED".equals( System.getProperty( "jre.debugMode" ) ) )
-      {
-        AssertUtil.debugger();
-      }
-      if ( BrainCheckConfig.verboseErrorMessages() )
-      {
-        throw new IllegalStateException( BrainCheckUtil.safeGetString( message ) );
-      }
-      else
-      {
-        throw new IllegalStateException();
-      }
+      doFail( message );
+    }
+  }
+
+  private static void doFail( @Nonnull final Supplier<String> message )
+  {
+    /*
+     * This flag will only be present and set when GWT is compiling the source code and the relevant
+     * compile time property is defined. Thus this will be false in normal jre runtime environment.
+     * This has to be checked outside of the AssertUtil class otherwise the GWT2.x compiler will not
+     * remove the AssertUtil type.
+     */
+    if ( "ENABLED".equals( System.getProperty( "jre.debugMode" ) ) )
+    {
+      AssertUtil.debugger();
+    }
+    if ( BrainCheckConfig.verboseErrorMessages() )
+    {
+      throw new IllegalStateException( BrainCheckUtil.safeGetString( message ) );
+    }
+    else
+    {
+      throw new IllegalStateException();
     }
   }
 }
