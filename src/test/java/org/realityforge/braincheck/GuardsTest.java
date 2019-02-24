@@ -23,7 +23,7 @@ public class GuardsTest
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.fail( () -> "My Failure Reason" ) );
 
-    assertEquals( exception.getMessage(), null );
+    assertNull( exception.getMessage() );
   }
 
   @Test
@@ -73,7 +73,7 @@ public class GuardsTest
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.invariant( () -> false, () -> "My Failure Reason" ) );
 
-    assertEquals( exception.getMessage(), null );
+    assertNull( exception.getMessage() );
   }
 
   @Test
@@ -123,7 +123,7 @@ public class GuardsTest
     final IllegalStateException exception =
       expectThrows( IllegalStateException.class, () -> Guards.apiInvariant( () -> false, () -> "My Failure Reason" ) );
 
-    assertEquals( exception.getMessage(), null );
+    assertNull( exception.getMessage() );
   }
 
   @Test
