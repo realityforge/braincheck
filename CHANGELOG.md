@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.13.0
 
 * Remove deployment from TravisCI infrastructure as it is no longer feasible.
 * If `BrainCheckConfig.checkInvariants()` returned `false` and `BrainCheckConfig.checkApiInvariants()`
