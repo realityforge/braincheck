@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Use `const` rather than `let` for module import to avoid closure compiler warning.
+
 ## 1.13.0
 
 * Remove deployment from TravisCI infrastructure as it is no longer feasible.
