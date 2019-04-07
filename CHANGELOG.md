@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+### Unreleased
 
 * Use `const` rather than `let` for module import to avoid closure compiler warning.
 * Use `Js.debugger()` from the `com.google.jsinterop:base` artifact. This avoids the need to explicitly
