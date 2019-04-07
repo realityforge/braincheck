@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Improve the formatting of javadocs, add source crosslinking and include source in generated documentation.
+
 ### [v1.14.0](https://github.com/realityforge/braincheck/tree/v1.14.0) (2019-04-07)
 [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.13.0...v1.14.0)
 
