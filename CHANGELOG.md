@@ -3,6 +3,11 @@
 ## Unreleased
 
 * Use `const` rather than `let` for module import to avoid closure compiler warning.
+* Use `Js.debugger()` from the `com.google.jsinterop:base` artifact. This avoids the need to explicitly
+  allow the `debugger` statement when compiled by closure compiler pass after transpiling via J2CL.
+* Remove direct dependency on the `com.google.jsinterop:jsinterop-annotations` artifact from the pom
+  as it is is no longer required for this library but is instead only used via the `com.google.jsinterop:base`
+  artifact.
 
 ## 1.13.0
 

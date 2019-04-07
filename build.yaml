@@ -17,3 +17,5 @@ artifacts:
   # GWT deps
   gwt_user: com.google.gwt:gwt-user:jar:2.8.2
   gwt_dev: com.google.gwt:gwt-dev:jar:2.8.2
+
+  jsinterop_base: org.realityforge.com.google.jsinterop:base:jar:1.0.0-b2-e6d791f
