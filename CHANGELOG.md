@@ -9,7 +9,8 @@
   as it is is no longer required for this library but is instead only used via the `com.google.jsinterop:base`
   artifact.
 
-## 1.13.0
+### [v1.13.0](https://github.com/realityforge/braincheck/tree/v1.13.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.12.0...v1.13.0)
 
 * Remove deployment from TravisCI infrastructure as it is no longer feasible.
 * If `BrainCheckConfig.checkInvariants()` returned `false` and `BrainCheckConfig.checkApiInvariants()`
@@ -17,17 +18,20 @@
   would be triggered. This has been fixed by ensuring that the failure code is only marked as
   dead code if it is not used.
 
-## 1.12.0
+### [v1.12.0](https://github.com/realityforge/braincheck/tree/v1.12.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.11.0...v1.12.0)
 
 * Add the `@define` configuration for the compile-time constants that is required for the
   closure compiler to correctly process constants at compile time.
 
-## 1.11.0
+### [v1.11.0](https://github.com/realityforge/braincheck/tree/v1.11.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.10.0...v1.11.0)
 
 * Fix bug introduced in `1.10.0` with compile time constants other than `braincheck.environment` in
   JRE mode being incorrectly interpreted.
 
-## 1.10.0
+### [v1.10.0](https://github.com/realityforge/braincheck/tree/v1.10.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.9.0...v1.10.0)
 
 * Compile-time constants work differently between the JRE, J2CL and GWT2.x environments. Adopt an
   approach that has the same effective outcome across all environments. This involves using instance
@@ -36,13 +40,15 @@
   environment, the properties still need to defined via code such as:
   `/** @define {string} */ goog.define('braincheck.environment', 'production');`
 
-## 1.9.0
+### [v1.9.0](https://github.com/realityforge/braincheck/tree/v1.9.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.8.0...v1.9.0)
 
 * Replace usage of the `com.google.code.findbugs:jsr305:jar` dependency with the
   `org.realityforge.javax.annotation:javax.annotation:jar` dependency as the former includes code that
   is incompatible with J2CL compiler.
 
-## 1.8.0
+### [v1.8.0](https://github.com/realityforge/braincheck/tree/v1.8.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.7.0...v1.8.0)
 
 * Remove dependency on the `org.realityforge.anodoc:anodoc:jar` artifact.
 * Change the dependency on the `com.google.jsinterop:jsinterop-annotations:jar` to being transitive.
@@ -55,7 +61,8 @@
 * Remove GWT dependencies and GWT as a dependency in the POM as these dependencies are incompatible
   with J2CL and are not actually required but instead artifacts of GWT compilation process.
 
-## 1.7.0
+### [v1.7.0](https://github.com/realityforge/braincheck/tree/v1.7.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.6.0...v1.7.0)
 
 * Work-around limitations of GWT2.x compiler that was failing to eliminate the type of `AssertUtil`
   even though no reference was made to code in production mode. This involved moving guard inline
@@ -63,23 +70,27 @@
   an invariant fails. This is should be a rare occurrence and the ability to eliminate the type in
   GWT mode was considered an acceptable trade-off.
 
-## 1.6.0
+### [v1.6.0](https://github.com/realityforge/braincheck/tree/v1.6.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.5.0...v1.6.0)
 
 * Removed unnecessary `com.google.gwt.core.Core` inherit from the `BrainCheck.gwt.xml` GWT module.
 * Remove `super-source` construct for compatibility with GWT 3.x. Reimplemented the debugger call-out
   using jsinterop and a check against a compile time constant that should only be present in GWT
   environment.
 
-## 1.5.0
+### [v1.5.0](https://github.com/realityforge/braincheck/tree/v1.5.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.4.0...v1.5.0)
 
 * Remove gwt classifier from artifacts.
 
-## 1.4.0
+### [v1.4.0](https://github.com/realityforge/braincheck/tree/v1.4.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.3.0...v1.4.0)
 
 * Mark `BrainCheckConfig.PRODUCTION_ENVIRONMENT` and use it to control whether can modify values
   using the `BrainCheckTestUtil` class.
 
-## 1.3.0
+### [v1.3.0](https://github.com/realityforge/braincheck/tree/v1.3.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.2.0...v1.3.0)
 
 * Issue a `debugger` javascript command when GWT compiling code and an assertion fails. Use super-sourcing to
   ensure code has no GWT dependency.
@@ -87,14 +98,17 @@
 * Introduce `BrainCheckTestUtil.resetConfig(boolean productionMode)` utility method that resets the configuration
   to either development or production mode. Useful to simplify test setup.
 
-## 1.2.0:
+### [v1.2.0](https://github.com/realityforge/braincheck/tree/v1.2.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.1.0...v1.2.0)
 
 * Replace usage of `org.jetbrains:annotations:jar` dependency with `org.realityforge.anodoc:anodoc:jar`.
 
-## 1.1.0:
+### [v1.1.0](https://github.com/realityforge/braincheck/tree/v1.1.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.0.0...v1.1.0)
 
 * Mark `BrainCheckTestUtil` as `GwtIncompatible` so that it is not compiled by GWT.
 
-## 1.0.0:
+### [v1.0.0](https://github.com/realityforge/braincheck/tree/v1.0.0)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/2e6a33153660e6074dab5c8056ee58a7a4ad6770...v1.0.0)
 
 * 🎉 Initial release.
