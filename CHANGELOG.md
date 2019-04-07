@@ -1,6 +1,7 @@
 # Change Log
 
-### Unreleased
+### [v1.14.0](https://github.com/realityforge/braincheck/tree/v1.14.0) (2019-04-07)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.13.0...v1.14.0)
 
 * Use `const` rather than `let` for module import to avoid closure compiler warning.
 * Use `Js.debugger()` from the `com.google.jsinterop:base` artifact. This avoids the need to explicitly
