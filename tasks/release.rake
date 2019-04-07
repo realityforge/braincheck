@@ -83,43 +83,6 @@ HEADER
       sh 'git commit -m "Update CHANGELOG.md in preparation for release"'
     end
 
-    stage('PatchWebsite', 'Update the website with a post announcing release') do
-      changelog = IO.read('CHANGELOG.md')
-
-      # Find the double new line after the product version banner
-      start_index = changelog.index("\n\n", changelog.index("## [v#{ENV['PRODUCT_VERSION']}]")) + 2
-
-      end_index = changelog.index("### [v#{ENV['PREVIOUS_PRODUCT_VERSION']}]", start_index)
-
-      filename = "website/blog/#{ENV['RELEASE_DATE']}-version-#{ENV['PRODUCT_VERSION']}-release.md"
-      IO.write(filename, <<CONTENT)
----
-title: React4j #{ENV['PRODUCT_VERSION']} released
-author: React4j Project
-authorURL: https://github.com/react4j
----
-
-[Full Changelog](https://github.com/realityforge/braincheck/compare/v#{ENV['PREVIOUS_PRODUCT_VERSION']}...v#{ENV['PRODUCT_VERSION']})
-
-Changes in this release:
-
-#{changelog[start_index, end_index - start_index].gsub('https://react4j.github.io', '')}
-CONTENT
-      setup_filename = 'docs/project_setup.md'
-      IO.write(setup_filename, IO.read(setup_filename).
-        gsub("<version>#{ENV['PREVIOUS_PRODUCT_VERSION']}</version>", "<version>#{ENV['PRODUCT_VERSION']}</version>"))
-      sh 'git reset 2>&1 1> /dev/null'
-      sh "git add #{filename}"
-      sh "git add #{setup_filename}"
-      # Zapwhite only runs against files added to git so we have to do this dance after adding files
-      `bundle exec zapwhite`
-      sh 'git reset 2>&1 1> /dev/null'
-      sh "git add #{filename}"
-      sh "git commit -m \"Update site to add news about the #{ENV['PRODUCT_VERSION']} release\""
-      sh "git add #{setup_filename}"
-      sh "git commit -m \"Update documentation to reflect the #{ENV['PRODUCT_VERSION']} release\""
-    end
-
     stage('TagProject', 'Tag the project') do
       sh "git tag v#{ENV['PRODUCT_VERSION']}"
     end
