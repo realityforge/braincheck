@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Improve the way defines are handled in closure by assigning the results of `goog.define` to a module local variable.
+
 ### [v1.15.0](https://github.com/realityforge/braincheck/tree/v1.15.0) (2019-04-07)
 [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.14.0...v1.15.0)
 

@@ -5,11 +5,11 @@
 goog.provide('braincheck');
 
 /** @define {string} */
-goog.define('braincheck.environment', 'production');
+braincheck.environment = goog.define('braincheck.environment', 'production');
 
 /** @define {string} */
-goog.define('braincheck.verbose_error_messages', 'false');
+braincheck.verbose_error_messages = goog.define('braincheck.verbose_error_messages', 'false');
 /** @define {string} */
-goog.define('braincheck.check_invariants', 'false');
+braincheck.check_invariants = goog.define('braincheck.check_invariants', 'false');
 /** @define {string} */
-goog.define('braincheck.check_api_invariants', 'false');
+braincheck.check_api_invariants = goog.define('braincheck.check_api_invariants', 'false');
