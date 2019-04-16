@@ -1,6 +1,7 @@
 # Change Log
 
-### Unreleased
+### [v1.16.0](https://github.com/realityforge/braincheck/tree/v1.16.0) (2019-04-16)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.15.0...v1.16.0)
 
 * Improve the way defines are handled in closure by assigning the results of `goog.define` to a module local variable.
 
