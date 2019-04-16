@@ -119,23 +119,21 @@
 <span class="sourceLineNo">111</span>    /*<a name="line.111"></a>
 <span class="sourceLineNo">112</span>     * This flag will only be present and set when GWT is compiling the source code and the relevant<a name="line.112"></a>
 <span class="sourceLineNo">113</span>     * compile time property is defined. Thus this will be false in normal jre runtime environment.<a name="line.113"></a>
-<span class="sourceLineNo">114</span>     * This has to be checked outside of the AssertUtil class otherwise the GWT2.x compiler will not<a name="line.114"></a>
-<span class="sourceLineNo">115</span>     * remove the AssertUtil type.<a name="line.115"></a>
-<span class="sourceLineNo">116</span>     */<a name="line.116"></a>
-<span class="sourceLineNo">117</span>    if ( "ENABLED".equals( System.getProperty( "jre.debugMode" ) ) )<a name="line.117"></a>
-<span class="sourceLineNo">118</span>    {<a name="line.118"></a>
-<span class="sourceLineNo">119</span>      Js.debugger();<a name="line.119"></a>
-<span class="sourceLineNo">120</span>    }<a name="line.120"></a>
-<span class="sourceLineNo">121</span>    if ( BrainCheckConfig.verboseErrorMessages() )<a name="line.121"></a>
-<span class="sourceLineNo">122</span>    {<a name="line.122"></a>
-<span class="sourceLineNo">123</span>      throw new IllegalStateException( BrainCheckUtil.safeGetString( message ) );<a name="line.123"></a>
-<span class="sourceLineNo">124</span>    }<a name="line.124"></a>
-<span class="sourceLineNo">125</span>    else<a name="line.125"></a>
-<span class="sourceLineNo">126</span>    {<a name="line.126"></a>
-<span class="sourceLineNo">127</span>      throw new IllegalStateException();<a name="line.127"></a>
-<span class="sourceLineNo">128</span>    }<a name="line.128"></a>
-<span class="sourceLineNo">129</span>  }<a name="line.129"></a>
-<span class="sourceLineNo">130</span>}<a name="line.130"></a>
+<span class="sourceLineNo">114</span>     */<a name="line.114"></a>
+<span class="sourceLineNo">115</span>    if ( "ENABLED".equals( System.getProperty( "jre.debugMode" ) ) )<a name="line.115"></a>
+<span class="sourceLineNo">116</span>    {<a name="line.116"></a>
+<span class="sourceLineNo">117</span>      Js.debugger();<a name="line.117"></a>
+<span class="sourceLineNo">118</span>    }<a name="line.118"></a>
+<span class="sourceLineNo">119</span>    if ( BrainCheckConfig.verboseErrorMessages() )<a name="line.119"></a>
+<span class="sourceLineNo">120</span>    {<a name="line.120"></a>
+<span class="sourceLineNo">121</span>      throw new IllegalStateException( BrainCheckUtil.safeGetString( message ) );<a name="line.121"></a>
+<span class="sourceLineNo">122</span>    }<a name="line.122"></a>
+<span class="sourceLineNo">123</span>    else<a name="line.123"></a>
+<span class="sourceLineNo">124</span>    {<a name="line.124"></a>
+<span class="sourceLineNo">125</span>      throw new IllegalStateException();<a name="line.125"></a>
+<span class="sourceLineNo">126</span>    }<a name="line.126"></a>
+<span class="sourceLineNo">127</span>  }<a name="line.127"></a>
+<span class="sourceLineNo">128</span>}<a name="line.128"></a>
 
 
 
