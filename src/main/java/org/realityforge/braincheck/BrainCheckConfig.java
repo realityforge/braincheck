@@ -34,6 +34,16 @@ public final class BrainCheckConfig
   }
 
   /**
+   * Return true if BrainCheck is running in development mode.
+   *
+   * @return true if BrainCheck is running in development mode.
+   */
+  static boolean isDevelopmentEnvironment()
+  {
+    return !isProductionEnvironment();
+  }
+
+  /**
    * Return true if invariant failures will include a detail message.
    *
    * @return true if invariant failures will include a detail message.
