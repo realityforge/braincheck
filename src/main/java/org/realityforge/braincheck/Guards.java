@@ -2,12 +2,42 @@ package org.realityforge.braincheck;
 
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * A utility class used to perform assertions and invariant checks.
  */
 public final class Guards
 {
+  @Nullable
+  private static OnGuardListener c_onGuardListener;
+
+  /**
+   * The type of the guard.
+   * This is only used during development process and will be optimized out in production mode.
+   */
+  enum Type
+  {
+    INVARIANT,
+    API_INVARIANT
+  }
+
+  /**
+   * Interface used to receive details about an invoked guard.
+   * This is only used internally during development to collect the guards/invariants/etc to ensure
+   * that they comply with patterns and to ensure they are documented appropriately.
+   */
+  interface OnGuardListener
+  {
+    void onGuard( @Nonnull Type type, @Nonnull String message, @Nonnull StackTraceElement[] stackTrace );
+  }
+
+  static void setOnGuardListener( @Nullable final OnGuardListener onGuardListener )
+  {
+    assert BrainCheckConfig.isDevelopmentEnvironment();
+    c_onGuardListener = onGuardListener;
+  }
+
   private Guards()
   {
   }
@@ -30,6 +60,12 @@ public final class Guards
   public static void apiInvariant( @Nonnull final Supplier<Boolean> condition,
                                    @Nonnull final Supplier<String> message )
   {
+    if ( BrainCheckConfig.isDevelopmentEnvironment() && null != c_onGuardListener )
+    {
+      c_onGuardListener.onGuard( Type.API_INVARIANT,
+                                 BrainCheckUtil.safeGetString( message ),
+                                 StackTraceUtil.getStackTrace( 2 ) );
+    }
     if ( BrainCheckConfig.checkApiInvariants() )
     {
       boolean conditionResult = isConditionTrue( condition, message );
@@ -58,6 +94,12 @@ public final class Guards
   public static void invariant( @Nonnull final Supplier<Boolean> condition,
                                 @Nonnull final Supplier<String> message )
   {
+    if ( BrainCheckConfig.isDevelopmentEnvironment() && null != c_onGuardListener )
+    {
+      c_onGuardListener.onGuard( Type.INVARIANT,
+                                 BrainCheckUtil.safeGetString( message ),
+                                 StackTraceUtil.getStackTrace( 2 ) );
+    }
     if ( BrainCheckConfig.checkInvariants() )
     {
       if ( !isConditionTrue( condition, message ) )

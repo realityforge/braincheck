@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Add the ability to register a callback that is invoked every time the `Guards.invariant(...)` or `Guards.apiInvariant(...)` methods are invoked. The callback is only invoked in development mode when braincheck is invoked in a jre environment and is primarily intended to enable the collection and verification of all invariant checks within a system. The callback is registered via `BrainCheckTestUtil.setOnGuardListener(...)`.
+
 ### [v1.18.0](https://github.com/realityforge/braincheck/tree/v1.18.0) (2019-06-30)
 [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.17.0...v1.18.0)
 
