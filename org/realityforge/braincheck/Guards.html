@@ -46,7 +46,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.html" title="class in org.realityforge.braincheck"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.OnGuardListener.html" title="interface in org.realityforge.braincheck"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
@@ -106,7 +106,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <hr>
 <br>
-<pre>public final class <a href="../../../src-html/org/realityforge/braincheck/Guards.html#line.9">Guards</a>
+<pre>public final class <a href="../../../src-html/org/realityforge/braincheck/Guards.html#line.10">Guards</a>
 extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
 <div class="block">A utility class used to perform assertions and invariant checks.</div>
 </li>
@@ -175,7 +175,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>apiInvariant</h4>
-<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/Guards.html#line.30">apiInvariant</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function">Supplier</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</a>&gt;&nbsp;condition,
+<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/Guards.html#line.60">apiInvariant</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function">Supplier</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</a>&gt;&nbsp;condition,
                                 <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function">Supplier</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;message)</pre>
 <div class="block">Check an api invariant in the code base.
  The invariant condition should return true if the library user is using the api correctly. This invariant
@@ -201,7 +201,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>invariant</h4>
-<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/Guards.html#line.58">invariant</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function">Supplier</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</a>&gt;&nbsp;condition,
+<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/Guards.html#line.94">invariant</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function">Supplier</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</a>&gt;&nbsp;condition,
                              <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function">Supplier</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;message)</pre>
 <div class="block">Check an invariant in code base.
  The invariant condition should always return true. Returning false indicates that the host application
@@ -227,7 +227,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockListLast">
 <li class="blockList">
 <h4>fail</h4>
-<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/Guards.html#line.100">fail</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function">Supplier</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;message)</pre>
+<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/Guards.html#line.142">fail</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function">Supplier</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;message)</pre>
 <div class="block">Throw an IllegalStateException with supplied detail message.
  The exception is not thrown unless <a href="../../../org/realityforge/braincheck/BrainCheckConfig.html#checkInvariants--"><code>BrainCheckConfig.checkInvariants()</code></a> is true.
  The exception will ignore the supplied message unless <a href="../../../org/realityforge/braincheck/BrainCheckConfig.html#verboseErrorMessages--"><code>BrainCheckConfig.verboseErrorMessages()</code></a> is true.</div>
@@ -265,7 +265,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.html" title="class in org.realityforge.braincheck"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.OnGuardListener.html" title="interface in org.realityforge.braincheck"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">

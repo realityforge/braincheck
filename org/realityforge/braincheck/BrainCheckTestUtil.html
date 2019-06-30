@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -47,7 +47,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../org/realityforge/braincheck/BrainCheckConfig.html" title="class in org.realityforge.braincheck"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../org/realityforge/braincheck/Guards.html" title="class in org.realityforge.braincheck"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.GuardType.html" title="enum in org.realityforge.braincheck"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?org/realityforge/braincheck/BrainCheckTestUtil.html" target="_top">Frames</a></li>
@@ -71,7 +71,7 @@ var activeTableTab = "activeTableTab";
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
@@ -107,7 +107,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>@GwtIncompatible
-public final class <a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.10">BrainCheckTestUtil</a>
+public final class <a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.12">BrainCheckTestUtil</a>
 extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
 <div class="block">Utility class for interacting with BrainCheck in tests.</div>
 </li>
@@ -116,6 +116,33 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="nested.class.summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Nested Class Summary table, listing nested classes, and an explanation">
+<caption><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.GuardType.html" title="enum in org.realityforge.braincheck">BrainCheckTestUtil.GuardType</a></span></code>
+<div class="block">The type of the guard.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static interface&nbsp;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.OnGuardListener.html" title="interface in org.realityforge.braincheck">BrainCheckTestUtil.OnGuardListener</a></span></code>
+<div class="block">Interface used to receive details about an invoked guard.</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -148,6 +175,13 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.html#setOnGuardListener-org.realityforge.braincheck.BrainCheckTestUtil.OnGuardListener-">setOnGuardListener</a></span>(<a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.OnGuardListener.html" title="interface in org.realityforge.braincheck">BrainCheckTestUtil.OnGuardListener</a>&nbsp;onGuardListener)</code>
+<div class="block">Specify a callback that is invoked anytime the <a href="../../../org/realityforge/braincheck/Guards.html#invariant-java.util.function.Supplier-java.util.function.Supplier-"><code>Guards.invariant(Supplier, Supplier)</code></a> method or
+ the <a href="../../../org/realityforge/braincheck/Guards.html#apiInvariant-java.util.function.Supplier-java.util.function.Supplier-"><code>Guards.apiInvariant(Supplier, Supplier)</code></a> method is invoked while in development mode.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.html#setVerboseErrorMessages-boolean-">setVerboseErrorMessages</a></span>(boolean&nbsp;verboseErrorMessages)</code>
 <div class="block">Configure the verbose error messages setting.</div>
 </td>
@@ -174,13 +208,28 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="setOnGuardListener-org.realityforge.braincheck.BrainCheckTestUtil.OnGuardListener-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setOnGuardListener</h4>
+<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.46">setOnGuardListener</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nullable.html?is-external=true" title="class or interface in javax.annotation">@Nullable</a> <a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.OnGuardListener.html" title="interface in org.realityforge.braincheck">BrainCheckTestUtil.OnGuardListener</a>&nbsp;onGuardListener)</pre>
+<div class="block">Specify a callback that is invoked anytime the <a href="../../../org/realityforge/braincheck/Guards.html#invariant-java.util.function.Supplier-java.util.function.Supplier-"><code>Guards.invariant(Supplier, Supplier)</code></a> method or
+ the <a href="../../../org/realityforge/braincheck/Guards.html#apiInvariant-java.util.function.Supplier-java.util.function.Supplier-"><code>Guards.apiInvariant(Supplier, Supplier)</code></a> method is invoked while in development mode.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>onGuardListener</code> - the listener.</dd>
+</dl>
+</li>
+</ul>
 <a name="resetConfig-boolean-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>resetConfig</h4>
-<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.21">resetConfig</a>(boolean&nbsp;productionMode)</pre>
+<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.67">resetConfig</a>(boolean&nbsp;productionMode)</pre>
 <div class="block">Reset the state of BrainCheck config to either production or development state.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -194,7 +243,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>setVerboseErrorMessages</h4>
-<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.52">setVerboseErrorMessages</a>(boolean&nbsp;verboseErrorMessages)</pre>
+<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.94">setVerboseErrorMessages</a>(boolean&nbsp;verboseErrorMessages)</pre>
 <div class="block">Configure the verbose error messages setting.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -208,7 +257,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>setCheckInvariants</h4>
-<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.62">setCheckInvariants</a>(boolean&nbsp;checkInvariants)</pre>
+<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.104">setCheckInvariants</a>(boolean&nbsp;checkInvariants)</pre>
 <div class="block">Configure the "check invariants" setting.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -222,7 +271,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockListLast">
 <li class="blockList">
 <h4>setCheckApiInvariants</h4>
-<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.72">setCheckApiInvariants</a>(boolean&nbsp;checkApiInvariants)</pre>
+<pre>public static&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/BrainCheckTestUtil.html#line.114">setCheckApiInvariants</a>(boolean&nbsp;checkApiInvariants)</pre>
 <div class="block">Configure the "check api invariants" setting.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -257,7 +306,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../org/realityforge/braincheck/BrainCheckConfig.html" title="class in org.realityforge.braincheck"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../org/realityforge/braincheck/Guards.html" title="class in org.realityforge.braincheck"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../org/realityforge/braincheck/BrainCheckTestUtil.GuardType.html" title="enum in org.realityforge.braincheck"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?org/realityforge/braincheck/BrainCheckTestUtil.html" target="_top">Frames</a></li>
@@ -281,7 +330,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>

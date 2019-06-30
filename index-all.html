@@ -89,6 +89,14 @@
 <dd>
 <div class="block">Utility class for interacting with BrainCheck in tests.</div>
 </dd>
+<dt><a href="org/realityforge/braincheck/BrainCheckTestUtil.GuardType.html" title="enum in org.realityforge.braincheck"><span class="typeNameLink">BrainCheckTestUtil.GuardType</span></a> - Enum in <a href="org/realityforge/braincheck/package-summary.html">org.realityforge.braincheck</a></dt>
+<dd>
+<div class="block">The type of the guard.</div>
+</dd>
+<dt><a href="org/realityforge/braincheck/BrainCheckTestUtil.OnGuardListener.html" title="interface in org.realityforge.braincheck"><span class="typeNameLink">BrainCheckTestUtil.OnGuardListener</span></a> - Interface in <a href="org/realityforge/braincheck/package-summary.html">org.realityforge.braincheck</a></dt>
+<dd>
+<div class="block">Interface used to receive details about an invoked guard.</div>
+</dd>
 </dl>
 <a name="I:C">
 <!--   -->
@@ -139,6 +147,8 @@
 </a>
 <h2 class="title">O</h2>
 <dl>
+<dt><span class="memberNameLink"><a href="org/realityforge/braincheck/BrainCheckTestUtil.OnGuardListener.html#onGuard-org.realityforge.braincheck.BrainCheckTestUtil.GuardType-java.lang.String-java.lang.StackTraceElement:A-">onGuard(BrainCheckTestUtil.GuardType, String, StackTraceElement[])</a></span> - Method in interface org.realityforge.braincheck.<a href="org/realityforge/braincheck/BrainCheckTestUtil.OnGuardListener.html" title="interface in org.realityforge.braincheck">BrainCheckTestUtil.OnGuardListener</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/realityforge/braincheck/package-summary.html">org.realityforge.braincheck</a> - package org.realityforge.braincheck</dt>
 <dd>
 <div class="block">This package contains the core Braincheck library.</div>
@@ -167,6 +177,11 @@
 <dd>
 <div class="block">Configure the "check invariants" setting.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/realityforge/braincheck/BrainCheckTestUtil.html#setOnGuardListener-org.realityforge.braincheck.BrainCheckTestUtil.OnGuardListener-">setOnGuardListener(BrainCheckTestUtil.OnGuardListener)</a></span> - Static method in class org.realityforge.braincheck.<a href="org/realityforge/braincheck/BrainCheckTestUtil.html" title="class in org.realityforge.braincheck">BrainCheckTestUtil</a></dt>
+<dd>
+<div class="block">Specify a callback that is invoked anytime the <a href="org/realityforge/braincheck/Guards.html#invariant-java.util.function.Supplier-java.util.function.Supplier-"><code>invariant(Supplier, Supplier)</code></a> method or
+ the <a href="org/realityforge/braincheck/Guards.html#apiInvariant-java.util.function.Supplier-java.util.function.Supplier-"><code>apiInvariant(Supplier, Supplier)</code></a> method is invoked while in development mode.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/realityforge/braincheck/BrainCheckTestUtil.html#setVerboseErrorMessages-boolean-">setVerboseErrorMessages(boolean)</a></span> - Static method in class org.realityforge.braincheck.<a href="org/realityforge/braincheck/BrainCheckTestUtil.html" title="class in org.realityforge.braincheck">BrainCheckTestUtil</a></dt>
 <dd>
 <div class="block">Configure the verbose error messages setting.</div>
@@ -177,6 +192,15 @@
 </a>
 <h2 class="title">V</h2>
 <dl>
+<dt><span class="memberNameLink"><a href="org/realityforge/braincheck/BrainCheckTestUtil.GuardType.html#valueOf-java.lang.String-">valueOf(String)</a></span> - Static method in enum org.realityforge.braincheck.<a href="org/realityforge/braincheck/BrainCheckTestUtil.GuardType.html" title="enum in org.realityforge.braincheck">BrainCheckTestUtil.GuardType</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this type with the specified name.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/realityforge/braincheck/BrainCheckTestUtil.GuardType.html#values--">values()</a></span> - Static method in enum org.realityforge.braincheck.<a href="org/realityforge/braincheck/BrainCheckTestUtil.GuardType.html" title="enum in org.realityforge.braincheck">BrainCheckTestUtil.GuardType</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum type, in
+the order they are declared.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/realityforge/braincheck/BrainCheckConfig.html#verboseErrorMessages--">verboseErrorMessages()</a></span> - Static method in class org.realityforge.braincheck.<a href="org/realityforge/braincheck/BrainCheckConfig.html" title="class in org.realityforge.braincheck">BrainCheckConfig</a></dt>
 <dd>
 <div class="block">Return true if invariant failures will include a detail message.</div>
