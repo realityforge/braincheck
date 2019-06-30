@@ -2,7 +2,6 @@ package org.realityforge.braincheck;
 
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
-import jsinterop.base.Js;
 
 /**
  * A utility class used to perform assertions and invariant checks.
@@ -114,7 +113,7 @@ public final class Guards
      */
     if ( "ENABLED".equals( System.getProperty( "jre.debugMode" ) ) )
     {
-      Js.debugger();
+      DebuggerUtil.debugger();
     }
     if ( BrainCheckConfig.verboseErrorMessages() )
     {
