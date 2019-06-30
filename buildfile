@@ -17,7 +17,7 @@ define 'braincheck' do
 
   pom.include_transitive_dependencies << artifact(:javax_annotation)
   pom.include_transitive_dependencies << artifact(:jsinterop_annotations)
-  pom.dependency_filter = Proc.new {|dep| dep[:scope].to_s != 'test' && dep[:id] != 'jsinterop-annotations'}
+  pom.dependency_filter = Proc.new {|dep| dep[:scope].to_s != 'test'}
 
   compile.with :javax_annotation,
                :jsinterop_annotations
