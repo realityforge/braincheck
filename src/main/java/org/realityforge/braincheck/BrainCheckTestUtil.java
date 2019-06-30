@@ -22,11 +22,6 @@ public final class BrainCheckTestUtil
   {
     if ( BrainCheckConfig.isProductionEnvironment() )
     {
-      /*
-       * This should really never happen but if it does add assertion (so code stops in debugger) or
-       * failing that throw an exception.
-       */
-      assert !BrainCheckConfig.isProductionEnvironment();
       throw new IllegalStateException( "Unable to reset config as BrainCheck is in production mode" );
     }
 
