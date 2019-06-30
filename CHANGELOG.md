@@ -1,6 +1,7 @@
 # Change Log
 
-### Unreleased
+### [v1.17.0](https://github.com/realityforge/braincheck/tree/v1.17.0) (2019-06-30)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.16.0...v1.17.0)
 
 * Decouple from the `com.google.jsinterop:base` artifact, re-add dependency on `com.google.jsinterop:jsinterop-annotations` and implement the `debugger` javascript statement locally. This change reverses the change applied in version `1.14.0` due to changes in either closure compiler or j2cl that meant that even if `com.google.jsinterop:base` is included, the downstream `j2cl_library` Bazel rule still needed to suppress the `checkDebuggerStatement` warning. Thus the decision was made to simplify the dependency hierarchy.
 
