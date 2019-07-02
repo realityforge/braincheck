@@ -14,6 +14,8 @@ artifacts:
 
   guiceyloops: org.realityforge.guiceyloops:guiceyloops:jar:0.98
 
+  javax_json: org.glassfish:javax.json:jar:1.1
+
   # GWT deps
   gwt_user: com.google.gwt:gwt-user:jar:2.8.2
   gwt_dev: com.google.gwt:gwt-dev:jar:2.8.2

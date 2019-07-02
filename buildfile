@@ -17,9 +17,12 @@ define 'braincheck' do
 
   pom.include_transitive_dependencies << artifact(:javax_annotation)
   pom.include_transitive_dependencies << artifact(:jsinterop_annotations)
+  pom.include_transitive_dependencies << artifact(:javax_json)
+  pom.optional_dependencies << artifact(:javax_json)
   pom.dependency_filter = Proc.new {|dep| dep[:scope].to_s != 'test'}
 
   compile.with :javax_annotation,
+               :javax_json,
                :jsinterop_annotations
 
   gwt_enhance(project)
