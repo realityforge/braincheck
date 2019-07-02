@@ -1,6 +1,7 @@
 # Change Log
 
-### Unreleased
+### [v1.20.0](https://github.com/realityforge/braincheck/tree/v1.20.0) (2019-07-02)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.19.0...v1.20.0)
 
 * Import the `GuardMessageCollector` class from Arez. The class is used to collect invariant invocations during tests for the purpose of documentation and verification. See the javadocs for further details.
 
