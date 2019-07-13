@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Upgrade the `au.com.stocksoftware.idea.codestyle` artifact to version `1.14`.
+
 ### [v1.20.0](https://github.com/realityforge/braincheck/tree/v1.20.0) (2019-07-02)
 [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.19.0...v1.20.0)
 
