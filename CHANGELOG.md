@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Upgrade the `org.realityforge.guiceyloops` artifact to version `0.102`.
 * Upgrade the `au.com.stocksoftware.idea.codestyle` artifact to version `1.14`.
 
 ### [v1.20.0](https://github.com/realityforge/braincheck/tree/v1.20.0) (2019-07-02)
