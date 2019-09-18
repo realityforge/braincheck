@@ -6,6 +6,7 @@
 * Upgrade the `org.realityforge.guiceyloops` artifact to version `0.102`.
 * Upgrade the `au.com.stocksoftware.idea.codestyle` artifact to version `1.14`.
 * Change the implementation of the `GuardMessageCollector` so that it generates an `AssertionError` if an invariant message fails to match the existing pattern rather than an `IllegalStateException` in some circumstances and an `AssertionError` in other circumstances.
+* Record the number of invariant messages that failed to match in the `GuardMessageCollector` and expose the count via the `GuardMessageCollector.getMatchFailureCount()` method.
 
 ### [v1.20.0](https://github.com/realityforge/braincheck/tree/v1.20.0) (2019-07-02)
 [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.19.0...v1.20.0)

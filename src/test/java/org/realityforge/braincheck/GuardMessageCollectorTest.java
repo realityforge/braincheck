@@ -160,8 +160,11 @@ public class GuardMessageCollectorTest
 
     collector.onTestSuiteStart();
     collector.onTestStart();
+    assertEquals( collector.getMatchFailureCount(), 0 );
     workerMethod1();
+    assertEquals( collector.getMatchFailureCount(), 0 );
     workerMethod2();
+    assertEquals( collector.getMatchFailureCount(), 0 );
 
     assertFalse( Files.exists( messageTemplates ) );
     collector.onTestComplete();
@@ -230,11 +233,14 @@ public class GuardMessageCollectorTest
 
     collector.onTestSuiteStart();
     collector.onTestStart();
+    assertEquals( collector.getMatchFailureCount(), 0 );
     Guards.apiInvariant( () -> true, () -> "Arez-0001: Hello" );
+    assertEquals( collector.getMatchFailureCount(), 0 );
     final AssertionError exception =
       expectThrows( AssertionError.class, () -> Guards.invariant( () -> true, () -> "Arez-0001: Hello" ) );
     assertEquals( exception.getMessage(),
                   "Failed to match diagnostic message type with key Arez and code 1." );
+    assertEquals( collector.getMatchFailureCount(), 1 );
   }
 
   @Nonnull

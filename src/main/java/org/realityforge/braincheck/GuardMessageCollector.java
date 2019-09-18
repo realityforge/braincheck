@@ -98,6 +98,7 @@ public final class GuardMessageCollector
   private final File _file;
   private final boolean _saveIfChanged;
   private long _loadTime;
+  private int _matchFailureCount;
 
   /**
    * Create the collector.
@@ -115,12 +116,18 @@ public final class GuardMessageCollector
     _saveIfChanged = saveIfChanged;
   }
 
+  public int getMatchFailureCount()
+  {
+    return _matchFailureCount;
+  }
+
   /**
    * Hook method that should be invoked before any test starts.
    * This method will load the message templates if the file exists otherwise it will just reset internal state.
    */
   public void onTestSuiteStart()
   {
+    _matchFailureCount = 0;
     loadIfRequired();
   }
 
@@ -373,6 +380,7 @@ public final class GuardMessageCollector
       final Pattern pattern = Pattern.compile( sb.toString() );
       if ( !pattern.matcher( message ).matches() )
       {
+        _matchFailureCount++;
         throw new AssertionError( "Failed to match " + type + " diagnostic message with " +
                                   "key " + _key + " and code " + code + ".\n" +
                                   "Expected pattern:\n" + messagePattern + "\n\n" +
@@ -380,6 +388,7 @@ public final class GuardMessageCollector
       }
       else if ( !Objects.equals( m.getType(), type ) )
       {
+        _matchFailureCount++;
         throw new AssertionError( "Failed to match diagnostic message type with " +
                                   "key " + _key + " and code " + code + "." );
       }
