@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Comparator;
@@ -317,8 +318,7 @@ public final class GuardMessageCollector
     throws IOException
   {
     final byte[] data = Files.readAllBytes( file.toPath() );
-    final Charset charset = Charset.forName( "UTF-8" );
-    final String jsonData = new String( data, charset );
+    final String jsonData = new String( data, StandardCharsets.UTF_8 );
 
     final String output =
       jsonData
@@ -331,7 +331,7 @@ public final class GuardMessageCollector
         .replaceAll( "(?m)^ {16}\"", "        \"" )
         .replaceAll( "(?m)^\n\\[\n", "[\n" ) +
       "\n";
-    Files.write( file.toPath(), output.getBytes( charset ) );
+    Files.write( file.toPath(), output.getBytes( StandardCharsets.UTF_8 ) );
   }
 
   @Nonnull
