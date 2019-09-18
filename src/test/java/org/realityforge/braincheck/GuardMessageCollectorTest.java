@@ -205,8 +205,8 @@ public class GuardMessageCollectorTest
     Guards.apiInvariant( () -> true, () -> "Arez-0001: Hello bob" );
     Guards.apiInvariant( () -> true, () -> "Arez-0001: Hello fred" );
     Guards.apiInvariant( () -> true, () -> "Arez-0001: Hello other" );
-    final IllegalStateException exception =
-      expectThrows( IllegalStateException.class,
+    final AssertionError exception =
+      expectThrows( AssertionError.class,
                     () -> Guards.apiInvariant( () -> true, () -> "Arez-0001: This no match" ) );
     assertEquals( exception.getMessage(),
                   "Failed to match API_INVARIANT diagnostic message with key Arez and code 1.\n" +

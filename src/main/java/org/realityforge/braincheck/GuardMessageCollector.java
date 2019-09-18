@@ -374,10 +374,10 @@ public final class GuardMessageCollector
       final Pattern pattern = Pattern.compile( sb.toString() );
       if ( !pattern.matcher( message ).matches() )
       {
-        throw new IllegalStateException( "Failed to match " + type + " diagnostic message with " +
-                                         "key " + _key + " and code " + code + ".\n" +
-                                         "Expected pattern:\n" + messagePattern + "\n\n" +
-                                         "Actual Message:\n" + message );
+        throw new AssertionError( "Failed to match " + type + " diagnostic message with " +
+                                  "key " + _key + " and code " + code + ".\n" +
+                                  "Expected pattern:\n" + messagePattern + "\n\n" +
+                                  "Actual Message:\n" + message );
       }
       else if ( !Objects.equals( m.getType(), type ) )
       {
