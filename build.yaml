@@ -19,3 +19,5 @@ artifacts:
   # GWT deps
   gwt_user: com.google.gwt:gwt-user:jar:2.8.2
   gwt_dev: com.google.gwt:gwt-dev:jar:2.8.2
+
+  testng: org.testng:testng:jar:6.11
