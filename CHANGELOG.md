@@ -1,5 +1,7 @@
 # Change Log
 
+### Unreleased
+
 ### [v1.21.0](https://github.com/realityforge/braincheck/tree/v1.21.0) (2019-09-18)
 [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.20.0...v1.21.0)
 
