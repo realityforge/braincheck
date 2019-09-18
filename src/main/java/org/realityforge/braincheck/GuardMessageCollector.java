@@ -380,9 +380,8 @@ public final class GuardMessageCollector
       }
       else if ( !Objects.equals( m.getType(), type ) )
       {
-        final String message1 =
-          "Failed to match diagnostic message type with key " + _key + " and code " + code + ".";
-        throw new AssertionError( message1 );
+        throw new AssertionError( "Failed to match diagnostic message type with " +
+                                  "key " + _key + " and code " + code + "." );
       }
       return m;
     }
