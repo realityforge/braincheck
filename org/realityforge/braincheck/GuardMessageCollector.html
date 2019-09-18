@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -208,24 +208,28 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../org/realityforge/braincheck/GuardMessageCollector.html#getMatchFailureCount--">getMatchFailureCount</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../org/realityforge/braincheck/GuardMessageCollector.html#onTestComplete--">onTestComplete</a></span>()</code>
 <div class="block">Hook method that should be invoked after a test completes.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../org/realityforge/braincheck/GuardMessageCollector.html#onTestStart--">onTestStart</a></span>()</code>
 <div class="block">Hook method that should be invoked before a test starts.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../org/realityforge/braincheck/GuardMessageCollector.html#onTestSuiteComplete--">onTestSuiteComplete</a></span>()</code>
 <div class="block">Hook method that should be invoked after all tests have completed.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../org/realityforge/braincheck/GuardMessageCollector.html#onTestSuiteStart--">onTestSuiteStart</a></span>()</code>
 <div class="block">Hook method that should be invoked before any test starts.</div>
@@ -259,7 +263,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockListLast">
 <li class="blockList">
 <h4>GuardMessageCollector</h4>
-<pre>public&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.109">GuardMessageCollector</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
+<pre>public&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.110">GuardMessageCollector</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
                              <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;file,
                              boolean&nbsp;saveIfChanged)</pre>
 <div class="block">Create the collector.</div>
@@ -279,13 +283,22 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="getMatchFailureCount--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMatchFailureCount</h4>
+<pre>public&nbsp;int&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.119">getMatchFailureCount</a>()</pre>
+</li>
+</ul>
 <a name="onTestSuiteStart--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>onTestSuiteStart</h4>
-<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.122">onTestSuiteStart</a>()</pre>
+<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.128">onTestSuiteStart</a>()</pre>
 <div class="block">Hook method that should be invoked before any test starts.
  This method will load the message templates if the file exists otherwise it will just reset internal state.</div>
 </li>
@@ -296,7 +309,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>onTestStart</h4>
-<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.130">onTestStart</a>()</pre>
+<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.137">onTestStart</a>()</pre>
 <div class="block">Hook method that should be invoked before a test starts.</div>
 </li>
 </ul>
@@ -306,7 +319,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>onTestComplete</h4>
-<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.138">onTestComplete</a>()</pre>
+<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.145">onTestComplete</a>()</pre>
 <div class="block">Hook method that should be invoked after a test completes.</div>
 </li>
 </ul>
@@ -316,7 +329,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockListLast">
 <li class="blockList">
 <h4>onTestSuiteComplete</h4>
-<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.149">onTestSuiteComplete</a>()</pre>
+<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.156">onTestSuiteComplete</a>()</pre>
 <div class="block">Hook method that should be invoked after all tests have completed.
  If the expected invariant invocations no longer match the actual invariant invocations
  then this method will either save the new message template or generate an exception depending
