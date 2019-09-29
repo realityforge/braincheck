@@ -1,6 +1,7 @@
 # Change Log
 
-### Unreleased
+### [v1.22.0](https://github.com/realityforge/braincheck/tree/v1.22.0) (2019-09-29)
+[Full Changelog](https://github.com/realityforge/braincheck/compare/v1.21.0...v1.22.0)
 
 * Fixed a bug in the `GuardMessageCollector` class that could occur when an invariant failed to match the expected pattern and caused a test to fail. This may result in some code expected to be exercised, not being exercised and thus some invariants to fail to have callers. Previously this would result in these messages being omitted from the invariant message file. This would mean that when when the tests were re-run further messages failed to be matched. This was fixed such that messages are only removed from the message log if the failed tests are not the result of failures to match invariants.
 
