@@ -159,7 +159,7 @@ public final class GuardMessageCollector
     {
       if ( _saveIfChanged )
       {
-        saveIfRequired();
+        save();
       }
       else
       {
@@ -246,55 +246,52 @@ public final class GuardMessageCollector
     }
   }
 
-  private void saveIfRequired()
+  private void save()
   {
-    if ( needsSave() )
+    final Map<String, Object> properties = new HashMap<>();
+    properties.put( JsonGenerator.PRETTY_PRINTING, true );
+
+    final JsonGeneratorFactory generatorFactory = Json.createGeneratorFactory( properties );
+    try
     {
-      final Map<String, Object> properties = new HashMap<>();
-      properties.put( JsonGenerator.PRETTY_PRINTING, true );
-
-      final JsonGeneratorFactory generatorFactory = Json.createGeneratorFactory( properties );
-      try
+      try ( final FileOutputStream output = new FileOutputStream( _file ) )
       {
-        try ( final FileOutputStream output = new FileOutputStream( _file ) )
-        {
-          final JsonGenerator g = generatorFactory.createGenerator( output );
-          g.writeStartArray();
-          _messages.values()
-            .stream()
-            .filter( m -> !m.getCallers().isEmpty() )
-            .sorted( Comparator.comparingInt( Message::getCode ) )
-            .forEachOrdered( m -> {
+        final JsonGenerator g = generatorFactory.createGenerator( output );
+        g.writeStartArray();
+        _messages.values()
+          .stream()
+          .filter( m -> !m.getCallers().isEmpty() )
+          .sorted( Comparator.comparingInt( Message::getCode ) )
+          .forEachOrdered( m -> {
+            g.writeStartObject();
+            g.write( "code", m.getCode() );
+            g.write( "type", m.getType().name() );
+            g.write( "messagePattern", m.getMessagePattern() );
+
+            g.writeStartArray( "callers" );
+            final StackTraceElement[] callers =
+              m.getCallers().stream().sorted( this::compareElements ).toArray( StackTraceElement[]::new );
+            for ( final StackTraceElement caller : callers )
+            {
               g.writeStartObject();
-              g.write( "code", m.getCode() );
-              g.write( "type", m.getType().name() );
-              g.write( "messagePattern", m.getMessagePattern() );
-
-              g.writeStartArray( "callers" );
-              final StackTraceElement[] callers =
-                m.getCallers().stream().sorted( this::compareElements ).toArray( StackTraceElement[]::new );
-              for ( final StackTraceElement caller : callers )
-              {
-                g.writeStartObject();
-                g.write( "class", caller.getClassName() );
-                g.write( "method", caller.getMethodName() );
-                g.write( "file", caller.getFileName() );
-                g.write( "lineNumber", caller.getLineNumber() );
-                g.writeEnd();
-              }
-
+              g.write( "class", caller.getClassName() );
+              g.write( "method", caller.getMethodName() );
+              g.write( "file", caller.getFileName() );
+              g.write( "lineNumber", caller.getLineNumber() );
               g.writeEnd();
-              g.writeEnd();
-            } );
-          g.writeEnd();
-          g.close();
-        }
-        formatJson( _file );
+            }
+
+            g.writeEnd();
+            g.writeEnd();
+          } );
+        g.writeEnd();
+        g.close();
       }
-      catch ( final IOException ioe )
-      {
-        throw new IllegalStateException( "Failed to write diagnostic messages file " + _file + ".", ioe );
-      }
+      formatJson( _file );
+    }
+    catch ( final IOException ioe )
+    {
+      throw new IllegalStateException( "Failed to write diagnostic messages file " + _file + ".", ioe );
     }
   }
 
