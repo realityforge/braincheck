@@ -49,15 +49,13 @@ public abstract class AbstractTestNGMessageCollector
   {
     if ( shouldCompleteCollection( context ) )
     {
-      _messages.onTestSuiteComplete();
+      _messages.onTestSuiteComplete(context.getFailedTests().size() <= _messages.getMatchFailureCount());
     }
   }
 
   protected boolean shouldCompleteCollection( @Nonnull final ITestContext context )
   {
-    // Only attempt to write out results if all tests passed or the only tests are failed are those that
-    // failed because invariant messages did not match
-    return context.getFailedTests().size() <= _messages.getMatchFailureCount() && shouldCheckDiagnosticMessages();
+    return shouldCheckDiagnosticMessages();
   }
 
   protected abstract boolean shouldCheckDiagnosticMessages();

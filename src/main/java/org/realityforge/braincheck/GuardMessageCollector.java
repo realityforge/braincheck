@@ -97,23 +97,27 @@ public final class GuardMessageCollector
   @Nonnull
   private final File _file;
   private final boolean _saveIfChanged;
+  private final boolean _deleteIfUnmatched;
   private long _loadTime;
   private int _matchFailureCount;
 
   /**
    * Create the collector.
    *
-   * @param key           the key/prefix used when selecting messages to match.
-   * @param file          the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.
-   * @param saveIfChanged flag set to true if changed message templates should be saved to <code>file</code>.
+   * @param key               the key/prefix used when selecting messages to match.
+   * @param file              the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.
+   * @param saveIfChanged     flag set to true if changed message templates should be saved to <code>file</code>.
+   * @param deleteIfUnmatched flag set to true if should delete messages from template if they are unmatched,
    */
   public GuardMessageCollector( @Nonnull final String key,
                                 @Nonnull final File file,
-                                final boolean saveIfChanged )
+                                final boolean saveIfChanged,
+                                final boolean deleteIfUnmatched )
   {
     _key = Objects.requireNonNull( key );
     _file = Objects.requireNonNull( file );
     _saveIfChanged = saveIfChanged;
+    _deleteIfUnmatched = deleteIfUnmatched;
   }
 
   public int getMatchFailureCount()
@@ -152,14 +156,16 @@ public final class GuardMessageCollector
    * If the expected invariant invocations no longer match the actual invariant invocations
    * then this method will either save the new message template or generate an exception depending
    * on the value of the <code>saveIfChanged</code> used to create this class.
+   *
+   * @param suiteSuccessful true if test suite completed with no failures, false otherwise.
    */
-  public void onTestSuiteComplete()
+  public void onTestSuiteComplete( final boolean suiteSuccessful )
   {
     if ( needsSave() )
     {
       if ( _saveIfChanged )
       {
-        save();
+        save( suiteSuccessful );
       }
       else
       {
@@ -246,7 +252,7 @@ public final class GuardMessageCollector
     }
   }
 
-  private void save()
+  private void save( final boolean suiteSuccessful )
   {
     final Map<String, Object> properties = new HashMap<>();
     properties.put( JsonGenerator.PRETTY_PRINTING, true );
@@ -260,7 +266,9 @@ public final class GuardMessageCollector
         g.writeStartArray();
         _messages.values()
           .stream()
-          .filter( m -> !m.getCallers().isEmpty() )
+          // Avoid deleting an entry if we failed matching some invariants as it is possible
+          // that some invariant checks were never reached during test run
+          .filter( m -> !_deleteIfUnmatched || !suiteSuccessful || !m.getCallers().isEmpty() )
           .sorted( Comparator.comparingInt( Message::getCode ) )
           .forEachOrdered( m -> {
             g.writeStartObject();

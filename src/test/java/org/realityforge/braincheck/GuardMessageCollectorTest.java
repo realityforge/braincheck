@@ -26,7 +26,8 @@ public class GuardMessageCollectorTest
   {
     final Path messageTemplates = getMessageTemplatesFile();
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true );
+    final GuardMessageCollector collector =
+      new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
 
     assertFalse( Files.exists( messageTemplates ) );
     collector.onTestSuiteStart();
@@ -39,7 +40,7 @@ public class GuardMessageCollectorTest
     collector.onTestComplete();
     assertFalse( Files.exists( messageTemplates ) );
 
-    collector.onTestSuiteComplete();
+    collector.onTestSuiteComplete( true );
     assertTrue( Files.exists( messageTemplates ) );
 
     final JsonArray messages = readMessageTemplates( messageTemplates );
@@ -58,17 +59,17 @@ public class GuardMessageCollectorTest
   {
     final Path messageTemplates = getMessageTemplatesFile();
     final String content =
-      "[{\"code\":1234,\"type\":\"INVARIANT\",\"messagePattern\":\"Some message\",\"callers\":[{\"class\":\"org.realityforge.braincheck.GuardMessageCollectorTest\",\"method\":\"matchExistingMessage\",\"file\":\"GuardMessageCollectorTest.java\",\"lineNumber\":69}]}]";
+      "[{\"code\":1234,\"type\":\"INVARIANT\",\"messagePattern\":\"Some message\",\"callers\":[{\"class\":\"org.realityforge.braincheck.GuardMessageCollectorTest\",\"method\":\"matchExistingMessage\",\"file\":\"GuardMessageCollectorTest.java\",\"lineNumber\":70}]}]";
     final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
     Files.write( messageTemplates, bytes );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
     Guards.invariant( () -> true, () -> "Arez-1234: Some message" );
     collector.onTestComplete();
-    collector.onTestSuiteComplete();
+    collector.onTestSuiteComplete( true );
 
     // The data would be formatted differently if it did not match
     assertEquals( Files.readAllBytes( messageTemplates ),
@@ -77,19 +78,81 @@ public class GuardMessageCollectorTest
   }
 
   @Test
+  public void existingMessageNotMatchedButTestSuiteHasErrors()
+    throws Exception
+  {
+    final Path messageTemplates = getMessageTemplatesFile();
+    final String content = "[{\"code\":70,\"type\":\"API_INVARIANT\",\"messagePattern\":\"Bleep\",\"callers\":[]}]";
+    final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
+    Files.write( messageTemplates, bytes );
+
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
+
+    collector.onTestSuiteStart();
+    collector.onTestStart();
+    collector.onTestComplete();
+    collector.onTestSuiteComplete( false );
+
+    final JsonArray messages = readMessageTemplates( messageTemplates );
+    assertEquals( messages.size(), 1 );
+    ensureMessage( messages, 0, 70, "API_INVARIANT", "Bleep" );
+  }
+
+  @Test
+  public void existingMessageNotMatchedButDeleteIfUnmatchedFalse()
+    throws Exception
+  {
+    final Path messageTemplates = getMessageTemplatesFile();
+    final String content = "[{\"code\":70,\"type\":\"API_INVARIANT\",\"messagePattern\":\"Bleep\",\"callers\":[]}]";
+    final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
+    Files.write( messageTemplates, bytes );
+
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, false );
+
+    collector.onTestSuiteStart();
+    collector.onTestStart();
+    collector.onTestComplete();
+    collector.onTestSuiteComplete( true );
+
+    final JsonArray messages = readMessageTemplates( messageTemplates );
+    assertEquals( messages.size(), 1 );
+    ensureMessage( messages, 0, 70, "API_INVARIANT", "Bleep" );
+  }
+
+  @Test
+  public void existingMessageNotMatched()
+    throws Exception
+  {
+    final Path messageTemplates = getMessageTemplatesFile();
+    final String content = "[{\"code\":70,\"type\":\"API_INVARIANT\",\"messagePattern\":\"Bleep\",\"callers\":[]}]";
+    final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
+    Files.write( messageTemplates, bytes );
+
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
+
+    collector.onTestSuiteStart();
+    collector.onTestStart();
+    collector.onTestComplete();
+    collector.onTestSuiteComplete( true );
+
+    final JsonArray messages = readMessageTemplates( messageTemplates );
+    assertEquals( messages.size(), 0 );
+  }
+
+  @Test
   public void ignoreUnmatchedMessage()
     throws Exception
   {
     final Path messageTemplates = getMessageTemplatesFile();
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
     Guards.invariant( () -> true, () -> "Other-1234: Some message" );
     Guards.invariant( () -> true, () -> "Random string not matching message format" );
     collector.onTestComplete();
-    collector.onTestSuiteComplete();
+    collector.onTestSuiteComplete( true );
     assertFalse( Files.exists( messageTemplates ) );
   }
 
@@ -101,7 +164,7 @@ public class GuardMessageCollectorTest
     Files.write( messageTemplates, new byte[ 0 ] );
     Files.setPosixFilePermissions( messageTemplates, Collections.emptySet() );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
 
     final IllegalStateException exception = expectThrows( IllegalStateException.class, collector::onTestSuiteStart );
     assertEquals( exception.getMessage(), "Failed to read diagnostic messages file " + messageTemplates + "." );
@@ -118,7 +181,8 @@ public class GuardMessageCollectorTest
     Files.write( messageTemplates, bytes );
     Files.setPosixFilePermissions( messageTemplates, Collections.singleton( PosixFilePermission.OWNER_READ ) );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Spritz", messageTemplates.toFile(), true );
+    final GuardMessageCollector collector =
+      new GuardMessageCollector( "Spritz", messageTemplates.toFile(), true, true );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -126,7 +190,7 @@ public class GuardMessageCollectorTest
     Guards.invariant( () -> true, () -> "Random string not matching message format" );
     collector.onTestComplete();
     final IllegalStateException exception =
-      expectThrows( IllegalStateException.class, collector::onTestSuiteComplete );
+      expectThrows( IllegalStateException.class, () -> collector.onTestSuiteComplete( true ) );
     assertEquals( exception.getMessage(), "Failed to write diagnostic messages file " + messageTemplates + "." );
     assertEquals( Files.readAllBytes( messageTemplates ), bytes );
   }
@@ -137,13 +201,15 @@ public class GuardMessageCollectorTest
   {
     final Path messageTemplates = getMessageTemplatesFile();
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), false );
+    final GuardMessageCollector collector =
+      new GuardMessageCollector( "Arez", messageTemplates.toFile(), false, true );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
     Guards.invariant( () -> true, () -> "Arez-1234: Some message" );
     collector.onTestComplete();
-    final IllegalStateException exception = expectThrows( IllegalStateException.class, collector::onTestSuiteComplete );
+    final IllegalStateException exception =
+      expectThrows( IllegalStateException.class, () -> collector.onTestSuiteComplete( true ) );
 
     assertEquals( exception.getMessage(),
                   "Diagnostic messages template is out of date. 1 messages need to be updated including messages:\n" +
@@ -156,7 +222,8 @@ public class GuardMessageCollectorTest
   {
     final Path messageTemplates = getMessageTemplatesFile();
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true );
+    final GuardMessageCollector collector =
+      new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -170,7 +237,7 @@ public class GuardMessageCollectorTest
     collector.onTestComplete();
     assertFalse( Files.exists( messageTemplates ) );
 
-    collector.onTestSuiteComplete();
+    collector.onTestSuiteComplete( true );
     assertTrue( Files.exists( messageTemplates ) );
 
     final JsonArray messages = readMessageTemplates( messageTemplates );
@@ -201,7 +268,8 @@ public class GuardMessageCollectorTest
     final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
     Files.write( messageTemplates, bytes );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true,
+                                                                       true );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -229,7 +297,8 @@ public class GuardMessageCollectorTest
     final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
     Files.write( messageTemplates, bytes );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true,
+                                                                       true );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -253,6 +322,7 @@ public class GuardMessageCollectorTest
     return messageTemplates;
   }
 
+  @SuppressWarnings( "SameParameterValue" )
   private void assertSingleCallerMessage( @Nonnull final JsonArray messages,
                                           final int index,
                                           final int code,
