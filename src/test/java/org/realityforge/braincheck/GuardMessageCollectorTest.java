@@ -26,8 +26,7 @@ public class GuardMessageCollectorTest
   {
     final Path messageTemplates = getMessageTemplatesFile();
 
-    final GuardMessageCollector collector =
-      new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
 
     assertFalse( Files.exists( messageTemplates ) );
     collector.onTestSuiteStart();
@@ -59,11 +58,11 @@ public class GuardMessageCollectorTest
   {
     final Path messageTemplates = getMessageTemplatesFile();
     final String content =
-      "[{\"code\":1234,\"type\":\"INVARIANT\",\"messagePattern\":\"Some message\",\"callers\":[{\"class\":\"org.realityforge.braincheck.GuardMessageCollectorTest\",\"method\":\"matchExistingMessage\",\"file\":\"GuardMessageCollectorTest.java\",\"lineNumber\":70}]}]";
+      "[{\"code\":1234,\"type\":\"INVARIANT\",\"messagePattern\":\"Some message\",\"callers\":[{\"class\":\"org.realityforge.braincheck.GuardMessageCollectorTest\",\"method\":\"matchExistingMessage\",\"file\":\"GuardMessageCollectorTest.java\",\"lineNumber\":69}]}]";
     final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
     Files.write( messageTemplates, bytes );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -86,7 +85,7 @@ public class GuardMessageCollectorTest
     final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
     Files.write( messageTemplates, bytes );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -128,7 +127,7 @@ public class GuardMessageCollectorTest
     final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
     Files.write( messageTemplates, bytes );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -145,7 +144,7 @@ public class GuardMessageCollectorTest
   {
     final Path messageTemplates = getMessageTemplatesFile();
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -164,7 +163,7 @@ public class GuardMessageCollectorTest
     Files.write( messageTemplates, new byte[ 0 ] );
     Files.setPosixFilePermissions( messageTemplates, Collections.emptySet() );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
 
     final IllegalStateException exception = expectThrows( IllegalStateException.class, collector::onTestSuiteStart );
     assertEquals( exception.getMessage(), "Failed to read diagnostic messages file " + messageTemplates + "." );
@@ -182,7 +181,7 @@ public class GuardMessageCollectorTest
     Files.setPosixFilePermissions( messageTemplates, Collections.singleton( PosixFilePermission.OWNER_READ ) );
 
     final GuardMessageCollector collector =
-      new GuardMessageCollector( "Spritz", messageTemplates.toFile(), true, true );
+      new GuardMessageCollector( "Spritz", messageTemplates.toFile() );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -201,8 +200,7 @@ public class GuardMessageCollectorTest
   {
     final Path messageTemplates = getMessageTemplatesFile();
 
-    final GuardMessageCollector collector =
-      new GuardMessageCollector( "Arez", messageTemplates.toFile(), false, true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), false );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -222,8 +220,7 @@ public class GuardMessageCollectorTest
   {
     final Path messageTemplates = getMessageTemplatesFile();
 
-    final GuardMessageCollector collector =
-      new GuardMessageCollector( "Arez", messageTemplates.toFile(), true, true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -268,8 +265,7 @@ public class GuardMessageCollectorTest
     final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
     Files.write( messageTemplates, bytes );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true,
-                                                                       true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
 
     collector.onTestSuiteStart();
     collector.onTestStart();
@@ -297,8 +293,7 @@ public class GuardMessageCollectorTest
     final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
     Files.write( messageTemplates, bytes );
 
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile(), true,
-                                                                       true );
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
 
     collector.onTestSuiteStart();
     collector.onTestStart();

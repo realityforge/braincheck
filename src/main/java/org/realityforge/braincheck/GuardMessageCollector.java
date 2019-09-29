@@ -104,6 +104,29 @@ public final class GuardMessageCollector
   /**
    * Create the collector.
    *
+   * @param key  the key/prefix used when selecting messages to match.
+   * @param file the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.
+   */
+  public GuardMessageCollector( @Nonnull final String key, @Nonnull final File file )
+  {
+    this( key, file, true );
+  }
+
+  /**
+   * Create the collector.
+   *
+   * @param key           the key/prefix used when selecting messages to match.
+   * @param file          the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.
+   * @param saveIfChanged flag set to true if changed message templates should be saved to <code>file</code>.
+   */
+  public GuardMessageCollector( @Nonnull final String key, @Nonnull final File file, final boolean saveIfChanged )
+  {
+    this( key, file, saveIfChanged, true );
+  }
+
+  /**
+   * Create the collector.
+   *
    * @param key               the key/prefix used when selecting messages to match.
    * @param file              the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.
    * @param saveIfChanged     flag set to true if changed message templates should be saved to <code>file</code>.

@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Restore API compatibility with v1.21.0 by adding additional constructors to `GuardMessageCollector`.
+
 ### [v1.22.0](https://github.com/realityforge/braincheck/tree/v1.22.0) (2019-09-29)
 [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.21.0...v1.22.0)
 
