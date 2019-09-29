@@ -21,6 +21,30 @@ public class GuardMessageCollectorTest
   extends AbstractBraincheckTest
 {
   @Test
+  public void matchExistingMessage()
+    throws Exception
+  {
+    final Path messageTemplates = getMessageTemplatesFile();
+    final String content =
+      "[{\"code\":1234,\"type\":\"INVARIANT\",\"messagePattern\":\"Some message\",\"callers\":[{\"class\":\"org.realityforge.braincheck.GuardMessageCollectorTest\",\"method\":\"matchExistingMessage\",\"file\":\"GuardMessageCollectorTest.java\",\"lineNumber\":37}]}]";
+    final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
+    Files.write( messageTemplates, bytes );
+
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
+
+    collector.onTestSuiteStart();
+    collector.onTestStart();
+    Guards.invariant( () -> true, () -> "Arez-1234: Some message" );
+    collector.onTestComplete();
+    collector.onTestSuiteComplete( true );
+
+    // The data would be formatted differently if it did not match
+    assertEquals( Files.readAllBytes( messageTemplates ),
+                  bytes,
+                  "Actual: " + readMessageTemplates( messageTemplates ) );
+  }
+
+  @Test
   public void recordMatchingMessage_whenSaveIfChanged()
     throws Exception
   {
@@ -50,30 +74,6 @@ public class GuardMessageCollectorTest
                                "INVARIANT",
                                "Some message",
                                "recordMatchingMessage_whenSaveIfChanged" );
-  }
-
-  @Test
-  public void matchExistingMessage()
-    throws Exception
-  {
-    final Path messageTemplates = getMessageTemplatesFile();
-    final String content =
-      "[{\"code\":1234,\"type\":\"INVARIANT\",\"messagePattern\":\"Some message\",\"callers\":[{\"class\":\"org.realityforge.braincheck.GuardMessageCollectorTest\",\"method\":\"matchExistingMessage\",\"file\":\"GuardMessageCollectorTest.java\",\"lineNumber\":69}]}]";
-    final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
-    Files.write( messageTemplates, bytes );
-
-    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
-
-    collector.onTestSuiteStart();
-    collector.onTestStart();
-    Guards.invariant( () -> true, () -> "Arez-1234: Some message" );
-    collector.onTestComplete();
-    collector.onTestSuiteComplete( true );
-
-    // The data would be formatted differently if it did not match
-    assertEquals( Files.readAllBytes( messageTemplates ),
-                  bytes,
-                  "Actual: " + readMessageTemplates( messageTemplates ) );
   }
 
   @Test
