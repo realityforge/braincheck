@@ -18,6 +18,7 @@ public final class Guards
    */
   enum Type
   {
+    FAIL,
     INVARIANT,
     API_INVARIANT
   }
@@ -141,6 +142,12 @@ public final class Guards
    */
   public static void fail( @Nonnull final Supplier<String> message )
   {
+    if ( BrainCheckConfig.isDevelopmentEnvironment() && null != c_onGuardListener )
+    {
+      c_onGuardListener.onGuard( Type.FAIL,
+                                 BrainCheckUtil.safeGetString( message ),
+                                 StackTraceUtil.getStackTrace( 2 ) );
+    }
     if ( BrainCheckConfig.checkInvariants() )
     {
       doFail( message );

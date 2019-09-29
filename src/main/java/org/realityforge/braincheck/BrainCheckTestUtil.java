@@ -22,6 +22,7 @@ public final class BrainCheckTestUtil
   @GwtIncompatible
   public enum GuardType
   {
+    FAIL,
     INVARIANT,
     API_INVARIANT
   }

@@ -246,6 +246,36 @@ public class GuardMessageCollectorTest
     assertCaller( callers, 1, "workerMethod2" );
   }
 
+  @Test
+  public void recordMatchingMessageFromFail()
+    throws Exception
+  {
+    final Path messageTemplates = getMessageTemplatesFile();
+
+    final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
+
+    collector.onTestSuiteStart();
+    collector.onTestStart();
+
+    assertEquals( collector.getMatchFailureCount(), 0 );
+    workerMethod3();
+    assertEquals( collector.getMatchFailureCount(), 0 );
+
+    assertFalse( Files.exists( messageTemplates ) );
+    collector.onTestComplete();
+    assertFalse( Files.exists( messageTemplates ) );
+
+    collector.onTestSuiteComplete( true );
+    assertTrue( Files.exists( messageTemplates ) );
+
+    final JsonArray messages = readMessageTemplates( messageTemplates );
+    assertEquals( messages.size(), 1 );
+    final JsonObject message = ensureMessage( messages, 0, 4567, "FAIL", "Blah blee" );
+    final JsonArray callers = message.getJsonArray( "callers" );
+    assertEquals( callers.size(), 1 );
+    assertCaller( callers, 0, "workerMethod3" );
+  }
+
   private void workerMethod1()
   {
     Guards.invariant( () -> true, () -> "Arez-1234: Some message" );
@@ -254,6 +284,17 @@ public class GuardMessageCollectorTest
   private void workerMethod2()
   {
     Guards.invariant( () -> true, () -> "Arez-1234: Some message" );
+  }
+
+  private void workerMethod3()
+  {
+    try
+    {
+      Guards.fail( () -> "Arez-4567: Blah blee" );
+    }
+    catch ( final Exception ignored )
+    {
+    }
   }
 
   @Test
