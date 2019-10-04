@@ -415,7 +415,7 @@ public final class GuardMessageCollector
       m.recordCaller( caller );
       final StringBuilder sb = new StringBuilder();
 
-      String messagePattern = m.getMessagePattern();
+      final String messagePattern = m.getMessagePattern();
       int lastOffset = 0;
       int offset;
       while ( -1 != ( offset = messagePattern.indexOf( "%s", lastOffset ) ) )
