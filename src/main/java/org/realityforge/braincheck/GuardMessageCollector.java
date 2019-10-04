@@ -98,6 +98,7 @@ public final class GuardMessageCollector
   private final File _file;
   private final boolean _saveIfChanged;
   private final boolean _deleteIfUnmatched;
+  private final boolean _recordCallers;
   private long _loadTime;
   private int _matchFailureCount;
 
@@ -137,10 +138,29 @@ public final class GuardMessageCollector
                                 final boolean saveIfChanged,
                                 final boolean deleteIfUnmatched )
   {
+    this( key, file, saveIfChanged, deleteIfUnmatched, true );
+  }
+
+  /**
+   * Create the collector.
+   *
+   * @param key               the key/prefix used when selecting messages to match.
+   * @param file              the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.
+   * @param saveIfChanged     flag set to true if changed message templates should be saved to <code>file</code>.
+   * @param deleteIfUnmatched flag set to true if should delete messages from template if they are unmatched.
+   * @param recordCallers     flag set to true if the methods where invariant messages are located should be stored in the message log.
+   */
+  public GuardMessageCollector( @Nonnull final String key,
+                                @Nonnull final File file,
+                                final boolean saveIfChanged,
+                                final boolean deleteIfUnmatched,
+                                final boolean recordCallers )
+  {
     _key = Objects.requireNonNull( key );
     _file = Objects.requireNonNull( file );
     _saveIfChanged = saveIfChanged;
     _deleteIfUnmatched = deleteIfUnmatched;
+    _recordCallers = recordCallers;
   }
 
   public int getMatchFailureCount()
@@ -193,7 +213,7 @@ public final class GuardMessageCollector
       else
       {
         final List<Message> unsavedMessages =
-          _messages.values().stream().filter( Message::needsSave ).collect( Collectors.toList() );
+          _messages.values().stream().filter( m -> m.needsSave( _recordCallers ) ).collect( Collectors.toList() );
         throw new IllegalStateException( "Diagnostic messages template is out of date. " + unsavedMessages.size() +
                                          " messages need to be updated including messages:\n" +
                                          unsavedMessages.stream()
@@ -213,7 +233,7 @@ public final class GuardMessageCollector
       final int code = Integer.parseInt( matcher.group( 1 ) );
       final String msg = matcher.group( 2 );
 
-      matchOrRecordDiagnosticMessage( code, type, msg ).recordCaller( stackTrace[ 0 ] );
+      matchOrRecordDiagnosticMessage( code, type, msg, stackTrace[ 0 ] );
     }
   }
 
@@ -298,21 +318,23 @@ public final class GuardMessageCollector
             g.write( "code", m.getCode() );
             g.write( "type", m.getType().name() );
             g.write( "messagePattern", m.getMessagePattern() );
-
-            g.writeStartArray( "callers" );
-            final StackTraceElement[] callers =
-              m.getCallers().stream().sorted( this::compareElements ).toArray( StackTraceElement[]::new );
-            for ( final StackTraceElement caller : callers )
+            if ( _recordCallers )
             {
-              g.writeStartObject();
-              g.write( "class", caller.getClassName() );
-              g.write( "method", caller.getMethodName() );
-              g.write( "file", caller.getFileName() );
-              g.write( "lineNumber", caller.getLineNumber() );
+              g.writeStartArray( "callers" );
+              final StackTraceElement[] callers =
+                m.getCallers().stream().sorted( this::compareElements ).toArray( StackTraceElement[]::new );
+              for ( final StackTraceElement caller : callers )
+              {
+                g.writeStartObject();
+                g.write( "class", caller.getClassName() );
+                g.write( "method", caller.getMethodName() );
+                g.write( "file", caller.getFileName() );
+                g.write( "lineNumber", caller.getLineNumber() );
+                g.writeEnd();
+              }
+
               g.writeEnd();
             }
-
-            g.writeEnd();
             g.writeEnd();
           } );
         g.writeEnd();
@@ -341,7 +363,7 @@ public final class GuardMessageCollector
 
   private boolean needsSave()
   {
-    return _messages.values().stream().anyMatch( Message::needsSave );
+    return _messages.values().stream().anyMatch( m -> m.needsSave( _recordCallers ) );
   }
 
   /**
@@ -368,29 +390,29 @@ public final class GuardMessageCollector
     Files.write( file.toPath(), output.getBytes( StandardCharsets.UTF_8 ) );
   }
 
-  @Nonnull
-  private Message recordDiagnosticMessage( final int code,
-                                           @Nonnull final BrainCheckTestUtil.GuardType type,
-                                           @Nonnull final String messagePattern )
+  private void recordDiagnosticMessage( final int code,
+                                        @Nonnull final BrainCheckTestUtil.GuardType type,
+                                        @Nonnull final String messagePattern,
+                                        @Nonnull final StackTraceElement caller )
   {
-    final Message message =
-      new Message( _key, code, type, messagePattern, true, new HashSet<>() );
+    final Message message = new Message( _key, code, type, messagePattern, true, new HashSet<>() );
+    message.recordCaller( caller );
     _messages.put( code, message );
-    return message;
   }
 
-  @Nonnull
-  private Message matchOrRecordDiagnosticMessage( final int code,
-                                                  @Nonnull final BrainCheckTestUtil.GuardType type,
-                                                  @Nonnull final String message )
+  private void matchOrRecordDiagnosticMessage( final int code,
+                                               @Nonnull final BrainCheckTestUtil.GuardType type,
+                                               @Nonnull final String message,
+                                               @Nonnull final StackTraceElement caller )
   {
     final Message m = _messages.get( code );
     if ( null == m )
     {
-      return recordDiagnosticMessage( code, type, message );
+      recordDiagnosticMessage( code, type, message, caller );
     }
     else
     {
+      m.recordCaller( caller );
       final StringBuilder sb = new StringBuilder();
 
       String messagePattern = m.getMessagePattern();
@@ -420,7 +442,6 @@ public final class GuardMessageCollector
         throw new AssertionError( "Failed to match diagnostic message type with " +
                                   "key " + _key + " and code " + code + "." );
       }
-      return m;
     }
   }
 
@@ -473,9 +494,11 @@ public final class GuardMessageCollector
       return _messagePattern;
     }
 
-    boolean needsSave()
+    boolean needsSave( final boolean recordCallers )
     {
-      return _needsSave || !Objects.equals( _originalCallers, _callers ) || _originalCallers.isEmpty();
+      return _needsSave ||
+             ( recordCallers && !Objects.equals( _originalCallers, _callers ) ) ||
+             _callers.isEmpty();
     }
 
     void recordCaller( @Nonnull final StackTraceElement caller )

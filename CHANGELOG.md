@@ -3,6 +3,9 @@
 ### Unreleased
 
 * Fix bug in `AbstractTestNGMessageCollector` where a suite could be detected as successful if the only failures that occurred were invariant message match failures. This could result in the invariant message file being incorrectly updated with unseen messages removed even when the test suite had not completed cleanly.
+* Fix a bug where the caller was not recorded if the invariant message did not match the existing pattern.
+* Fix a bug in the `GuardMessageCollector` which was inspecting `_originalCallers` rather than `_callers` when detecting if a message needs to be updated as there is no more callers.
+* Update `GuardMessageCollector` so that it can optionally omit callers from the message log, thus reducing the potential churn when the message log is not needed to create a cross reference to the code.
 
 ### [v1.23.0](https://github.com/realityforge/braincheck/tree/v1.23.0) (2019-09-29)
 [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.22.0...v1.23.0)
