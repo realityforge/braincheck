@@ -206,6 +206,15 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <div class="block">Create the collector.</div>
 </td>
 </tr>
+<tr class="rowColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../org/realityforge/braincheck/GuardMessageCollector.html#GuardMessageCollector-java.lang.String-java.io.File-boolean-boolean-boolean-">GuardMessageCollector</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
+                     <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;file,
+                     boolean&nbsp;saveIfChanged,
+                     boolean&nbsp;deleteIfUnmatched,
+                     boolean&nbsp;recordCallers)</code>
+<div class="block">Create the collector.</div>
+</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -277,7 +286,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>GuardMessageCollector</h4>
-<pre>public&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.110">GuardMessageCollector</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
+<pre>public&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.111">GuardMessageCollector</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
                              <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;file)</pre>
 <div class="block">Create the collector.</div>
 <dl>
@@ -293,7 +302,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>GuardMessageCollector</h4>
-<pre>public&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.122">GuardMessageCollector</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
+<pre>public&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.123">GuardMessageCollector</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
                              <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;file,
                              boolean&nbsp;saveIfChanged)</pre>
 <div class="block">Create the collector.</div>
@@ -308,10 +317,10 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <a name="GuardMessageCollector-java.lang.String-java.io.File-boolean-boolean-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>GuardMessageCollector</h4>
-<pre>public&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.135">GuardMessageCollector</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
+<pre>public&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.136">GuardMessageCollector</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
                              <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;file,
                              boolean&nbsp;saveIfChanged,
                              boolean&nbsp;deleteIfUnmatched)</pre>
@@ -321,7 +330,29 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <dd><code>key</code> - the key/prefix used when selecting messages to match.</dd>
 <dd><code>file</code> - the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.</dd>
 <dd><code>saveIfChanged</code> - flag set to true if changed message templates should be saved to <code>file</code>.</dd>
-<dd><code>deleteIfUnmatched</code> - flag set to true if should delete messages from template if they are unmatched,</dd>
+<dd><code>deleteIfUnmatched</code> - flag set to true if should delete messages from template if they are unmatched.</dd>
+</dl>
+</li>
+</ul>
+<a name="GuardMessageCollector-java.lang.String-java.io.File-boolean-boolean-boolean-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>GuardMessageCollector</h4>
+<pre>public&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.153">GuardMessageCollector</a>(<a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
+                             <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation">@Nonnull</a> <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;file,
+                             boolean&nbsp;saveIfChanged,
+                             boolean&nbsp;deleteIfUnmatched,
+                             boolean&nbsp;recordCallers)</pre>
+<div class="block">Create the collector.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>key</code> - the key/prefix used when selecting messages to match.</dd>
+<dd><code>file</code> - the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.</dd>
+<dd><code>saveIfChanged</code> - flag set to true if changed message templates should be saved to <code>file</code>.</dd>
+<dd><code>deleteIfUnmatched</code> - flag set to true if should delete messages from template if they are unmatched.</dd>
+<dd><code>recordCallers</code> - flag set to true if the methods where invariant messages are located should be stored in the message log.</dd>
 </dl>
 </li>
 </ul>
@@ -339,7 +370,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>getMatchFailureCount</h4>
-<pre>public&nbsp;int&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.146">getMatchFailureCount</a>()</pre>
+<pre>public&nbsp;int&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.166">getMatchFailureCount</a>()</pre>
 </li>
 </ul>
 <a name="onTestSuiteStart--">
@@ -348,7 +379,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>onTestSuiteStart</h4>
-<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.155">onTestSuiteStart</a>()</pre>
+<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.175">onTestSuiteStart</a>()</pre>
 <div class="block">Hook method that should be invoked before any test starts.
  This method will load the message templates if the file exists otherwise it will just reset internal state.</div>
 </li>
@@ -359,7 +390,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>onTestStart</h4>
-<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.164">onTestStart</a>()</pre>
+<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.184">onTestStart</a>()</pre>
 <div class="block">Hook method that should be invoked before a test starts.</div>
 </li>
 </ul>
@@ -369,7 +400,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>onTestComplete</h4>
-<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.172">onTestComplete</a>()</pre>
+<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.192">onTestComplete</a>()</pre>
 <div class="block">Hook method that should be invoked after a test completes.</div>
 </li>
 </ul>
@@ -379,7 +410,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockListLast">
 <li class="blockList">
 <h4>onTestSuiteComplete</h4>
-<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.185">onTestSuiteComplete</a>(boolean&nbsp;suiteSuccessful)</pre>
+<pre>public&nbsp;void&nbsp;<a href="../../../src-html/org/realityforge/braincheck/GuardMessageCollector.html#line.205">onTestSuiteComplete</a>(boolean&nbsp;suiteSuccessful)</pre>
 <div class="block">Hook method that should be invoked after all tests have completed.
  If the expected invariant invocations no longer match the actual invariant invocations
  then this method will either save the new message template or generate an exception depending
