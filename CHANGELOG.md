@@ -1,6 +1,6 @@
 # Change Log
 
-### Unreleased
+### [v1.24.0](https://github.com/realityforge/braincheck/tree/v1.24.0) (2019-10-04) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.23.0...v1.24.0)
 
 * Fix bug in `AbstractTestNGMessageCollector` where a suite could be detected as successful if the only failures that occurred were invariant message match failures. This could result in the invariant message file being incorrectly updated with unseen messages removed even when the test suite had not completed cleanly.
 * Fix a bug where the caller was not recorded if the invariant message did not match the existing pattern.
