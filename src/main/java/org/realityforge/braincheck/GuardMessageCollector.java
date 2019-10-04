@@ -275,16 +275,19 @@ public final class GuardMessageCollector
                                            "incorrectly formatted with duplicate entries for code " + code );
         }
         final HashSet<StackTraceElement> callers = new HashSet<>();
-        final JsonArray callersData = entry.getJsonArray( "callers" );
-        final int callerCount = callersData.size();
-        for ( int j = 0; j < callerCount; j++ )
+        if ( entry.containsKey( "callers" ) )
         {
-          final JsonObject callerData = callersData.getJsonObject( j );
-          final String className = callerData.getString( "class" );
-          final String methodName = callerData.getString( "method" );
-          final String fileName = callerData.getString( "file" );
-          final int lineNumber = callerData.getInt( "lineNumber" );
-          callers.add( new StackTraceElement( className, methodName, fileName, lineNumber ) );
+          final JsonArray callersData = entry.getJsonArray( "callers" );
+          final int callerCount = callersData.size();
+          for ( int j = 0; j < callerCount; j++ )
+          {
+            final JsonObject callerData = callersData.getJsonObject( j );
+            final String className = callerData.getString( "class" );
+            final String methodName = callerData.getString( "method" );
+            final String fileName = callerData.getString( "file" );
+            final int lineNumber = callerData.getInt( "lineNumber" );
+            callers.add( new StackTraceElement( className, methodName, fileName, lineNumber ) );
+          }
         }
         _messages.put( code, new Message( _key, code, type, messagePattern, false, callers ) );
       }
