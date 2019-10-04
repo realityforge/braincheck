@@ -130,7 +130,7 @@ public final class GuardMessageCollector
    * @param key               the key/prefix used when selecting messages to match.
    * @param file              the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.
    * @param saveIfChanged     flag set to true if changed message templates should be saved to <code>file</code>.
-   * @param deleteIfUnmatched flag set to true if should delete messages from template if they are unmatched,
+   * @param deleteIfUnmatched flag set to true if should delete messages from template if they are unmatched.
    */
   public GuardMessageCollector( @Nonnull final String key,
                                 @Nonnull final File file,
