@@ -49,7 +49,7 @@ public abstract class AbstractTestNGMessageCollector
   {
     if ( shouldCompleteCollection( context ) )
     {
-      _messages.onTestSuiteComplete(context.getFailedTests().size() <= _messages.getMatchFailureCount());
+      _messages.onTestSuiteComplete( 0 == context.getFailedTests().size() );
     }
   }
 
