@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Upgrade the `org.realityforge.guiceyloops` artifact to version `0.106`.
+
 ### [v1.25.0](https://github.com/realityforge/braincheck/tree/v1.25.0) (2019-10-04) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.24.0...v1.25.0)
 
 * Fix a bug in the `GuardMessageCollector` which could result in a `NullPointerException` when loading an invariant message log which did not include caller data.
