@@ -2,6 +2,7 @@
   <inherits name='jsinterop.annotations.Annotations'/>
 
   <source path='' includes='*.java'/>
+  <super-source path='super'/>
 
   <!--
     These properties are all defined in org.realityforge.braincheck.BrainCheckConfig

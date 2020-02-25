@@ -28,7 +28,7 @@ define 'braincheck' do
                :testng,
                :jsinterop_annotations
 
-  gwt_enhance(project)
+  gwt_enhance(project, :extra_deps => [_('src/main/super')])
 
   test.using :testng
   test.with :guiceyloops
