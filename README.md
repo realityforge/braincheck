@@ -5,7 +5,9 @@
 ![GWT3/J2CL compatible](https://img.shields.io/badge/GWT3/J2CL-compatible-brightgreen.svg)
 
 Braincheck is a very simple library that you can used to check invariants in code. It is designed that these invariant
-checks can be compiled out in production environments either by the JIT or the GWT compiler.
+checks can be compiled out in production environments either by the JIT or the GWT compiler. Braincheck also super-sources
+`Objects.requireNonNull(...)` to call `javaemul.internal.InternalPreconditions.checkNotNull(...)` so that these guards
+can be stripped by configuring the compile-time property `jre.checks.checkLevel` to `DISABLED`.
 
 ## Quick Start
 
