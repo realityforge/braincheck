@@ -1,5 +1,7 @@
 # Change Log
 
+### Unreleased
+
 ### [v1.26.0](https://github.com/realityforge/braincheck/tree/v1.26.0) (2020-02-26) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.25.0...v1.26.0)
 
 * Add super-source for `java.util.Objects` that implements `Objects.requireNonNull(...)` as calls to `javaemul.internal.InternalPreconditions.checkNotNull(...)`. This makes it possible to strip these guards at compile time by configuring the compile-time property `jre.checks.checkLevel` to `DISABLED`.
