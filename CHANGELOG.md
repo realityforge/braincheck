@@ -1,6 +1,6 @@
 # Change Log
 
-### Unreleased
+### [v1.27.0](https://github.com/realityforge/braincheck/tree/v1.27.0) (2020-02-26) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.26.0...v1.27.0)
 
 * Create an artifact named `braincheck-j2cl` that that is the same as the `braincheck` artifact but without the super-sourced code which is incompatible with j2cl.
 
