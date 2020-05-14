@@ -16,7 +16,7 @@ artifacts:
   javax_json: org.glassfish:javax.json:jar:1.1
 
   # GWT deps
-  gwt_user: org.realityforge.com.google.gwt:gwt-user:jar:2.8.2-v20191108
-  gwt_dev: org.realityforge.com.google.gwt:gwt-dev:jar:2.8.2-v20191108
+  gwt_user: com.google.gwt:gwt-user:jar:2.9.0
+  gwt_dev: com.google.gwt:gwt-dev:jar:2.9.0
 
   testng: org.testng:testng:jar:6.11
