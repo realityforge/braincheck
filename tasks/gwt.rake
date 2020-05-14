@@ -1,8 +1,9 @@
 #
 # Enhance the Buildr project to compile gwt sources.
-# For each of the supplied gwt modules, this task will create
+# For each of the discovered gwt modules, this task will create
 # a synthetic gwt module that includes a single entrypoint to
-# compile against. It will also include all the sources in the jar.
+# compile against. It will also create a gwt classifier jar
+# that includes all the sources.
 #
 def gwt_enhance(project, options = {})
   modules_complete = !!options[:modules_complete]
@@ -14,9 +15,15 @@ def gwt_enhance(project, options = {})
     a.is_a?(String) ? file(a) : a
   end
 
-  dependencies = project.compile.dependencies + extra_deps + [Buildr.artifact(:gwt_user)]
+  if project.enable_annotation_processor?
+    extra_deps += [project.file(project._(:generated, 'processors/main/java'))]
+  end
 
-  gwt_modules = []
+  project.compile.with Buildr::GWT.dependencies(project.gwt_detect_version(Buildr.artifacts(:gwt_user)))
+
+  dependencies = project.compile.dependencies + extra_deps
+
+  gwt_modules = options[:gwt_modules] || []
   source_paths = project.compile.sources + project.iml.main_generated_resource_directories.flatten.compact + project.iml.main_generated_source_directories.flatten.compact
   source_paths.each do |base_dir|
     Dir["#{base_dir}/**/*.gwt.xml"].each do |filename|
@@ -53,7 +60,7 @@ CONTENT
   # which we typically do NOT want to include in jar
   assets = project.assets.paths.dup
   if ENV['GWT'].nil? || ENV['GWT'] == project.name
-    modules = modules_complete ? gwt_modules : gwt_modules.collect {|gwt_module| "#{gwt_module}Test"}
+    modules = modules_complete ? gwt_modules : gwt_modules.collect { |gwt_module| "#{gwt_module}Test" }
     modules.each do |m|
       gwtc_args = options[:module_gwtc_args].nil? ? nil : options[:module_gwtc_args][m]
       output_key = options[:output_key] || m
@@ -69,7 +76,14 @@ CONTENT
   project.package(:jar).tap do |j|
     extra_deps.each do |dep|
       j.enhance([dep])
-      j.include("#{dep}/*")
+      Dir["#{"#{dep}/*"}"].each do |path|
+        j.include(path)
+      end
+    end
+    if project.enable_annotation_processor?
+      Dir["#{project._(:generated, 'processors/main/java/*')}"].each do |path|
+        j.include(path)
+      end
     end
     assets.each do |path|
       j.include("#{path}/*")
