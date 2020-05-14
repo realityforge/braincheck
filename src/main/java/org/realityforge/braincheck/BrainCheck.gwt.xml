@@ -1,6 +1,4 @@
 <module>
-  <inherits name='jsinterop.annotations.Annotations'/>
-
   <source path='' includes='*.java'/>
   <super-source path='super'/>
 
