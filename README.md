@@ -1,6 +1,6 @@
 # Braincheck
 
-[![Build Status](https://api.travis-ci.com/realityforge/braincheck.svg?branch=master)](http://travis-ci.org/realityforge/braincheck)
+[![Build Status](https://api.travis-ci.com/realityforge/braincheck.svg?branch=master)](http://travis-ci.com/realityforge/braincheck)
 [<img src="https://img.shields.io/maven-central/v/org.realityforge.braincheck/braincheck.svg?label=latest%20release"/>](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.realityforge.braincheck%22%20a%3A%22braincheck%22)
 ![GWT3/J2CL compatible](https://img.shields.io/badge/GWT3/J2CL-compatible-brightgreen.svg)
 
