@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Fix the POMs to remove the accidentally added GWT dependencies.
+
 ### [v1.28.0](https://github.com/realityforge/braincheck/tree/v1.28.0) (2020-05-15) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.27.0...v1.28.0)
 
 * Upgrade jsinterop library to use public release `com.google.jsinterop:jsinterop-annotations:jar:2.0.0`.

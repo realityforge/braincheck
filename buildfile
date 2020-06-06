@@ -15,13 +15,11 @@ define 'braincheck' do
   pom.add_github_project('realityforge/braincheck')
   pom.add_developer('realityforge', 'Peter Donald')
 
-  pom.include_transitive_dependencies << artifact(:javax_annotation)
-  pom.include_transitive_dependencies << artifact(:jsinterop_annotations)
-  pom.include_transitive_dependencies << artifact(:javax_json)
-  pom.include_transitive_dependencies << artifact(:testng)
-  pom.optional_dependencies << artifact(:javax_json)
-  pom.optional_dependencies << artifact(:testng)
-  pom.dependency_filter = Proc.new {|dep| dep[:scope].to_s != 'test'}
+  optional_deps = [artifact(:javax_json), artifact(:testng)]
+  deps = [artifact(:javax_annotation), artifact(:jsinterop_annotations)] + optional_deps
+  pom.include_transitive_dependencies << deps
+  pom.optional_dependencies << optional_deps
+  pom.dependency_filter = Proc.new {|dep| dep[:scope].to_s != 'test' && deps.include?(dep[:artifact])}
 
   compile.with :javax_annotation,
                :javax_json,
@@ -64,13 +62,11 @@ define 'braincheck-j2cl' do
   pom.add_github_project('realityforge/braincheck')
   pom.add_developer('realityforge', 'Peter Donald')
 
-  pom.include_transitive_dependencies << artifact(:javax_annotation)
-  pom.include_transitive_dependencies << artifact(:jsinterop_annotations)
-  pom.include_transitive_dependencies << artifact(:javax_json)
-  pom.include_transitive_dependencies << artifact(:testng)
-  pom.optional_dependencies << artifact(:javax_json)
-  pom.optional_dependencies << artifact(:testng)
-  pom.dependency_filter = Proc.new {|dep| dep[:scope].to_s != 'test'}
+  optional_deps = [artifact(:javax_json), artifact(:testng)]
+  deps = [artifact(:javax_annotation), artifact(:jsinterop_annotations)] + optional_deps
+  pom.include_transitive_dependencies << deps
+  pom.optional_dependencies << optional_deps
+  pom.dependency_filter = Proc.new {|dep| dep[:scope].to_s != 'test' && deps.include?(dep[:artifact])}
 
   compile.with :javax_annotation,
                :javax_json,
