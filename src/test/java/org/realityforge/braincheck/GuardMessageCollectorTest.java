@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class GuardMessageCollectorTest
-  extends AbstractBraincheckTest
+  extends AbstractTest
 {
   @Test
   public void matchExistingMessage()

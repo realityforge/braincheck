@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class GuardsTest
-  extends AbstractBraincheckTest
+  extends AbstractTest
 {
   @Test
   public void fail()
