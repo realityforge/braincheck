@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Upgrade the `au.com.stocksoftware.idea.codestyle` artifact to version `1.17`.
+
 ### [v1.29.0](https://github.com/realityforge/braincheck/tree/v1.29.0) (2020-06-07) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.28.0...v1.29.0)
 
 * Fix the POMs to remove the accidentally added GWT dependencies.
