@@ -2,6 +2,8 @@ require 'buildr/git_auto_version'
 require 'buildr/gpg'
 require 'buildr/gwt'
 
+Buildr::MavenCentral.define_publish_tasks(:profile_name => 'org.realityforge', :username => 'realityforge')
+
 desc 'BrainCheck: A very simply invariant verification library'
 define 'braincheck' do
   project.group = 'org.realityforge.braincheck'
