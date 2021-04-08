@@ -4,6 +4,8 @@ require 'buildr/gwt'
 require 'buildr/single_intermediate_layout'
 require 'buildr/top_level_generate_dir'
 
+Buildr::MavenCentral.define_publish_tasks(:profile_name => 'org.realityforge', :username => 'realityforge')
+
 desc 'BrainCheck: A very simply invariant verification library'
 define 'braincheck' do
   project.group = 'org.realityforge.braincheck'
