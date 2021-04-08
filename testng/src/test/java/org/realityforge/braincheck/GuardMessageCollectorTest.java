@@ -26,9 +26,22 @@ public class GuardMessageCollectorTest
   {
     final Path messageTemplates = getMessageTemplatesFile();
     final String content =
-      "[{\"code\":1234,\"type\":\"INVARIANT\",\"messagePattern\":\"Some message\",\"callers\":[{\"class\":\"org.realityforge.braincheck.GuardMessageCollectorTest\",\"method\":\"matchExistingMessage\",\"file\":\"GuardMessageCollectorTest.java\",\"lineNumber\":37}]}]";
-    final byte[] bytes = content.getBytes( StandardCharsets.UTF_8 );
-    Files.write( messageTemplates, bytes );
+      "[\n" +
+      "  {\n" +
+      "    \"code\": 1234,\n" +
+      "    \"type\": \"INVARIANT\",\n" +
+      "    \"messagePattern\": \"Some message\",\n" +
+      "    \"callers\": [\n" +
+      "      {\n" +
+      "        \"class\": \"org.realityforge.braincheck.GuardMessageCollectorTest\",\n" +
+      "        \"method\": \"matchExistingMessage\",\n" +
+      "        \"file\": \"GuardMessageCollectorTest.java\",\n" +
+      "        \"lineNumber\": 50\n" +
+      "      }\n" +
+      "    ]\n" +
+      "  }\n" +
+      "]\n";
+    Files.write( messageTemplates, content.getBytes( StandardCharsets.UTF_8 ) );
 
     final GuardMessageCollector collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
 
@@ -39,9 +52,7 @@ public class GuardMessageCollectorTest
     collector.onTestSuiteComplete( true );
 
     // The data would be formatted differently if it did not match
-    assertEquals( Files.readAllBytes( messageTemplates ),
-                  bytes,
-                  "Actual: " + readMessageTemplates( messageTemplates ) );
+    assertEquals( new String( Files.readAllBytes( messageTemplates ), StandardCharsets.UTF_8 ), content );
   }
 
   @Test

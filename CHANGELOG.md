@@ -3,6 +3,7 @@
 ### Unreleased
 
 * Upgrade the `au.com.stocksoftware.idea.codestyle` artifact to version `1.17`.
+* Reorganize the library into 3 separate artifacts; `core` which contains the invariant checking code, `jre` which contains the super-sourced code used by GWT to remove null check in `Objects.requireNonNull()` and `testng` the testng support code.
 
 ### [v1.29.0](https://github.com/realityforge/braincheck/tree/v1.29.0) (2020-06-07) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.28.0...v1.29.0)
 
