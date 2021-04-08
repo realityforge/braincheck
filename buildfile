@@ -35,6 +35,13 @@ define 'braincheck' do
     test.options[:properties] = { 'braincheck.environment' => 'development' }
     test.options[:java_args] = ['-ea']
 
+    doc.using(:javadoc,
+              :windowtitle => 'Braincheck API Documentation',
+              :linksource => true,
+              :timestamp => false,
+              :link => %w(https://docs.oracle.com/javase/8/docs/api)
+    ).sourcepath << compile.sources
+
     package(:jar)
     package(:sources)
     package(:javadoc)
@@ -75,13 +82,6 @@ define 'braincheck' do
   end
 
   cleanup_javadocs(project, 'org')
-
-  doc.using(:javadoc,
-            :windowtitle => 'Braincheck API Documentation',
-            :linksource => true,
-            :timestamp => false,
-            :link => %w(https://docs.oracle.com/javase/8/docs/api)
-  ).sourcepath << project('core').compile.sources
 
   ipr.add_default_testng_configuration(:jvm_args => '-ea -Dbraincheck.environment=development')
   ipr.add_component_from_artifact(:idea_codestyle)
