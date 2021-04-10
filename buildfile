@@ -49,6 +49,8 @@ define 'braincheck' do
 
   desc 'Super-source jre classes'
   define 'jre' do
+    pom.dependency_filter = Proc.new { |_| false }
+
     gwt_enhance(project, :extra_deps => [_('src/main/super')])
 
     package(:jar)

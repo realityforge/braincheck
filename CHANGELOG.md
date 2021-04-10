@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Remove all dependencies from `braincheck-jre` as none are needed.
+
 ### [v1.30.0](https://github.com/realityforge/braincheck/tree/v1.30.0) (2021-04-09) · [Full Changelog](https://github.com/spritz/spritz/compare/v1.29.0...v1.30.0)
 
 Changes in this release:
