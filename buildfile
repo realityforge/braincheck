@@ -86,6 +86,7 @@ define 'braincheck' do
   if ENV['J2CL'].nil? || ENV['J2CL'] == project.name
     t = Buildr::BazelJ2cl.define_bazel_j2cl_test(Buildr.project('braincheck'),
                                                  [Buildr.project('braincheck:core')],
+                                                 %w[org.realityforge.braincheck.BrainCheckConfig org.realityforge.braincheck.Guards],
                                                  :javax_annotation => true)
     package.enhance([t])
   end
