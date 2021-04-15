@@ -12,7 +12,7 @@ module Buildr
       private
 
       def perform_bazel_test(root_project, projects_to_upload)
-        depgen_cache_dir = root_project._(:target, :artifact_cache)
+        depgen_cache_dir = root_project._(:target, :depgen_artifact_cache)
         cache_dir = root_project._(:target, :artifact_cache)
         bazel_workspace_dir = root_project._(:target, :bazel_workspace)
 
