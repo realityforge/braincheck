@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Ensure that the `braincheck-core` compiles without errors using Bazel/J2CL.
+
 ### [v1.31.0](https://github.com/realityforge/braincheck/tree/v1.31.0) (2021-04-11) · [Full Changelog](https://github.com/spritz/spritz/compare/v1.30.0...v1.31.0)
 
 Changes in this release:
