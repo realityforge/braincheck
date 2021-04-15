@@ -28,7 +28,7 @@ define 'braincheck' do
     compile.with :javax_annotation,
                  :jsinterop_annotations
 
-    gwt_enhance(project, :extra_deps => [_('src/main/super')])
+    gwt_enhance(project)
 
     test.using :testng
     test.with :guiceyloops
