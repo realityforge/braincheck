@@ -2,10 +2,10 @@ module Buildr
   class BazelJ2cl
     class << self
 
-      def define_bazel_j2cl_test(root_project, projects_to_upload, options = {})
+      def define_bazel_j2cl_test(root_project, projects, options = {})
         desc 'Verify that the specified packages can be compiled with J2CL'
         root_project.task('bazel_j2cl_test') do
-          perform_bazel_test(root_project, projects_to_upload, options)
+          perform_bazel_test(root_project, projects, options)
         end
       end
 
