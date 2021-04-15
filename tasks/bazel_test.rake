@@ -2,27 +2,30 @@ module Buildr
   class BazelJ2cl
     class << self
 
-      def define_bazel_j2cl_test(root_project, projects_to_upload)
+      def define_bazel_j2cl_test(root_project, projects_to_upload, options = {})
         desc 'Verify that the specified packages can be compiled with J2CL'
         root_project.task('bazel_j2cl_test') do
-          perform_bazel_test(root_project, projects_to_upload)
+          perform_bazel_test(root_project, projects_to_upload, options)
         end
       end
 
       private
 
-      def perform_bazel_test(root_project, projects_to_upload)
+      def perform_bazel_test(root_project, projects, options)
+        packages = projects.collect { |p| p.packages }.flatten.select{|p| p.classifier.nil? }.sort.uniq
+
         depgen_cache_dir = root_project._(:target, :depgen_artifact_cache)
         cache_dir = root_project._(:target, :artifact_cache)
         bazel_workspace_dir = root_project._(:target, :bazel_workspace)
 
-        install_artifacts_into_local_cache(cache_dir, projects_to_upload)
+        install_artifacts_into_local_cache(cache_dir, projects)
 
         FileUtils.mkdir_p bazel_workspace_dir
         write_bazelrc(bazel_workspace_dir)
         write_workspace(bazel_workspace_dir)
-        write_build(bazel_workspace_dir)
-        write_dependency_yml(bazel_workspace_dir, cache_dir, projects_to_upload.collect{|p|p.packages}.flatten)
+        File.write("#{bazel_workspace_dir}/src.js", "goog.module('bazel.BuildTest');\n")
+        write_build(bazel_workspace_dir, packages)
+        write_dependency_yml(bazel_workspace_dir, cache_dir, packages, options)
         write_dependency_bzl(bazel_workspace_dir, depgen_cache_dir)
 
         sh "cd #{bazel_workspace_dir} && bazel build :all"
@@ -72,15 +75,17 @@ http_archive(
 TEXT
       end
 
-      def write_build(dir)
-        File.write("#{dir}/BUILD.bazel", <<TEXT)
+      def write_build(dir, packages)
+        content = <<TEXT
 package(default_visibility = ["//visibility:public"])
 
 alias( name = "jsinterop_annotations-j2cl", actual = "@com_google_j2cl//:jsinterop-annotations-j2cl", visibility = ["//visibility:public"],)
 
 alias( name = "jsinterop_base-j2cl", actual = "@com_google_jsinterop_base//:jsinterop-base-j2cl", )
 
-load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_import")
+load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_import", "j2cl_application")
+
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
 j2cl_import( name = "javaemul_internal_annotations-j2cl", jar = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations", )
 
@@ -88,9 +93,19 @@ load("//:dependencies.bzl", "generate_targets")
 
 generate_targets()
 TEXT
+        packages.collect { |d| d.to_spec_hash }.each do |d|
+          name = d[:id].gsub('-','_')
+          content += <<TEXT
+
+closure_js_library( name = "#{name}-closure", srcs = ["src.js"], deps = [":#{name}-j2cl"], )
+
+j2cl_application( name = "#{name}-app", entry_points = ["bazel.BuildTest"], deps = [":#{name}-closure"], )
+TEXT
+        end
+        File.write("#{dir}/BUILD.bazel", content)
       end
 
-      def write_dependency_yml(dir, cache_dir, dependencies)
+      def write_dependency_yml(dir, cache_dir, dependencies, options)
         content = <<TEXT
 repositories:
   - name: local
@@ -117,7 +132,26 @@ TEXT
 
         dependencies.collect { |d| d.to_spec_hash }.each do |d|
           content += "  - coord: #{d[:group]}:#{d[:id]}:#{d[:version]}\n"
+
+          if d[:group].to_s == 'org.realityforge.javax.annotation'
+            # This package does all sorts of uglies including colliding with a
+            # annotation that is already present in jre emulation later so we
+            # add a suppression to ignore problem
+            content += <<TEXT
+    j2cl:
+      suppress: [CR_REDECLARED_PROVIDES]
+TEXT
+          end
         end
+
+        if options[:javax_annotation]
+          content += <<TEXT
+  - coord: org.realityforge.javax.annotation:javax.annotation
+    j2cl:
+      suppress: [CR_REDECLARED_PROVIDES]
+TEXT
+        end
+
         File.write("#{dir}/dependencies.yml", content)
       end
 
