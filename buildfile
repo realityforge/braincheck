@@ -83,6 +83,9 @@ define 'braincheck' do
     package(:javadoc)
   end
 
+  t = Buildr::BazelJ2cl.define_bazel_j2cl_test(Buildr.project('braincheck'), [Buildr.project('braincheck:core').package(:jar)])
+  package.enhance([t])
+
   cleanup_javadocs(project, 'org')
 
   ipr.add_default_testng_configuration(:jvm_args => '-ea -Dbraincheck.environment=development')
