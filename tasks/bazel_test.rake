@@ -2,27 +2,27 @@ module Buildr
   class BazelJ2cl
     class << self
 
-      def define_bazel_j2cl_test(root_project, packages)
+      def define_bazel_j2cl_test(root_project, projects_to_upload)
         desc 'Verify that the specified packages can be compiled with J2CL'
         root_project.task('bazel_j2cl_test') do
-          perform_bazel_test(root_project, packages)
+          perform_bazel_test(root_project, projects_to_upload)
         end
       end
 
       private
 
-      def perform_bazel_test(root_project, packages)
+      def perform_bazel_test(root_project, projects_to_upload)
         depgen_cache_dir = root_project._(:target, :artifact_cache)
         cache_dir = root_project._(:target, :artifact_cache)
         bazel_workspace_dir = root_project._(:target, :bazel_workspace)
 
-        install_artifacts_into_local_cache(cache_dir, packages)
+        install_artifacts_into_local_cache(cache_dir, projects_to_upload)
 
         FileUtils.mkdir_p bazel_workspace_dir
         write_bazelrc(bazel_workspace_dir)
         write_workspace(bazel_workspace_dir)
         write_build(bazel_workspace_dir)
-        write_dependency_yml(bazel_workspace_dir, cache_dir, packages)
+        write_dependency_yml(bazel_workspace_dir, cache_dir, projects_to_upload.collect{|p|p.packages}.flatten)
         write_dependency_bzl(bazel_workspace_dir, depgen_cache_dir)
 
         sh "cd #{bazel_workspace_dir} && bazel build :all"
@@ -138,17 +138,19 @@ TEXT
         sh args.join(' ')
       end
 
-      def install_artifacts_into_local_cache(cache_dir, packages_to_upload)
+      def install_artifacts_into_local_cache(cache_dir, projects_to_upload)
         local_test_repository_url = URI.join('file:///', File.expand_path(cache_dir)).to_s
         old_release_to = Buildr.repositories.release_to
         begin
           # First we install them in a local repository so we don't have to access the network during local builds
           Buildr.repositories.release_to = local_test_repository_url
-          packages_to_upload.each do |pkg|
-            # Uninstall version already present in local maven cache
-            pkg.uninstall
-            # Install version into local repository
-            pkg.upload
+          projects_to_upload.each do |project|
+            project.packages.each do |pkg|
+              # Uninstall version already present in local maven cache
+              pkg.uninstall
+              # Install version into local repository
+              pkg.upload
+            end
           end
         ensure
           Buildr.repositories.release_to = old_release_to
