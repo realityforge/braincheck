@@ -25,6 +25,6 @@ install:
 - rvm use 2.7.2
 - gem install bundler
 - bundle install
-script: buildr package
+script: J2CL=no buildr package
 git:
   depth: false
