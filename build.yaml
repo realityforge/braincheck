@@ -11,7 +11,7 @@ artifacts:
 
   javax_annotation: org.realityforge.javax.annotation:javax.annotation:jar:1.0.1
 
-  guiceyloops: org.realityforge.guiceyloops:guiceyloops:jar:0.110
+  guiceyloops: org.realityforge.guiceyloops:guiceyloops:jar:0.112
 
   javax_json: org.glassfish:javax.json:jar:1.1
 
