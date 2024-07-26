@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Update the `org.realityforge.javax.annotation` artifact to version `1.1.1`.
 * Update the `org.realityforge.guiceyloops` artifact to version `0.113`.
 * Ensure that the `braincheck-core` compiles without errors using Bazel/J2CL.
 
