@@ -1,6 +1,8 @@
 # Change Log
 
-### Unreleased
+### [v1.32.0](https://github.com/realityforge/braincheck/tree/v1.32.0) (2025-11-28) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.31.0...v1.32.0)
+
+Changes in this release:
 
 * Update the `org.gwtproject` artifacts to version `2.10.0`.
 * Update the `org.realityforge.javax.annotation` artifact to version `1.1.1`.
