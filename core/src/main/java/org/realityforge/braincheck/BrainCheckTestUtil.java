@@ -22,8 +22,17 @@ public final class BrainCheckTestUtil
   @GwtIncompatible
   public enum GuardType
   {
+    /**
+     * A guard type indicating a failure.
+     */
     FAIL,
+    /**
+     * A guard type indicating a failure of an invariant condition in the codebase.
+     */
     INVARIANT,
+    /**
+     * A guard type indicating a failure of an api invariant condition in the codebase.
+     */
     API_INVARIANT
   }
 
@@ -35,6 +44,14 @@ public final class BrainCheckTestUtil
   @GwtIncompatible
   public interface OnGuardListener
   {
+    /**
+     * Invoked when a guard is triggered. This method provides details about the guard type,
+     * the associated message, and the stack trace at the point of invocation.
+     *
+     * @param type       The type of the guard (e.g., FAIL, INVARIANT, API_INVARIANT). Must not be null.
+     * @param message    A detailed message describing the reason for the guard invocation. Must not be null.
+     * @param stackTrace The stack trace captured at the time of the guard invocation. Must not be null.
+     */
     void onGuard( @Nonnull GuardType type, @Nonnull String message, @Nonnull StackTraceElement[] stackTrace );
   }
 
