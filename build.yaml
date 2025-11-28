@@ -12,7 +12,7 @@ artifacts:
   javax_json: org.glassfish:javax.json:jar:1.1
 
   # GWT deps
-  gwt_user: com.google.gwt:gwt-user:jar:2.9.0
-  gwt_dev: com.google.gwt:gwt-dev:jar:2.9.0
+  gwt_user: org.gwtproject:gwt-user:jar:2.10.0
+  gwt_dev: org.gwtproject:gwt-dev:jar:2.10.0
 
   testng: org.testng:testng:jar:6.11
