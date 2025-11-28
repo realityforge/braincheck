@@ -27,15 +27,6 @@ public class GuardsTest
   }
 
   @Test
-  public void fail_checkInvariants_false()
-  {
-    BrainCheckTestUtil.setCheckInvariants( false );
-
-    // No failure
-    Guards.fail( () -> "My Failure Reason" );
-  }
-
-  @Test
   public void invariant_passed()
   {
     Guards.invariant( () -> true, () -> "My Failure Reason" );

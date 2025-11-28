@@ -5,6 +5,7 @@
 * Update the `org.realityforge.javax.annotation` artifact to version `1.1.1`.
 * Update the `org.realityforge.guiceyloops` artifact to version `0.113`.
 * Ensure that the `braincheck-core` compiles without errors using Bazel/J2CL.
+* Change `Guards.fail()` to always throw an exception, even when checkInvariants is false. This is the most obvious behavior for this method and most callers expected this behavior.
 
 ### [v1.31.0](https://github.com/realityforge/braincheck/tree/v1.31.0) (2021-04-11) · [Full Changelog](https://github.com/spritz/spritz/compare/v1.30.0...v1.31.0)
 

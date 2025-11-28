@@ -134,7 +134,6 @@ public final class Guards
 
   /**
    * Throw an IllegalStateException with supplied detail message.
-   * The exception is not thrown unless {@link BrainCheckConfig#checkInvariants()} is true.
    * The exception will ignore the supplied message unless {@link BrainCheckConfig#verboseErrorMessages()} is true.
    *
    * @param message the message supplier used if verbose messages enabled.
@@ -148,10 +147,7 @@ public final class Guards
                                  BrainCheckUtil.safeGetString( message ),
                                  StackTraceUtil.getStackTrace( 2 ) );
     }
-    if ( BrainCheckConfig.checkInvariants() )
-    {
-      doFail( message );
-    }
+    doFail( message );
   }
 
   private static void doFail( @Nonnull final Supplier<String> message )
