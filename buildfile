@@ -55,7 +55,6 @@ define 'braincheck' do
 
     package(:jar)
     package(:sources)
-    package(:javadoc)
 
     project.no_iml
   end
@@ -92,6 +91,9 @@ define 'braincheck' do
   end
 
   cleanup_javadocs(project, 'org')
+
+  project('jre').task('upload').actions.clear
+
 
   ipr.add_default_testng_configuration(:jvm_args => '-ea -Dbraincheck.environment=development')
 end
