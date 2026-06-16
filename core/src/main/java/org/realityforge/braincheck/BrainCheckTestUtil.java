@@ -1,6 +1,5 @@
 package org.realityforge.braincheck;
 
-import java.lang.reflect.Field;
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
