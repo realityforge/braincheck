@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Move to Java 17 as the baseline.
+
 ### [v1.32.0](https://github.com/realityforge/braincheck/tree/v1.32.0) (2025-11-28) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.31.0...v1.32.0)
 
 Changes in this release:
