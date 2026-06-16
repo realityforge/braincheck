@@ -52,6 +52,11 @@ public final class BrainCheckConfig
     return VERBOSE_ERROR_MESSAGES;
   }
 
+  static void setVerboseErrorMessages( final boolean verboseErrorMessages )
+  {
+    VERBOSE_ERROR_MESSAGES = verboseErrorMessages;
+  }
+
   /**
    * Return true if invariants will be checked.
    *
@@ -62,6 +67,11 @@ public final class BrainCheckConfig
     return CHECK_INVARIANTS;
   }
 
+  static void setCheckInvariants( final boolean checkInvariants )
+  {
+    CHECK_INVARIANTS = checkInvariants;
+  }
+
   /**
    * Return true if apiInvariants will be checked.
    *
@@ -70,6 +80,11 @@ public final class BrainCheckConfig
   public static boolean checkApiInvariants()
   {
     return CHECK_API_INVARIANTS;
+  }
+
+  static void setCheckApiInvariants( final boolean checkApiInvariants )
+  {
+    CHECK_API_INVARIANTS = checkApiInvariants;
   }
 
   @SuppressWarnings( "SimplifiableConditionalExpression" )
