@@ -3,7 +3,7 @@ package org.realityforge.braincheck;
 /**
  * Location of all compile time configuration settings for the toolkit.
  */
-@SuppressWarnings( "StringEquality" )
+@SuppressWarnings( { "StringEquality", "FieldMayBeFinal" } )
 public final class BrainCheckConfig
 {
   /**
@@ -73,6 +73,7 @@ public final class BrainCheckConfig
     return CHECK_API_INVARIANTS;
   }
 
+  @SuppressWarnings( "SimplifiableConditionalExpression" )
   private static final class ConfigProvider
     extends AbstractConfigProvider
   {
