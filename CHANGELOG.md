@@ -1,6 +1,8 @@
 # Change Log
 
-### Unreleased
+### [v1.33.0](https://github.com/realityforge/braincheck/tree/v1.33.0) (2026-06-16) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.32.0...v1.33.0)
+
+Changes in this release:
 
 * Move to Java 17 as the baseline.
 * Change `BrainCheckTestUtil` to use setters rather than reflection to set the configuration values in tests.
