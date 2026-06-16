@@ -26,7 +26,7 @@ final class StackTraceUtil
     @Override
     StackTraceElement[] getStackTrace( final int frameCountToDrop )
     {
-      final StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+      final StackTraceElement[] stackTrace = java.lang.Thread.currentThread().getStackTrace();
       final int skipCount = frameCountToDrop + 1;
       final StackTraceElement[] result = new StackTraceElement[ Math.max( stackTrace.length - skipCount, 0 ) ];
       System.arraycopy( stackTrace, skipCount, result, 0, result.length );
