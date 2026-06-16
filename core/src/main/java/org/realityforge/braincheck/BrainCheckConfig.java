@@ -13,7 +13,6 @@ public final class BrainCheckConfig
    * it seems. Using a pair of classes with @GwtIncompatible allows us to have the best of both worlds.
    */
   private static final ConfigProvider PROVIDER = new ConfigProvider();
-
   private static final boolean PRODUCTION_ENVIRONMENT = PROVIDER.isProductionEnvironment();
   private static boolean VERBOSE_ERROR_MESSAGES = PROVIDER.verboseErrorMessages();
   private static boolean CHECK_INVARIANTS = PROVIDER.checkInvariants();
