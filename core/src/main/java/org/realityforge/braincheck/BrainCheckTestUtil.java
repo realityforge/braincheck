@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 /**
  * Utility class for interacting with BrainCheck in tests.
  */
-@GwtIncompatible
 public final class BrainCheckTestUtil
 {
   private BrainCheckTestUtil()
@@ -18,7 +17,6 @@ public final class BrainCheckTestUtil
    * The type of the guard.
    * This is only used during development process and will be optimized out in production mode.
    */
-  @GwtIncompatible
   public enum GuardType
   {
     /**
@@ -40,7 +38,6 @@ public final class BrainCheckTestUtil
    * This is only used internally during development to collect the guards/invariants/etc to ensure
    * that they comply with patterns and to ensure they are documented appropriately.
    */
-  @GwtIncompatible
   public interface OnGuardListener
   {
     /**
