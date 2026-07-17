@@ -1,0 +1,192 @@
+load(
+    ":release.bzl",
+    "release_jar",
+    "release_javadoc_jar",
+    "release_pom",
+    "release_source_jar",
+    "release_version",
+    "release_version_file",
+)
+
+package(default_visibility = ["//visibility:public"])
+
+CORE = "//core/src/main/java/org/realityforge/braincheck:core"
+
+TESTNG = "//testng/src/main/java/org/realityforge/braincheck:testng"
+
+release_version(
+    name = "version",
+    build_setting_default = "0.0.0-SNAPSHOT",
+)
+
+alias(
+    name = "jar_builder",
+    actual = "//tools/release/org/realityforge/braincheck/release:jar_builder",
+)
+
+alias(
+    name = "javadoc_jar_builder",
+    actual = "//tools/release/org/realityforge/braincheck/release:javadoc_jar_builder",
+)
+
+alias(
+    name = "dist",
+    actual = "//tools/release/org/realityforge/braincheck/release:dist",
+)
+
+alias(
+    name = "release_lifecycle",
+    actual = "//tools/release/org/realityforge/braincheck/release:release_lifecycle",
+)
+
+release_jar(
+    name = "braincheck_core_jar",
+    out = "braincheck-core.jar",
+    include_sources = True,
+    java_targets = [CORE],
+    resource_entries = ["META-INF/LICENSE"],
+    resource_files = ["//:LICENSE"],
+)
+
+release_source_jar(
+    name = "braincheck_core_sources_jar",
+    out = "braincheck-core-sources.jar",
+    java_targets = [CORE],
+)
+
+release_javadoc_jar(
+    name = "braincheck_core_javadoc_jar",
+    out = "braincheck-core-javadoc.jar",
+    classpath = [
+        "@jsinterop_annotations//file",
+        "@jspecify//file",
+    ],
+    java_targets = [CORE],
+)
+
+release_pom(
+    name = "braincheck_core_pom",
+    out = "braincheck-core.pom",
+    artifact_id = "braincheck-core",
+    dependencies = [
+        "org.jspecify:jspecify:1.0.0",
+        "com.google.jsinterop:jsinterop-annotations:2.0.0",
+    ],
+    description = "Core invariant verification library",
+    display_name = "Core invariant verification library",
+)
+
+release_jar(
+    name = "braincheck_jre_jar",
+    out = "braincheck-jre.jar",
+    resource_entries = [
+        "org/realityforge/braincheck/super/java/util/Objects.java",
+        "META-INF/LICENSE",
+    ],
+    resource_files = [
+        "//jre/src/main/super/org/realityforge/braincheck/super/java/util:jre_sources",
+        "//:LICENSE",
+    ],
+)
+
+release_source_jar(
+    name = "braincheck_jre_sources_jar",
+    out = "braincheck-jre-sources.jar",
+)
+
+release_pom(
+    name = "braincheck_jre_pom",
+    out = "braincheck-jre.pom",
+    artifact_id = "braincheck-jre",
+    description = "Super-source jre classes",
+    display_name = "Super-source jre classes",
+)
+
+release_jar(
+    name = "braincheck_testng_jar",
+    out = "braincheck-testng.jar",
+    include_sources = True,
+    java_targets = [TESTNG],
+    resource_entries = ["META-INF/LICENSE"],
+    resource_files = ["//:LICENSE"],
+)
+
+release_source_jar(
+    name = "braincheck_testng_sources_jar",
+    out = "braincheck-testng-sources.jar",
+    java_targets = [TESTNG],
+)
+
+release_javadoc_jar(
+    name = "braincheck_testng_javadoc_jar",
+    out = "braincheck-testng-javadoc.jar",
+    classpath = [
+        CORE,
+        "@javax_json//file",
+        "@jsinterop_annotations//file",
+        "@jspecify//file",
+        "@testng//file",
+    ],
+    java_targets = [TESTNG],
+)
+
+release_pom(
+    name = "braincheck_testng_pom",
+    out = "braincheck-testng.pom",
+    artifact_id = "braincheck-testng",
+    dependencies = [
+        "org.jspecify:jspecify:1.0.0",
+        "com.google.jsinterop:jsinterop-annotations:2.0.0",
+        "org.glassfish:javax.json:1.1",
+        "org.testng:testng:6.11",
+    ],
+    description = "TestNG support library",
+    display_name = "TestNG support library",
+)
+
+release_version_file(
+    name = "release_version",
+    out = "release-version.txt",
+)
+
+filegroup(
+    name = "maven_artifacts",
+    srcs = [
+        ":braincheck_core_jar",
+        ":braincheck_core_javadoc_jar",
+        ":braincheck_core_pom",
+        ":braincheck_core_sources_jar",
+        ":braincheck_jre_jar",
+        ":braincheck_jre_pom",
+        ":braincheck_jre_sources_jar",
+        ":braincheck_testng_jar",
+        ":braincheck_testng_javadoc_jar",
+        ":braincheck_testng_pom",
+        ":braincheck_testng_sources_jar",
+    ],
+)
+
+test_suite(
+    name = "release_artifacts_integration_test",
+    tests = ["//tools/release/org/realityforge/braincheck/release:release_artifacts_integration_test"],
+)
+
+test_suite(
+    name = "dist_builder_test",
+    tests = ["//tools/release/org/realityforge/braincheck/release:dist_builder_test"],
+)
+
+test_suite(
+    name = "release_lifecycle_tool_test",
+    tests = ["//tools/release/org/realityforge/braincheck/release:release_lifecycle_tool_test"],
+)
+
+test_suite(
+    name = "all_tests",
+    tests = [
+        ":dist_builder_test",
+        ":release_artifacts_integration_test",
+        ":release_lifecycle_tool_test",
+        "//tools/release/org/realityforge/braincheck/release:jar_builder_test",
+    ],
+)

@@ -2,6 +2,8 @@ load("@buildifier_prebuilt//:rules.bzl", "buildifier")
 
 package(default_visibility = ["//visibility:public"])
 
+exports_files(["LICENSE"])
+
 WARNINGS = [
     "+unsorted-dict-items",
     "-module-docstring",
@@ -44,5 +46,6 @@ test_suite(
     tests = [
         "//core/src/test/java/org/realityforge/braincheck:all_tests",
         "//testng/src/test/java/org/realityforge/braincheck:all_tests",
+        "//tools/release:all_tests",
     ],
 )

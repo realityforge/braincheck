@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T09
+current_focus: T10
 
 tasks:
   - id: T01
@@ -204,10 +204,13 @@ tasks:
         result: pass (no matches)
       - command: tools/check.sh
         result: pass
+    commit:
+      hash: 290c87b
+      message: "chore(ide): replace legacy IntelliJ project with Bazel view"
 
   - id: T09
     title: Add Maven Central release infrastructure
-    status: in_progress
+    status: completed
     priority: high
     depends_on: [T08]
     acceptance_criteria:
@@ -222,11 +225,19 @@ tasks:
       - CONTRIBUTING.md
       - .bazelrc
       - CHANGELOG.md
-    evidence: []
+    evidence:
+      - command: bazel build //tools/release:maven_artifacts --release_version=1.33.0
+        result: pass (11 required primary artifacts built; no JRE Javadocs artifact)
+      - command: bazel test //tools/release:all_tests --release_version=1.33.0
+        result: pass (artifact manifests, POMs, 66-file signed distribution, jar builder, and lifecycle)
+      - command: tools/release/next_version.sh and prepare_release.sh 1.34.0 --dry-run
+        result: pass (derived 1.34.0 and updated temporary changelog/README copies)
+      - command: tools/check.sh
+        result: pass with seven tests, including release contract tests
 
   - id: T10
     title: Add latest J2CL compile and link validation
-    status: pending
+    status: in_progress
     priority: high
     depends_on: [T09]
     acceptance_criteria:
@@ -349,3 +360,7 @@ history:
     task: T07
     commit: 2d45863
     note: Added the pinned Palantir formatter repository and enforced formatting in the full gate.
+  - timestamp: "2026-07-17"
+    task: T08
+    commit: 290c87b
+    note: Replaced legacy local IntelliJ files with the managed Bazel project-view convention.
