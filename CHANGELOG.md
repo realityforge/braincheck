@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Restore GWT compatibility by removing `var` statements.
+
 ### [v1.34.0](https://github.com/realityforge/braincheck/tree/v1.34.0) (2026-07-17) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.33.0...v1.34.0)
 
 Changes in this release:
