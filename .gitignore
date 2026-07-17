@@ -1,9 +1,3 @@
-/Gemfile.lock
-/_buildr.rb
-/reports
-/target
 /dist
 /tmp
-/generated
-/*/generated
 /node_modules

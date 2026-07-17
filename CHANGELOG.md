@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Remove the legacy Buildr, Ruby, Rake, and Travis build infrastructure.
 * Add a GitHub Actions CI gate for the Bazel build.
 * Verify production and development configurations with GWT compiler smoke builds.
 * Verify BrainCheck by compiling and linking it with the latest pinned J2CL `master` revision.

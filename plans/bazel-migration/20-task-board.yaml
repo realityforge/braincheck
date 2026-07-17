@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T13
+current_focus: T14
 
 tasks:
   - id: T01
@@ -310,10 +310,13 @@ tasks:
         result: pass
       - command: tools/check.sh
         result: pass under the same command used by the Ubuntu 24.04 CI job
+    commit:
+      hash: 947cf1e
+      message: "ci: add Bazel validation workflow"
 
   - id: T13
     title: Remove Buildr Ruby and Travis
-    status: in_progress
+    status: completed
     priority: high
     depends_on: [T12]
     acceptance_criteria:
@@ -329,11 +332,17 @@ tasks:
       - tasks/**
       - .gitattributes
       - .gitignore
-    evidence: []
+    evidence:
+      - command: inspect all legacy build files and tracked references before deletion
+        result: pass (legacy path was isolated from current Bazel, CI, release, and documentation tooling)
+      - command: search tracked non-historical files for Buildr, Ruby, Rake, Bundler, Gemfile, and Travis references
+        result: pass (no matches)
+      - command: tools/check.sh
+        result: pass after deleting the legacy infrastructure
 
   - id: T14
     title: Remove Node Yarn and Javadoc site deployment
-    status: pending
+    status: in_progress
     priority: medium
     depends_on: [T13]
     acceptance_criteria:
@@ -407,3 +416,7 @@ history:
     task: T11
     commit: bd1d141
     note: Imported the Rose GWT aspect and added production and development compiler smoke artifacts.
+  - timestamp: "2026-07-17"
+    task: T12
+    commit: 947cf1e
+    note: Added the pinned GitHub Actions workflow for Bazel validation and generated-file drift detection.
