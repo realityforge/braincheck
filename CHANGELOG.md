@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Add a GitHub Actions CI gate for the Bazel build.
 * Verify production and development configurations with GWT compiler smoke builds.
 * Verify BrainCheck by compiling and linking it with the latest pinned J2CL `master` revision.
 * Add Bazel-based Maven Central packaging and release lifecycle tooling.

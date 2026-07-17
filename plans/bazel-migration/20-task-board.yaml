@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T12
+current_focus: T13
 
 tasks:
   - id: T01
@@ -289,10 +289,13 @@ tasks:
         result: pass (both normalized ZIPs contain cache JavaScript, bootstrap scripts, symbol maps, and deployment metadata)
       - command: tools/check.sh
         result: pass with both GWT compiler outputs explicitly built
+    commit:
+      hash: bd1d141
+      message: "test(gwt): add compiler smoke builds"
 
   - id: T12
     title: Add GitHub Actions CI
-    status: in_progress
+    status: completed
     priority: medium
     depends_on: [T11]
     acceptance_criteria:
@@ -300,11 +303,17 @@ tasks:
       - CI verifies generated files are current
     files_touched:
       - .github/workflows/**
-    evidence: []
+    evidence:
+      - command: cmp .github/workflows/ci.yml against the pinned bazel-depgen workflow
+        result: pass (byte-identical)
+      - command: parse .github/workflows/ci.yml as YAML
+        result: pass
+      - command: tools/check.sh
+        result: pass under the same command used by the Ubuntu 24.04 CI job
 
   - id: T13
     title: Remove Buildr Ruby and Travis
-    status: pending
+    status: in_progress
     priority: high
     depends_on: [T12]
     acceptance_criteria:
@@ -394,3 +403,7 @@ history:
     task: T10
     commit: 0b61ef4
     note: Pinned the latest observed J2CL master and added an optimized compile-and-link validation target.
+  - timestamp: "2026-07-17"
+    task: T11
+    commit: bd1d141
+    note: Imported the Rose GWT aspect and added production and development compiler smoke artifacts.
