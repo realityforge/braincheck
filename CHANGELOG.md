@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Convert the compile-time property definitions to a Closure module and explicitly register them with J2CL.
+
 ### [v1.33.0](https://github.com/realityforge/braincheck/tree/v1.33.0) (2026-06-16) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.32.0...v1.33.0)
 
 Changes in this release:

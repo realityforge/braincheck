@@ -2,14 +2,28 @@
  * This file provides the @defines for braincheck configuration options.
  * See BrainCheckConfig.java for details.
  */
-goog.provide('braincheck');
+goog.module('braincheck');
+goog.module.declareLegacyNamespace();
+
+const {addSystemPropertyFromGoogDefine} = goog.require('jre');
 
 /** @define {string} */
-braincheck.environment = goog.define('braincheck.environment', 'production');
+const environment = goog.define('braincheck.environment', 'production');
+addSystemPropertyFromGoogDefine('braincheck.environment', environment);
 
 /** @define {string} */
-braincheck.verbose_error_messages = goog.define('braincheck.verbose_error_messages', 'false');
+const verboseErrorMessages = goog.define('braincheck.verbose_error_messages', 'false');
+addSystemPropertyFromGoogDefine('braincheck.verbose_error_messages', verboseErrorMessages);
 /** @define {string} */
-braincheck.check_invariants = goog.define('braincheck.check_invariants', 'false');
+const checkInvariants = goog.define('braincheck.check_invariants', 'false');
+addSystemPropertyFromGoogDefine('braincheck.check_invariants', checkInvariants);
 /** @define {string} */
-braincheck.check_api_invariants = goog.define('braincheck.check_api_invariants', 'false');
+const checkApiInvariants = goog.define('braincheck.check_api_invariants', 'false');
+addSystemPropertyFromGoogDefine('braincheck.check_api_invariants', checkApiInvariants);
+
+exports = {
+  check_api_invariants: checkApiInvariants,
+  check_invariants: checkInvariants,
+  environment,
+  verbose_error_messages: verboseErrorMessages,
+};
