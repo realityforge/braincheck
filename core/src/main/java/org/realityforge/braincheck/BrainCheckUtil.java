@@ -52,7 +52,7 @@ final class BrainCheckUtil
   static String throwableToString( @Nonnull final Throwable throwable )
   {
     assert null != throwable;
-    final StringBuilder sb = new StringBuilder();
+    final var sb = new StringBuilder();
     Throwable t = throwable;
     while ( null != t )
     {

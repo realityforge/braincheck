@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T03
+current_focus: T04
 
 tasks:
   - id: T01
@@ -62,10 +62,13 @@ tasks:
         result: pass (compiled classes and core GWT/JavaScript resources present)
       - command: rg guiceyloops MODULE.bazel third_party tools BUILD.bazel core jre testng
         result: pass (no matches)
+    commit:
+      hash: 2f7776c
+      message: "feat(build): add Bazel build"
 
   - id: T03
     title: Fix Error Prone findings
-    status: in_progress
+    status: completed
     priority: high
     depends_on: [T02]
     acceptance_criteria:
@@ -75,11 +78,13 @@ tasks:
       - core/src/**/*.java
       - jre/src/**/*.java
       - testng/src/**/*.java
-    evidence: []
+    evidence:
+      - command: tools/check.sh with the strict Error Prone policy applied and NullAway absent
+        result: pass after resolving 20 findings
 
   - id: T04
     title: Enable Error Prone tooling
-    status: pending
+    status: in_progress
     priority: high
     depends_on: [T03]
     acceptance_criteria:
@@ -273,3 +278,7 @@ history:
     task: T01
     commit: 4b1f8f7
     note: Copied repository instructions byte-for-byte from the pinned reference repository.
+  - timestamp: "2026-07-17"
+    task: T02
+    commit: 2f7776c
+    note: Added the Bazel 9.2 build, DepGen dependency graph, Java 17 artifacts, and direct TestNG suites.

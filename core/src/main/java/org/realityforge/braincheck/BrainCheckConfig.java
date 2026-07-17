@@ -14,9 +14,9 @@ public final class BrainCheckConfig
    */
   private static final ConfigProvider PROVIDER = new ConfigProvider();
   private static final boolean PRODUCTION_ENVIRONMENT = PROVIDER.isProductionEnvironment();
-  private static boolean VERBOSE_ERROR_MESSAGES = PROVIDER.verboseErrorMessages();
-  private static boolean CHECK_INVARIANTS = PROVIDER.checkInvariants();
-  private static boolean CHECK_API_INVARIANTS = PROVIDER.checkApiInvariants();
+  private static boolean c_verboseErrorMessages = PROVIDER.verboseErrorMessages();
+  private static boolean c_checkInvariants = PROVIDER.checkInvariants();
+  private static boolean c_checkApiInvariants = PROVIDER.checkApiInvariants();
 
   private BrainCheckConfig()
   {
@@ -49,12 +49,12 @@ public final class BrainCheckConfig
    */
   public static boolean verboseErrorMessages()
   {
-    return VERBOSE_ERROR_MESSAGES;
+    return c_verboseErrorMessages;
   }
 
   static void setVerboseErrorMessages( final boolean verboseErrorMessages )
   {
-    VERBOSE_ERROR_MESSAGES = verboseErrorMessages;
+    c_verboseErrorMessages = verboseErrorMessages;
   }
 
   /**
@@ -64,12 +64,12 @@ public final class BrainCheckConfig
    */
   public static boolean checkInvariants()
   {
-    return CHECK_INVARIANTS;
+    return c_checkInvariants;
   }
 
   static void setCheckInvariants( final boolean checkInvariants )
   {
-    CHECK_INVARIANTS = checkInvariants;
+    c_checkInvariants = checkInvariants;
   }
 
   /**
@@ -79,12 +79,12 @@ public final class BrainCheckConfig
    */
   public static boolean checkApiInvariants()
   {
-    return CHECK_API_INVARIANTS;
+    return c_checkApiInvariants;
   }
 
   static void setCheckApiInvariants( final boolean checkApiInvariants )
   {
-    CHECK_API_INVARIANTS = checkApiInvariants;
+    c_checkApiInvariants = checkApiInvariants;
   }
 
   @SuppressWarnings( "SimplifiableConditionalExpression" )

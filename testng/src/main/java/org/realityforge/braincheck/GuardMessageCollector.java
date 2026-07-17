@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -377,7 +378,7 @@ public final class GuardMessageCollector
     throws IOException
   {
     final byte[] data = Files.readAllBytes( file.toPath() );
-    final String jsonData = new String( data, StandardCharsets.UTF_8 );
+    final var jsonData = new String( data, StandardCharsets.UTF_8 );
 
     final String output =
       jsonData
@@ -398,7 +399,7 @@ public final class GuardMessageCollector
                                         @Nonnull final String messagePattern,
                                         @Nonnull final StackTraceElement caller )
   {
-    final Message message = new Message( _key, code, type, messagePattern, true, new HashSet<>() );
+    final var message = new Message( _key, code, type, messagePattern, true, new HashSet<>() );
     message.recordCaller( caller );
     _messages.put( code, message );
   }
@@ -416,7 +417,7 @@ public final class GuardMessageCollector
     else
     {
       m.recordCaller( caller );
-      final StringBuilder sb = new StringBuilder();
+      final var sb = new StringBuilder();
 
       final String messagePattern = m.getMessagePattern();
       int lastOffset = 0;
@@ -518,7 +519,7 @@ public final class GuardMessageCollector
     @Override
     public String toString()
     {
-      return _key + "-" + String.format( "%4d", getCode() ) + ": " + getMessagePattern();
+      return _key + "-" + String.format( Locale.ROOT, "%4d", getCode() ) + ": " + getMessagePattern();
     }
   }
 }
