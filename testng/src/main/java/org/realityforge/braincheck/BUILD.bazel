@@ -7,10 +7,10 @@ java_library(
     srcs = [
         "AbstractTestNGMessageCollector.java",
         "GuardMessageCollector.java",
+        "package-info.java",
     ],
     deps = [
         "//core/src/main/java/org/realityforge/braincheck:core",
-        "//third_party/java:javax_annotation",
         "//third_party/java:javax_json",
         "//third_party/java:testng",
     ],

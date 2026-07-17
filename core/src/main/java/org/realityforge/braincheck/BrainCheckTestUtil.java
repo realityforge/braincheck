@@ -1,8 +1,7 @@
 package org.realityforge.braincheck;
 
 import java.util.function.Supplier;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Utility class for interacting with BrainCheck in tests.
@@ -48,7 +47,7 @@ public final class BrainCheckTestUtil
      * @param message    A detailed message describing the reason for the guard invocation. Must not be null.
      * @param stackTrace The stack trace captured at the time of the guard invocation. Must not be null.
      */
-    void onGuard( @Nonnull GuardType type, @Nonnull String message, @Nonnull StackTraceElement[] stackTrace );
+    void onGuard( GuardType type, String message, StackTraceElement[] stackTrace );
   }
 
   /**

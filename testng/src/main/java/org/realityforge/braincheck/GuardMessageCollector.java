@@ -19,7 +19,6 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -91,11 +90,8 @@ import javax.json.stream.JsonGeneratorFactory;
 @GwtIncompatible
 public final class GuardMessageCollector
 {
-  @Nonnull
   private final Map<Integer, Message> _messages = new HashMap<>();
-  @Nonnull
   private final String _key;
-  @Nonnull
   private final File _file;
   private final boolean _saveIfChanged;
   private final boolean _deleteIfUnmatched;
@@ -109,7 +105,7 @@ public final class GuardMessageCollector
    * @param key  the key/prefix used when selecting messages to match.
    * @param file the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.
    */
-  public GuardMessageCollector( @Nonnull final String key, @Nonnull final File file )
+  public GuardMessageCollector( final String key, final File file )
   {
     this( key, file, true );
   }
@@ -121,7 +117,7 @@ public final class GuardMessageCollector
    * @param file          the file expected to contain message templates. This file need not exist if <code>saveIfChanged</code> is <code>true</code>.
    * @param saveIfChanged flag set to true if changed message templates should be saved to <code>file</code>.
    */
-  public GuardMessageCollector( @Nonnull final String key, @Nonnull final File file, final boolean saveIfChanged )
+  public GuardMessageCollector( final String key, final File file, final boolean saveIfChanged )
   {
     this( key, file, saveIfChanged, true );
   }
@@ -134,8 +130,8 @@ public final class GuardMessageCollector
    * @param saveIfChanged     flag set to true if changed message templates should be saved to <code>file</code>.
    * @param deleteIfUnmatched flag set to true if should delete messages from template if they are unmatched.
    */
-  public GuardMessageCollector( @Nonnull final String key,
-                                @Nonnull final File file,
+  public GuardMessageCollector( final String key,
+                                final File file,
                                 final boolean saveIfChanged,
                                 final boolean deleteIfUnmatched )
   {
@@ -151,8 +147,8 @@ public final class GuardMessageCollector
    * @param deleteIfUnmatched flag set to true if should delete messages from template if they are unmatched.
    * @param recordCallers     flag set to true if the methods where invariant messages are located should be stored in the message log.
    */
-  public GuardMessageCollector( @Nonnull final String key,
-                                @Nonnull final File file,
+  public GuardMessageCollector( final String key,
+                                final File file,
                                 final boolean saveIfChanged,
                                 final boolean deleteIfUnmatched,
                                 final boolean recordCallers )
@@ -224,9 +220,9 @@ public final class GuardMessageCollector
     }
   }
 
-  private void onGuardInvoked( @Nonnull final BrainCheckTestUtil.GuardType type,
-                               @Nonnull final String message,
-                               @Nonnull final StackTraceElement[] stackTrace )
+  private void onGuardInvoked( final BrainCheckTestUtil.GuardType type,
+                               final String message,
+                               final StackTraceElement[] stackTrace )
   {
     final Matcher matcher = Pattern.compile( "^" + _key + "-(\\d\\d\\d\\d): (.*)$" ).matcher( message );
     if ( matcher.matches() )
@@ -352,7 +348,7 @@ public final class GuardMessageCollector
     }
   }
 
-  private int compareElements( @Nonnull final StackTraceElement o1, @Nonnull final StackTraceElement o2 )
+  private int compareElements( final StackTraceElement o1, final StackTraceElement o2 )
   {
     final int v = Objects.compare( o1.getClassName(), o2.getClassName(), String::compareTo );
     if ( 0 != v )
@@ -374,7 +370,7 @@ public final class GuardMessageCollector
    * Format the json file.
    * This is horribly inefficient but it is not called very often so ... meh.
    */
-  private void formatJson( @Nonnull final File file )
+  private void formatJson( final File file )
     throws IOException
   {
     final byte[] data = Files.readAllBytes( file.toPath() );
@@ -395,9 +391,9 @@ public final class GuardMessageCollector
   }
 
   private void recordDiagnosticMessage( final int code,
-                                        @Nonnull final BrainCheckTestUtil.GuardType type,
-                                        @Nonnull final String messagePattern,
-                                        @Nonnull final StackTraceElement caller )
+                                        final BrainCheckTestUtil.GuardType type,
+                                        final String messagePattern,
+                                        final StackTraceElement caller )
   {
     final var message = new Message( _key, code, type, messagePattern, true, new HashSet<>() );
     message.recordCaller( caller );
@@ -405,9 +401,9 @@ public final class GuardMessageCollector
   }
 
   private void matchOrRecordDiagnosticMessage( final int code,
-                                               @Nonnull final BrainCheckTestUtil.GuardType type,
-                                               @Nonnull final String message,
-                                               @Nonnull final StackTraceElement caller )
+                                               final BrainCheckTestUtil.GuardType type,
+                                               final String message,
+                                               final StackTraceElement caller )
   {
     final Message m = _messages.get( code );
     if ( null == m )
@@ -455,23 +451,20 @@ public final class GuardMessageCollector
   @GwtIncompatible
   private static final class Message
   {
-    @Nonnull
     private final String _key;
     private final int _code;
-    @Nonnull
     private final BrainCheckTestUtil.GuardType _type;
-    @Nonnull
     private final String _messagePattern;
     private final boolean _needsSave;
     private final Set<StackTraceElement> _originalCallers = new HashSet<>();
     private final Set<StackTraceElement> _callers = new HashSet<>();
 
-    Message( @Nonnull final String key,
+    Message( final String key,
              final int code,
-             @Nonnull final BrainCheckTestUtil.GuardType type,
-             @Nonnull final String messagePattern,
+             final BrainCheckTestUtil.GuardType type,
+             final String messagePattern,
              final boolean needsSave,
-             @Nonnull final Set<StackTraceElement> callers )
+             final Set<StackTraceElement> callers )
     {
       _key = Objects.requireNonNull( key );
       _code = code;
@@ -486,13 +479,11 @@ public final class GuardMessageCollector
       return _code;
     }
 
-    @Nonnull
     BrainCheckTestUtil.GuardType getType()
     {
       return _type;
     }
 
-    @Nonnull
     String getMessagePattern()
     {
       return _messagePattern;
@@ -505,12 +496,11 @@ public final class GuardMessageCollector
              _callers.isEmpty();
     }
 
-    void recordCaller( @Nonnull final StackTraceElement caller )
+    void recordCaller( final StackTraceElement caller )
     {
       _callers.add( caller );
     }
 
-    @Nonnull
     Set<StackTraceElement> getCallers()
     {
       return Collections.unmodifiableSet( _callers );

@@ -139,23 +139,6 @@ TEXT
         dependencies.collect { |d| d.to_spec_hash }.each do |d|
           content += "  - coord: #{d[:group]}:#{d[:id]}:#{d[:version]}\n"
 
-          if d[:group].to_s == 'org.realityforge.javax.annotation'
-            # This package does all sorts of uglies including colliding with a
-            # annotation that is already present in jre emulation later so we
-            # add a suppression to ignore problem
-            content += <<TEXT
-    j2cl:
-      suppress: [CR_REDECLARED_PROVIDES]
-TEXT
-          end
-        end
-
-        if options[:javax_annotation]
-          content += <<TEXT
-  - coord: org.realityforge.javax.annotation:javax.annotation
-    j2cl:
-      suppress: [CR_REDECLARED_PROVIDES]
-TEXT
         end
 
         File.write("#{dir}/dependencies.yml", content)

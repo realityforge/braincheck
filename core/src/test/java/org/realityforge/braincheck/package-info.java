@@ -1,6 +1,3 @@
-/**
- * This package contains the core Braincheck library.
- */
 @NullMarked
 package org.realityforge.braincheck;
 

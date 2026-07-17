@@ -1,21 +1,37 @@
-load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_test = "java_test")
+load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_plugin = "java_plugin", _java_test = "java_test")
 
 package(default_visibility = ["//visibility:public"])
+
+_java_plugin(
+    name = "nullaway_plugin",
+    deps = [":nullaway"],
+)
 
 # --- depgen-generated targets start ---
 
 # DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.27
 
 # SHA256 of the configuration content that generated this content
-_CONFIG_SHA256 = "B163249224FB37965FB8E9EE70830ED852ADAB2F5B2114440F51D6D872BCEA9D"
+_CONFIG_SHA256 = "AEE6BC447A2AF2750F34B1413D118131AEDDB75267B8006680F0FEE2253EAF83"
 
 exports_files(["dependencies.yml"])
 
 # Dependency Graph Generated from the input data
+# +- com.uber.nullaway:nullaway:jar:0.13.7 [compile]
+# |  +- org.jspecify:jspecify:jar:1.0.0 [compile]
+# |  +- org.checkerframework:dataflow-nullaway:jar:4.0.0 [runtime]
+# |  |  \- org.checkerframework:checker-qual:jar:4.0.0 [runtime]
+# |  \- com.google.guava:guava:jar:31.1-jre [runtime]
+# |     +- com.google.guava:failureaccess:jar:1.0.1 [runtime]
+# |     +- com.google.guava:listenablefuture:jar:9999.0-empty-to-avoid-conflict-with-guava [runtime]
+# |     +- com.google.code.findbugs:jsr305:jar:3.0.2 [runtime]
+# |     +- org.checkerframework:checker-qual:jar:3.12.0 [runtime] (conflicts with 4.0.0)
+# |     +- com.google.errorprone:error_prone_annotations:jar:2.11.0 [runtime]
+# |     \- com.google.j2objc:j2objc-annotations:jar:1.3 [runtime]
 # +- com.google.jsinterop:jsinterop-annotations:jar:2.0.0 [compile]
-# +- org.realityforge.javax.annotation:javax.annotation:jar:1.1.1 [compile]
 # +- org.glassfish:javax.json:jar:1.1 [compile]
 # |  \- javax.json:javax.json-api:jar:1.1 [compile, optional]
+# +- org.jspecify:jspecify:jar:1.0.0 [compile]
 # \- org.testng:testng:jar:6.11 [compile]
 #    +- com.beust:jcommander:jar:1.64 [compile]
 #    +- org.yaml:snakeyaml:jar:1.17 [compile]
@@ -70,9 +86,70 @@ _java_import(
 )
 
 _java_import(
+    name = "jsr305",
+    jars = ["@jsr305//file"],
+    tags = ["maven_coordinates=com.google.code.findbugs:jsr305:3.0.2"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "error_prone_annotations",
+    jars = ["@error_prone_annotations//file"],
+    tags = ["maven_coordinates=com.google.errorprone:error_prone_annotations:2.11.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "failureaccess",
+    jars = ["@failureaccess//file"],
+    tags = ["maven_coordinates=com.google.guava:failureaccess:1.0.1"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "guava",
+    jars = ["@guava//file"],
+    tags = ["maven_coordinates=com.google.guava:guava:31.1-jre"],
+    visibility = ["//visibility:private"],
+    runtime_deps = [
+        ":checker_qual",
+        ":error_prone_annotations",
+        ":failureaccess",
+        ":j2objc_annotations",
+        ":jsr305",
+        ":listenablefuture",
+    ],
+)
+
+_java_import(
+    name = "listenablefuture",
+    jars = ["@listenablefuture//file"],
+    tags = ["maven_coordinates=com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "j2objc_annotations",
+    jars = ["@j2objc_annotations//file"],
+    tags = ["maven_coordinates=com.google.j2objc:j2objc-annotations:1.3"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
     name = "jsinterop_annotations",
     jars = ["@jsinterop_annotations//file"],
     tags = ["maven_coordinates=com.google.jsinterop:jsinterop-annotations:2.0.0"],
+)
+
+_java_import(
+    name = "nullaway",
+    jars = ["@nullaway//file"],
+    tags = ["maven_coordinates=com.uber.nullaway:nullaway:0.13.7"],
+    runtime_deps = [
+        ":dataflow_nullaway",
+        ":guava",
+    ],
+    deps = [":jspecify"],
 )
 
 _java_import(
@@ -104,21 +181,36 @@ _java_import(
 )
 
 _java_import(
+    name = "checker_qual",
+    jars = ["@checker_qual//file"],
+    tags = ["maven_coordinates=org.checkerframework:checker-qual:4.0.0"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "dataflow_nullaway",
+    jars = ["@dataflow_nullaway//file"],
+    tags = ["maven_coordinates=org.checkerframework:dataflow-nullaway:4.0.0"],
+    visibility = ["//visibility:private"],
+    runtime_deps = [":checker_qual"],
+)
+
+_java_import(
     name = "javax_json",
     jars = ["@javax_json//file"],
     tags = ["maven_coordinates=org.glassfish:javax.json:1.1"],
 )
 
 _java_import(
-    name = "bazel_depgen",
-    jars = ["@bazel_depgen//file"],
-    tags = ["maven_coordinates=org.realityforge.bazel.depgen:bazel-depgen:0.27"],
+    name = "jspecify",
+    jars = ["@jspecify//file"],
+    tags = ["maven_coordinates=org.jspecify:jspecify:1.0.0"],
 )
 
 _java_import(
-    name = "javax_annotation",
-    jars = ["@javax_annotation//file"],
-    tags = ["maven_coordinates=org.realityforge.javax.annotation:javax.annotation:1.1.1"],
+    name = "bazel_depgen",
+    jars = ["@bazel_depgen//file"],
+    tags = ["maven_coordinates=org.realityforge.bazel.depgen:bazel-depgen:0.27"],
 )
 
 _java_import(

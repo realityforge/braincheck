@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.Collections;
-import javax.annotation.Nonnull;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -25,34 +24,25 @@ public class GuardMessageCollectorTest
     throws Exception
   {
     final Path messageTemplates = getMessageTemplatesFile();
-    final String content =
-      "[\n" +
-      "  {\n" +
-      "    \"code\": 1234,\n" +
-      "    \"type\": \"INVARIANT\",\n" +
-      "    \"messagePattern\": \"Some message\",\n" +
-      "    \"callers\": [\n" +
-      "      {\n" +
-      "        \"class\": \"org.realityforge.braincheck.GuardMessageCollectorTest\",\n" +
-      "        \"method\": \"matchExistingMessage\",\n" +
-      "        \"file\": \"GuardMessageCollectorTest.java\",\n" +
-      "        \"lineNumber\": 50\n" +
-      "      }\n" +
-      "    ]\n" +
-      "  }\n" +
-      "]\n";
-    Files.write( messageTemplates, content.getBytes( StandardCharsets.UTF_8 ) );
-
     final var collector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
-
     collector.onTestSuiteStart();
+    invokeMatchingMessage( collector );
+    collector.onTestSuiteComplete( true );
+    final var content = new String( Files.readAllBytes( messageTemplates ), StandardCharsets.UTF_8 );
+
+    final var matchingCollector = new GuardMessageCollector( "Arez", messageTemplates.toFile() );
+    matchingCollector.onTestSuiteStart();
+    invokeMatchingMessage( matchingCollector );
+    matchingCollector.onTestSuiteComplete( true );
+
+    assertEquals( new String( Files.readAllBytes( messageTemplates ), StandardCharsets.UTF_8 ), content );
+  }
+
+  private void invokeMatchingMessage( final GuardMessageCollector collector )
+  {
     collector.onTestStart();
     Guards.invariant( () -> true, () -> "Arez-1234: Some message" );
     collector.onTestComplete();
-    collector.onTestSuiteComplete( true );
-
-    // The data would be formatted differently if it did not match
-    assertEquals( new String( Files.readAllBytes( messageTemplates ), StandardCharsets.UTF_8 ), content );
   }
 
   @Test
@@ -360,7 +350,6 @@ public class GuardMessageCollectorTest
     assertEquals( collector.getMatchFailureCount(), 1 );
   }
 
-  @Nonnull
   private Path getMessageTemplatesFile()
     throws IOException
   {
@@ -371,12 +360,12 @@ public class GuardMessageCollectorTest
   }
 
   @SuppressWarnings( "SameParameterValue" )
-  private void assertSingleCallerMessage( @Nonnull final JsonArray messages,
+  private void assertSingleCallerMessage( final JsonArray messages,
                                           final int index,
                                           final int code,
-                                          @Nonnull final String type,
-                                          @Nonnull final String messagePattern,
-                                          @Nonnull final String callerMethod )
+                                          final String type,
+                                          final String messagePattern,
+                                          final String callerMethod )
   {
     final JsonObject message = ensureMessage( messages, index, code, type, messagePattern );
     final JsonArray callers = message.getJsonArray( "callers" );
@@ -384,12 +373,11 @@ public class GuardMessageCollectorTest
     assertCaller( callers, 0, callerMethod );
   }
 
-  @Nonnull
-  private JsonObject ensureMessage( @Nonnull final JsonArray messages,
+  private JsonObject ensureMessage( final JsonArray messages,
                                     final int index,
                                     final int code,
-                                    @Nonnull final String type,
-                                    @Nonnull final String messagePattern )
+                                    final String type,
+                                    final String messagePattern )
   {
     final JsonObject message = messages.getJsonObject( index );
     assertEquals( message.getInt( "code" ), code );
@@ -398,7 +386,7 @@ public class GuardMessageCollectorTest
     return message;
   }
 
-  private void assertCaller( @Nonnull final JsonArray callers, final int index, @Nonnull final String methodName )
+  private void assertCaller( final JsonArray callers, final int index, final String methodName )
   {
     assertTrue( callers.size() > index );
     final JsonObject caller = callers.getJsonObject( index );
@@ -409,8 +397,7 @@ public class GuardMessageCollectorTest
                 JsonValue.ValueType.NUMBER == caller.get( "lineNumber" ).getValueType() );
   }
 
-  @Nonnull
-  private JsonArray readMessageTemplates( @Nonnull final Path messageTemplates )
+  private JsonArray readMessageTemplates( final Path messageTemplates )
     throws IOException
   {
     try ( final Reader reader = new FileReader( messageTemplates.toFile() ) )
@@ -419,8 +406,7 @@ public class GuardMessageCollectorTest
     }
   }
 
-  @Nonnull
-  private JsonArray readMessageTemplates( @Nonnull final Reader reader )
+  private JsonArray readMessageTemplates( final Reader reader )
   {
     try ( final JsonReader jsonReader = Json.createReader( reader ) )
     {

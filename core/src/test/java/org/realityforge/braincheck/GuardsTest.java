@@ -1,5 +1,6 @@
 package org.realityforge.braincheck;
 
+import java.util.Objects;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -49,7 +50,7 @@ public class GuardsTest
         throw new RuntimeException( "X" );
       }, () -> "My Failure Reason" ) );
 
-    final String message = exception.getMessage();
+    final String message = Objects.requireNonNull( exception.getMessage() );
     assertTrue( message.startsWith( "Error checking condition.\n" +
                                     "Message: My Failure Reason\n" +
                                     "Throwable:\n" +
@@ -99,7 +100,7 @@ public class GuardsTest
         throw new RuntimeException( "X" );
       }, () -> "My Failure Reason" ) );
 
-    final String message = exception.getMessage();
+    final String message = Objects.requireNonNull( exception.getMessage() );
     assertTrue( message.startsWith( "Error checking condition.\n" +
                                     "Message: My Failure Reason\n" +
                                     "Throwable:\n" +

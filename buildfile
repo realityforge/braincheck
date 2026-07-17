@@ -21,17 +21,16 @@ define 'braincheck' do
 
   desc 'Core invariant verification library'
   define 'core' do
-    deps = [artifact(:javax_annotation), artifact(:jsinterop_annotations)]
+    deps = [artifact(:jspecify), artifact(:jsinterop_annotations)]
     pom.include_transitive_dependencies << deps
     pom.dependency_filter = Proc.new { |dep| dep[:scope].to_s != 'test' && deps.include?(dep[:artifact]) }
 
-    compile.with :javax_annotation,
+    compile.with :jspecify,
                  :jsinterop_annotations
 
     gwt_enhance(project)
 
     test.using :testng
-    test.with :guiceyloops
     test.options[:properties] = { 'braincheck.environment' => 'development' }
     test.options[:java_args] = ['-ea']
 
@@ -61,7 +60,7 @@ define 'braincheck' do
 
   desc 'TestNG support library'
   define 'testng' do
-    deps = [artifact(:javax_annotation), artifact(:jsinterop_annotations), artifact(:javax_json), artifact(:testng)]
+    deps = [artifact(:jspecify), artifact(:jsinterop_annotations), artifact(:javax_json), artifact(:testng)]
     pom.include_transitive_dependencies << deps
     pom.dependency_filter = Proc.new { |dep| dep[:scope].to_s != 'test' && deps.include?(dep[:artifact]) }
 
@@ -73,7 +72,6 @@ define 'braincheck' do
     gwt_enhance(project, :extra_deps => [_('src/main/super')])
 
     test.using :testng
-    test.with :guiceyloops
     test.options[:properties] = { 'braincheck.environment' => 'development' }
     test.options[:java_args] = ['-ea']
 
@@ -85,8 +83,7 @@ define 'braincheck' do
   if ENV['J2CL'].nil? || ENV['J2CL'] == project.name
     t = Buildr::BazelJ2cl.define_bazel_j2cl_test(Buildr.project('braincheck'),
                                                  [Buildr.project('braincheck:core')],
-                                                 %w[org.realityforge.braincheck.BrainCheckConfig org.realityforge.braincheck.Guards],
-                                                 :javax_annotation => true)
+                                                 %w[org.realityforge.braincheck.BrainCheckConfig org.realityforge.braincheck.Guards])
     package.enhance([t])
   end
 

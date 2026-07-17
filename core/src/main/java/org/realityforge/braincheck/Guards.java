@@ -1,8 +1,7 @@
 package org.realityforge.braincheck;
 
 import java.util.function.Supplier;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A utility class used to perform assertions and invariant checks.
@@ -30,7 +29,7 @@ public final class Guards
    */
   interface OnGuardListener
   {
-    void onGuard( @Nonnull Type type, @Nonnull String message, @Nonnull StackTraceElement[] stackTrace );
+    void onGuard( Type type, String message, StackTraceElement[] stackTrace );
   }
 
   static void setOnGuardListener( @Nullable final OnGuardListener onGuardListener )
@@ -58,8 +57,8 @@ public final class Guards
    * @param message   the message supplier used if verbose messages enabled.
    * @throws IllegalStateException if condition returns false.
    */
-  public static void apiInvariant( @Nonnull final Supplier<Boolean> condition,
-                                   @Nonnull final Supplier<String> message )
+  public static void apiInvariant( final Supplier<Boolean> condition,
+                                   final Supplier<String> message )
   {
     if ( BrainCheckConfig.isDevelopmentEnvironment() && null != c_onGuardListener )
     {
@@ -92,8 +91,8 @@ public final class Guards
    * @param message   the message supplier used if verbose messages enabled.
    * @throws IllegalStateException if condition returns false.
    */
-  public static void invariant( @Nonnull final Supplier<Boolean> condition,
-                                @Nonnull final Supplier<String> message )
+  public static void invariant( final Supplier<Boolean> condition,
+                                final Supplier<String> message )
   {
     if ( BrainCheckConfig.isDevelopmentEnvironment() && null != c_onGuardListener )
     {
@@ -116,8 +115,8 @@ public final class Guards
    *
    * @return the result of specified condition.
    */
-  private static boolean isConditionTrue( @Nonnull final Supplier<Boolean> condition,
-                                          @Nonnull final Supplier<String> message )
+  private static boolean isConditionTrue( final Supplier<Boolean> condition,
+                                          final Supplier<String> message )
   {
     try
     {
@@ -139,7 +138,7 @@ public final class Guards
    * @param message the message supplier used if verbose messages enabled.
    * @throws IllegalStateException when called.
    */
-  public static void fail( @Nonnull final Supplier<String> message )
+  public static void fail( final Supplier<String> message )
   {
     if ( BrainCheckConfig.isDevelopmentEnvironment() && null != c_onGuardListener )
     {
@@ -150,7 +149,7 @@ public final class Guards
     doFail( message );
   }
 
-  private static void doFail( @Nonnull final Supplier<String> message )
+  private static void doFail( final Supplier<String> message )
   {
     /*
      * This flag will only be present and set when GWT is compiling the source code and the relevant

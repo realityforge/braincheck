@@ -1,6 +1,5 @@
 package org.realityforge.braincheck;
 
-import javax.annotation.Nonnull;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -14,11 +13,10 @@ public abstract class AbstractTestNGMessageCollector
   extends TestListenerAdapter
   implements ITestListener
 {
-  @Nonnull
   private final GuardMessageCollector _messages = createCollector();
 
   @Override
-  public void onTestStart( @Nonnull final ITestResult result )
+  public void onTestStart( final ITestResult result )
   {
     if ( shouldCheckDiagnosticMessages() )
     {
@@ -27,7 +25,7 @@ public abstract class AbstractTestNGMessageCollector
   }
 
   @Override
-  public void onTestSuccess( @Nonnull final ITestResult result )
+  public void onTestSuccess( final ITestResult result )
   {
     if ( shouldCheckDiagnosticMessages() )
     {
@@ -36,7 +34,7 @@ public abstract class AbstractTestNGMessageCollector
   }
 
   @Override
-  public void onStart( @Nonnull final ITestContext context )
+  public void onStart( final ITestContext context )
   {
     if ( shouldCheckDiagnosticMessages() )
     {
@@ -45,7 +43,7 @@ public abstract class AbstractTestNGMessageCollector
   }
 
   @Override
-  public void onFinish( @Nonnull final ITestContext context )
+  public void onFinish( final ITestContext context )
   {
     if ( shouldCompleteCollection( context ) )
     {
@@ -53,13 +51,12 @@ public abstract class AbstractTestNGMessageCollector
     }
   }
 
-  protected boolean shouldCompleteCollection( @Nonnull final ITestContext context )
+  protected boolean shouldCompleteCollection( final ITestContext context )
   {
     return shouldCheckDiagnosticMessages();
   }
 
   protected abstract boolean shouldCheckDiagnosticMessages();
 
-  @Nonnull
   protected abstract GuardMessageCollector createCollector();
 }

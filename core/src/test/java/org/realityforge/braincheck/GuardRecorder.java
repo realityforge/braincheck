@@ -3,7 +3,6 @@ package org.realityforge.braincheck;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
 
 final class GuardRecorder
   implements BrainCheckTestUtil.OnGuardListener
@@ -11,9 +10,9 @@ final class GuardRecorder
   private final List<String> _messages = new ArrayList<>();
 
   @Override
-  public void onGuard( @Nonnull final BrainCheckTestUtil.GuardType type,
-                       @Nonnull final String message,
-                       @Nonnull final StackTraceElement[] stackTrace )
+  public void onGuard( final BrainCheckTestUtil.GuardType type,
+                       final String message,
+                       final StackTraceElement[] stackTrace )
   {
     _messages.add( type +
                    ": " +

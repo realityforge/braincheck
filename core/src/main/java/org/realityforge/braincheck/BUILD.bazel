@@ -21,7 +21,6 @@ java_library(
         "braincheck.js",
     ],
     deps = [
-        "//third_party/java:javax_annotation",
         "//third_party/java:jsinterop_annotations",
     ],
 )
