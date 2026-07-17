@@ -32,6 +32,10 @@ MAVEN_ARTIFACT_DATA = [
     "//tools/release:release_version",
 ]
 
+DIST_ARTIFACT_ARGS = [
+    "$(rootpath :test-version.txt)",
+] + MAVEN_ARTIFACT_ARGS[1:]
+
 java_binary(
     name = "jar_builder",
     srcs = [
@@ -116,8 +120,8 @@ java_test(
         "DistBuilderTest.java",
         "package-info.java",
     ],
-    args = MAVEN_ARTIFACT_ARGS,
-    data = MAVEN_ARTIFACT_DATA,
+    args = DIST_ARTIFACT_ARGS,
+    data = MAVEN_ARTIFACT_DATA + [":test-version.txt"],
     main_class = "org.realityforge.braincheck.release.DistBuilderTest",
     use_testrunner = False,
 )
