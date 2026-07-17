@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Replace the legacy IntelliJ project files with a managed Bazel project view.
 * Add Palantir Java Format to the Bazel validation gate.
 * Replace `javax.annotation` nullness annotations with JSpecify and enforce NullAway checks.
 * Enable strict Error Prone checks in the Bazel build.

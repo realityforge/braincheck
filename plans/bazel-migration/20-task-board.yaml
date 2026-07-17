@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T08
+current_focus: T09
 
 tasks:
   - id: T01
@@ -177,10 +177,13 @@ tasks:
         result: pass
       - command: tools/check.sh
         result: pass, including dependency regeneration and formatting check
+    commit:
+      hash: 2d45863
+      message: "style(build): add Palantir formatter check"
 
   - id: T08
     title: Add Bazel IntelliJ tooling
-    status: in_progress
+    status: completed
     priority: medium
     depends_on: [T07]
     acceptance_criteria:
@@ -192,11 +195,19 @@ tasks:
       - '**/*.ipr'
       - '**/*.iml'
       - '**/*.iws'
-    evidence: []
+    evidence:
+      - command: inspect tools/intellij/.managed.bazelproject against pinned reference convention
+        result: pass with BrainCheck source-root adaptation
+      - command: find tracked worktree files with ipr, iml, or iws suffixes
+        result: pass (no files remain after the staged deletion)
+      - command: rg legacy IntelliJ suffix ignore rules in .gitignore
+        result: pass (no matches)
+      - command: tools/check.sh
+        result: pass
 
   - id: T09
     title: Add Maven Central release infrastructure
-    status: pending
+    status: in_progress
     priority: high
     depends_on: [T08]
     acceptance_criteria:
@@ -334,3 +345,7 @@ history:
     task: T06
     commit: 9b2b269
     note: Applied the pinned Palantir Java Format output in a source-only formatting phase.
+  - timestamp: "2026-07-17"
+    task: T07
+    commit: 2d45863
+    note: Added the pinned Palantir formatter repository and enforced formatting in the full gate.
