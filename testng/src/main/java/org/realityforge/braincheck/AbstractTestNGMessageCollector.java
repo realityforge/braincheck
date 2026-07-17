@@ -9,54 +9,42 @@ import org.testng.TestListenerAdapter;
  * A base class for creating a TestNG listener to attach to tests.
  */
 @GwtIncompatible
-public abstract class AbstractTestNGMessageCollector
-  extends TestListenerAdapter
-  implements ITestListener
-{
-  private final GuardMessageCollector _messages = createCollector();
+public abstract class AbstractTestNGMessageCollector extends TestListenerAdapter implements ITestListener {
+    private final GuardMessageCollector _messages = createCollector();
 
-  @Override
-  public void onTestStart( final ITestResult result )
-  {
-    if ( shouldCheckDiagnosticMessages() )
-    {
-      _messages.onTestStart();
+    @Override
+    public void onTestStart(final ITestResult result) {
+        if (shouldCheckDiagnosticMessages()) {
+            _messages.onTestStart();
+        }
     }
-  }
 
-  @Override
-  public void onTestSuccess( final ITestResult result )
-  {
-    if ( shouldCheckDiagnosticMessages() )
-    {
-      _messages.onTestComplete();
+    @Override
+    public void onTestSuccess(final ITestResult result) {
+        if (shouldCheckDiagnosticMessages()) {
+            _messages.onTestComplete();
+        }
     }
-  }
 
-  @Override
-  public void onStart( final ITestContext context )
-  {
-    if ( shouldCheckDiagnosticMessages() )
-    {
-      _messages.onTestSuiteStart();
+    @Override
+    public void onStart(final ITestContext context) {
+        if (shouldCheckDiagnosticMessages()) {
+            _messages.onTestSuiteStart();
+        }
     }
-  }
 
-  @Override
-  public void onFinish( final ITestContext context )
-  {
-    if ( shouldCompleteCollection( context ) )
-    {
-      _messages.onTestSuiteComplete( 0 == context.getFailedTests().size() );
+    @Override
+    public void onFinish(final ITestContext context) {
+        if (shouldCompleteCollection(context)) {
+            _messages.onTestSuiteComplete(0 == context.getFailedTests().size());
+        }
     }
-  }
 
-  protected boolean shouldCompleteCollection( final ITestContext context )
-  {
-    return shouldCheckDiagnosticMessages();
-  }
+    protected boolean shouldCompleteCollection(final ITestContext context) {
+        return shouldCheckDiagnosticMessages();
+    }
 
-  protected abstract boolean shouldCheckDiagnosticMessages();
+    protected abstract boolean shouldCheckDiagnosticMessages();
 
-  protected abstract GuardMessageCollector createCollector();
+    protected abstract GuardMessageCollector createCollector();
 }

@@ -1,36 +1,39 @@
 package org.realityforge.braincheck;
 
-import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
-public class BrainCheckTestUtilTest
-  extends AbstractTest
-{
-  @Test
-  public void onGuardListenerReceivesMessages()
-  {
-    final var recorder = new GuardRecorder();
-    BrainCheckTestUtil.setOnGuardListener( recorder );
+import org.testng.annotations.Test;
 
-    assertEquals( recorder.toString(), "" );
+public class BrainCheckTestUtilTest extends AbstractTest {
+    @Test
+    public void onGuardListenerReceivesMessages() {
+        final var recorder = new GuardRecorder();
+        BrainCheckTestUtil.setOnGuardListener(recorder);
 
-    assertThrows( () -> Guards.invariant( () -> false, () -> "Some Message" ) );
+        assertEquals(recorder.toString(), "");
 
-    final String firstMessage = recorder.toString();
-    assertTrue( firstMessage.startsWith(
-      "INVARIANT: Some Message @ org.realityforge.braincheck.BrainCheckTestUtilTest:lambda$onGuardListenerReceivesMessages$" ) );
+        assertThrows(() -> Guards.invariant(() -> false, () -> "Some Message"));
 
-    Guards.invariant( () -> true, () -> "Some Other Message" );
+        final String firstMessage = recorder.toString();
+        assertTrue(firstMessage.startsWith("INVARIANT: Some Message @"
+                + " org.realityforge.braincheck.BrainCheckTestUtilTest:lambda$onGuardListenerReceivesMessages$"));
 
-    assertEquals( recorder.toString(),
-                  firstMessage + "\n" +
-                  "INVARIANT: Some Other Message @ org.realityforge.braincheck.BrainCheckTestUtilTest:onGuardListenerReceivesMessages" );
+        Guards.invariant(() -> true, () -> "Some Other Message");
 
-    Guards.apiInvariant( () -> true, () -> "Blah" );
+        assertEquals(
+                recorder.toString(),
+                firstMessage + "\n"
+                        + "INVARIANT: Some Other Message @"
+                        + " org.realityforge.braincheck.BrainCheckTestUtilTest:onGuardListenerReceivesMessages");
 
-    assertEquals( recorder.toString(),
-                  firstMessage + "\n" +
-                  "INVARIANT: Some Other Message @ org.realityforge.braincheck.BrainCheckTestUtilTest:onGuardListenerReceivesMessages\n" +
-                  "API_INVARIANT: Blah @ org.realityforge.braincheck.BrainCheckTestUtilTest:onGuardListenerReceivesMessages" );
-  }
+        Guards.apiInvariant(() -> true, () -> "Blah");
+
+        assertEquals(
+                recorder.toString(),
+                firstMessage + "\n"
+                        + "INVARIANT: Some Other Message @"
+                        + " org.realityforge.braincheck.BrainCheckTestUtilTest:onGuardListenerReceivesMessages\n"
+                        + "API_INVARIANT: Blah @"
+                        + " org.realityforge.braincheck.BrainCheckTestUtilTest:onGuardListenerReceivesMessages");
+    }
 }

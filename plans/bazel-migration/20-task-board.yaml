@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T06
+current_focus: T07
 
 tasks:
   - id: T01
@@ -130,10 +130,13 @@ tasks:
         result: pass with JSpecify and without guiceyloops
       - command: rg org.realityforge.javax.annotation excluding historical changelog and generated output
         result: pass (no matches)
+    commit:
+      hash: 164cd3a
+      message: "chore(build): enforce NullAway with JSpecify annotations"
 
   - id: T06
     title: Apply Java formatting
-    status: in_progress
+    status: completed
     priority: medium
     depends_on: [T05]
     acceptance_criteria:
@@ -143,11 +146,17 @@ tasks:
       - core/src/**/*.java
       - jre/src/**/*.java
       - testng/src/**/*.java
-    evidence: []
+    evidence:
+      - command: pinned Palantir Java Format 2.93.0 with --dry-run --set-exit-if-changed
+        result: pass (no changes required)
+      - command: git diff --name-only filtered for non-Java paths
+        result: pass (no matches before task-board update)
+      - command: tools/check.sh
+        result: pass
 
   - id: T07
     title: Add Java-format tooling
-    status: pending
+    status: in_progress
     priority: medium
     depends_on: [T06]
     acceptance_criteria:
@@ -308,3 +317,7 @@ history:
     task: T04
     commit: 4451a6e
     note: Enabled the pinned strict Error Prone policy while leaving NullAway for the JSpecify phase.
+  - timestamp: "2026-07-17"
+    task: T05
+    commit: 164cd3a
+    note: Replaced javax nullability with JSpecify and enforced NullAway across Bazel Java targets.
