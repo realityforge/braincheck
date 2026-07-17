@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "deploy:docs": "gh-pages -d target/braincheck_core/doc"
-  },
-  "devDependencies": {
-    "gh-pages": "1.0.0"
-  }
-}

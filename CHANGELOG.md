@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Remove the obsolete Node, Yarn, and GitHub Pages Javadoc deployment.
 * Remove the legacy Buildr, Ruby, Rake, and Travis build infrastructure.
 * Add a GitHub Actions CI gate for the Bazel build.
 * Verify production and development configurations with GWT compiler smoke builds.

@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T14
+current_focus: T15
 
 tasks:
   - id: T01
@@ -339,10 +339,13 @@ tasks:
         result: pass (no matches)
       - command: tools/check.sh
         result: pass after deleting the legacy infrastructure
+    commit:
+      hash: 4460623
+      message: "chore(build): remove Buildr infrastructure"
 
   - id: T14
     title: Remove Node Yarn and Javadoc site deployment
-    status: in_progress
+    status: completed
     priority: medium
     depends_on: [T13]
     acceptance_criteria:
@@ -356,11 +359,19 @@ tasks:
       - .gitattributes
       - .gitignore
       - README.md
-    evidence: []
+    evidence:
+      - command: inspect package.json and all tracked Node references
+        result: pass (Node was used only for the obsolete gh-pages Javadoc deployment)
+      - command: search tracked non-historical files for Node, npm, Yarn, gh-pages, and deploy:docs references
+        result: pass (no matches)
+      - command: bazel build //tools/release:braincheck_core_javadoc_jar //tools/release:braincheck_testng_javadoc_jar --release_version=0.0.0
+        result: pass (Maven Central Javadoc artifacts remain available)
+      - command: tools/check.sh
+        result: pass after removing the Node/Yarn infrastructure
 
   - id: T15
     title: Review implementation and clean up plan
-    status: pending
+    status: in_progress
     priority: high
     depends_on: [T14]
     acceptance_criteria:
@@ -420,3 +431,7 @@ history:
     task: T12
     commit: 947cf1e
     note: Added the pinned GitHub Actions workflow for Bazel validation and generated-file drift detection.
+  - timestamp: "2026-07-17"
+    task: T13
+    commit: 4460623
+    note: Removed the superseded Buildr, Ruby, Rake, and Travis build and release infrastructure.

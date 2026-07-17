@@ -12,8 +12,6 @@ can be stripped by configuring the compile-time property `jre.checks.checkLevel`
 
 The simplest way to use Braincheck is to;
 
-* Review the [javadocs](http://realityforge.org/braincheck/).
-
 * Add the BrainCheck dependencies into the build system. i.e.
 
 ```xml
