@@ -93,7 +93,8 @@ public class GuardMessageCollectorTest extends AbstractTest {
         final byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
         Files.write(messageTemplates, bytes);
 
-        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile(), true, false);
+        final GuardMessageCollector collector =
+                new GuardMessageCollector("Arez", messageTemplates.toFile(), true, false);
 
         collector.onTestSuiteStart();
         collector.onTestStart();
