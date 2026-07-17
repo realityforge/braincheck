@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T07
+current_focus: T08
 
 tasks:
   - id: T01
@@ -153,10 +153,13 @@ tasks:
         result: pass (no matches before task-board update)
       - command: tools/check.sh
         result: pass
+    commit:
+      hash: 9b2b269
+      message: "style(java): apply Palantir Java Format"
 
   - id: T07
     title: Add Java-format tooling
-    status: in_progress
+    status: completed
     priority: medium
     depends_on: [T06]
     acceptance_criteria:
@@ -167,11 +170,17 @@ tasks:
       - tools/java_format.sh
       - tools/check.sh
       - MODULE.bazel
-    evidence: []
+    evidence:
+      - command: diff pinned tools/java-format/dependencies.yml and generated BUILD.bazel
+        result: pass (byte-identical)
+      - command: tools/java_format.sh check
+        result: pass
+      - command: tools/check.sh
+        result: pass, including dependency regeneration and formatting check
 
   - id: T08
     title: Add Bazel IntelliJ tooling
-    status: pending
+    status: in_progress
     priority: medium
     depends_on: [T07]
     acceptance_criteria:
@@ -321,3 +330,7 @@ history:
     task: T05
     commit: 164cd3a
     note: Replaced javax nullability with JSpecify and enforced NullAway across Bazel Java targets.
+  - timestamp: "2026-07-17"
+    task: T06
+    commit: 9b2b269
+    note: Applied the pinned Palantir Java Format output in a source-only formatting phase.

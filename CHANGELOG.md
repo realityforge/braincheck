@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Add Palantir Java Format to the Bazel validation gate.
 * Replace `javax.annotation` nullness annotations with JSpecify and enforce NullAway checks.
 * Enable strict Error Prone checks in the Bazel build.
 * Convert the compile-time property definitions to a Closure module and explicitly register them with J2CL.
