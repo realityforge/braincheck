@@ -1,3 +1,4 @@
+load("@j2cl//build_defs:rules.bzl", "j2cl_import")
 load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_plugin = "java_plugin", _java_test = "java_test")
 
 package(default_visibility = ["//visibility:public"])
@@ -231,3 +232,13 @@ _java_import(
 )
 
 # --- depgen-generated targets end ---
+
+j2cl_import(
+    name = "jspecify-j2cl",
+    jar = ":jspecify",
+)
+
+alias(
+    name = "jsinterop_annotations-j2cl",
+    actual = "@j2cl//:jsinterop-annotations-j2cl",
+)

@@ -1,0 +1,16 @@
+load("@j2cl//build_defs:rules.bzl", "j2cl_application")
+load("@rules_closure//closure:defs.bzl", "closure_js_library")
+
+package(default_visibility = ["//visibility:public"])
+
+closure_js_library(
+    name = "entry_point",
+    srcs = ["entry_point.js"],
+    deps = ["//core/src/main/java/org/realityforge/braincheck:core-j2cl"],
+)
+
+j2cl_application(
+    name = "braincheck_j2cl_smoke",
+    entry_points = ["braincheck.j2cl.BuildTest"],
+    deps = [":entry_point"],
+)

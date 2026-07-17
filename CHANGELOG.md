@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Verify BrainCheck by compiling and linking it with the latest pinned J2CL `master` revision.
 * Add Bazel-based Maven Central packaging and release lifecycle tooling.
 * Replace the legacy IntelliJ project files with a managed Bazel project view.
 * Add Palantir Java Format to the Bazel validation gate.

@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T10
+current_focus: T11
 
 tasks:
   - id: T01
@@ -234,10 +234,13 @@ tasks:
         result: pass (derived 1.34.0 and updated temporary changelog/README copies)
       - command: tools/check.sh
         result: pass with seven tests, including release contract tests
+    commit:
+      hash: 7c6efad
+      message: "feat(release): add Maven Central packaging"
 
   - id: T10
     title: Add latest J2CL compile and link validation
-    status: in_progress
+    status: completed
     priority: high
     depends_on: [T09]
     acceptance_criteria:
@@ -250,11 +253,19 @@ tasks:
       - third_party/bazel/**
       - core/**/BUILD.bazel
       - tools/check.sh
-    evidence: []
+    evidence:
+      - command: git ls-remote https://github.com/google/j2cl.git refs/heads/master
+        result: pass (latest master observed as 13315e2b1e7a9c895378f4a42581c75d46a5c230)
+      - command: sha256 of the pinned GitHub archive
+        result: pass (201045cc1a2fa2ca2787822da52344b65f9662cebec953613448b32b58b17866)
+      - command: bazel build //core/src/test/j2cl:braincheck_j2cl_smoke
+        result: pass (optimized 2,105-byte JavaScript link output produced under Bazel 9.2.0)
+      - command: tools/check.sh
+        result: pass with the latest-J2CL compile and optimized-link smoke included
 
   - id: T11
     title: Add GWT aspect and compiler smoke builds
-    status: pending
+    status: in_progress
     priority: high
     depends_on: [T10]
     acceptance_criteria:
@@ -364,3 +375,7 @@ history:
     task: T08
     commit: 290c87b
     note: Replaced legacy local IntelliJ files with the managed Bazel project-view convention.
+  - timestamp: "2026-07-17"
+    task: T09
+    commit: 7c6efad
+    note: Added exact Maven Central artifacts, signed distribution packaging, and release lifecycle tooling.
