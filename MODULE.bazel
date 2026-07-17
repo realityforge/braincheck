@@ -1,0 +1,92 @@
+module(
+    name = "braincheck",
+)
+
+bazel_dep(name = "buildifier_prebuilt", version = "8.5.1", dev_dependency = True)
+
+bazel_dep(name = "rules_java", version = "9.7.0")
+
+# --- depgen-generated repository rules start ---
+
+# DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.27
+
+_http_file = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
+
+_http_file(
+    name = "jcommander",
+    downloaded_file_path = "com/beust/jcommander/1.64/jcommander-1.64.jar",
+    sha256 = "156be736199c990321d9ff77090b199629cfc9865e2d6c13f7cd291bb1641817",
+    urls = ["https://repo.maven.apache.org/maven2/com/beust/jcommander/1.64/jcommander-1.64.jar"],
+)
+
+_http_file(
+    name = "jsinterop_annotations",
+    downloaded_file_path = "com/google/jsinterop/jsinterop-annotations/2.0.0/jsinterop-annotations-2.0.0.jar",
+    sha256 = "ce01f48439240e46521b99cc4c889dcb6793f7a0b0a3e238a38359093f457b49",
+    urls = ["https://repo.maven.apache.org/maven2/com/google/jsinterop/jsinterop-annotations/2.0.0/jsinterop-annotations-2.0.0.jar"],
+)
+
+_http_file(
+    name = "javax_json_api",
+    downloaded_file_path = "javax/json/javax.json-api/1.1/javax.json-api-1.1.jar",
+    sha256 = "208746be8ab088e6c4b17e8ecdb07ff7a6f7e62bb2b88bb09b993335ea17c615",
+    urls = ["https://repo.maven.apache.org/maven2/javax/json/javax.json-api/1.1/javax.json-api-1.1.jar"],
+)
+
+_http_file(
+    name = "junit",
+    downloaded_file_path = "junit/junit/4.12/junit-4.12.jar",
+    sha256 = "59721f0805e223d84b90677887d9ff567dc534d7c502ca903c0c2b17f05c116a",
+    urls = ["https://repo.maven.apache.org/maven2/junit/junit/4.12/junit-4.12.jar"],
+)
+
+_http_file(
+    name = "bsh",
+    downloaded_file_path = "org/apache-extras/beanshell/bsh/2.0b6/bsh-2.0b6.jar",
+    sha256 = "a17955976070c0573235ee662f2794a78082758b61accffce8d3f8aedcd91047",
+    urls = ["https://repo.maven.apache.org/maven2/org/apache-extras/beanshell/bsh/2.0b6/bsh-2.0b6.jar"],
+)
+
+_http_file(
+    name = "ant",
+    downloaded_file_path = "org/apache/ant/ant/1.9.7/ant-1.9.7.jar",
+    sha256 = "9a5dbe3f5f2cb91854c8682cab80178afa412ab35a5ab718bf39ce01b3435d93",
+    urls = ["https://repo.maven.apache.org/maven2/org/apache/ant/ant/1.9.7/ant-1.9.7.jar"],
+)
+
+_http_file(
+    name = "javax_json",
+    downloaded_file_path = "org/glassfish/javax.json/1.1/javax.json-1.1.jar",
+    sha256 = "4b1f21bc50b728aaae5f44ff550383182b58b67647362959e31004e4522ee24f",
+    urls = ["https://repo.maven.apache.org/maven2/org/glassfish/javax.json/1.1/javax.json-1.1.jar"],
+)
+
+_http_file(
+    name = "bazel_depgen",
+    downloaded_file_path = "org/realityforge/bazel/depgen/bazel-depgen/0.27/bazel-depgen-0.27-all.jar",
+    sha256 = "8426a82c850b847d606b9947f6757c9f2530d29a46fc1f80dfa3a185759b94e7",
+    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/bazel/depgen/bazel-depgen/0.27/bazel-depgen-0.27-all.jar"],
+)
+
+_http_file(
+    name = "javax_annotation",
+    downloaded_file_path = "org/realityforge/javax/annotation/javax.annotation/1.1.1/javax.annotation-1.1.1.jar",
+    sha256 = "147d086711cd48670097ac626bfe1ed137786144c2a2c46b2aa1bb7292adc77b",
+    urls = ["https://repo.maven.apache.org/maven2/org/realityforge/javax/annotation/javax.annotation/1.1.1/javax.annotation-1.1.1.jar"],
+)
+
+_http_file(
+    name = "testng",
+    downloaded_file_path = "org/testng/testng/6.11/testng-6.11.jar",
+    sha256 = "55d5897ac09339010eed2051124309a7127988d82ff0634228926d51da3540f6",
+    urls = ["https://repo.maven.apache.org/maven2/org/testng/testng/6.11/testng-6.11.jar"],
+)
+
+_http_file(
+    name = "snakeyaml",
+    downloaded_file_path = "org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar",
+    sha256 = "5666b36f9db46f06dd5a19d73bbff3b588d5969c0f4b8848fde0f5ec849430a5",
+    urls = ["https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar"],
+)
+
+# --- depgen-generated repository rules end ---

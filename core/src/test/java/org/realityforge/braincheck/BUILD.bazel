@@ -1,0 +1,27 @@
+load("//third_party/java:rules.bzl", "java_testng_test")
+
+package(default_visibility = ["//visibility:public"])
+
+java_testng_test(
+    name = "all_tests",
+    srcs = [
+        "AbstractTest.java",
+        "BrainCheckTestUtilTest.java",
+        "BrainCheckUtilTest.java",
+        "GuardRecorder.java",
+        "GuardsTest.java",
+        "StackTraceUtilTest.java",
+    ],
+    jvm_flags = ["-Dbraincheck.environment=development"],
+    test_classes = [
+        "org.realityforge.braincheck.BrainCheckTestUtilTest",
+        "org.realityforge.braincheck.BrainCheckUtilTest",
+        "org.realityforge.braincheck.GuardsTest",
+        "org.realityforge.braincheck.StackTraceUtilTest",
+    ],
+    deps = [
+        "//core/src/main/java/org/realityforge/braincheck:core",
+        "//third_party/java:javax_annotation",
+        "//third_party/java:testng",
+    ],
+)

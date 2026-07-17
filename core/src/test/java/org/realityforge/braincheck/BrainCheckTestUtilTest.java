@@ -16,19 +16,20 @@ public class BrainCheckTestUtilTest
 
     assertThrows( () -> Guards.invariant( () -> false, () -> "Some Message" ) );
 
-    assertEquals( recorder.toString(),
-                  "INVARIANT: Some Message @ org.realityforge.braincheck.BrainCheckTestUtilTest:lambda$onGuardListenerReceivesMessages$2" );
+    final String firstMessage = recorder.toString();
+    assertTrue( firstMessage.startsWith(
+      "INVARIANT: Some Message @ org.realityforge.braincheck.BrainCheckTestUtilTest:lambda$onGuardListenerReceivesMessages$" ) );
 
     Guards.invariant( () -> true, () -> "Some Other Message" );
 
     assertEquals( recorder.toString(),
-                  "INVARIANT: Some Message @ org.realityforge.braincheck.BrainCheckTestUtilTest:lambda$onGuardListenerReceivesMessages$2\n" +
+                  firstMessage + "\n" +
                   "INVARIANT: Some Other Message @ org.realityforge.braincheck.BrainCheckTestUtilTest:onGuardListenerReceivesMessages" );
 
     Guards.apiInvariant( () -> true, () -> "Blah" );
 
     assertEquals( recorder.toString(),
-                  "INVARIANT: Some Message @ org.realityforge.braincheck.BrainCheckTestUtilTest:lambda$onGuardListenerReceivesMessages$2\n" +
+                  firstMessage + "\n" +
                   "INVARIANT: Some Other Message @ org.realityforge.braincheck.BrainCheckTestUtilTest:onGuardListenerReceivesMessages\n" +
                   "API_INVARIANT: Blah @ org.realityforge.braincheck.BrainCheckTestUtilTest:onGuardListenerReceivesMessages" );
   }

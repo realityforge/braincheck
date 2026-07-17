@@ -1,0 +1,11 @@
+# Directories Bazel should not scan as source packages in the main repository.
+ignore_directories([
+    ".git",
+    "core/generated",
+    "generated",
+    "node_modules",
+    "reports",
+    "target",
+    "testng/generated",
+    "tmp",
+])

@@ -1,0 +1,141 @@
+load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_test = "java_test")
+
+package(default_visibility = ["//visibility:public"])
+
+# --- depgen-generated targets start ---
+
+# DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.27
+
+# SHA256 of the configuration content that generated this content
+_CONFIG_SHA256 = "B163249224FB37965FB8E9EE70830ED852ADAB2F5B2114440F51D6D872BCEA9D"
+
+exports_files(["dependencies.yml"])
+
+# Dependency Graph Generated from the input data
+# +- com.google.jsinterop:jsinterop-annotations:jar:2.0.0 [compile]
+# +- org.realityforge.javax.annotation:javax.annotation:jar:1.1.1 [compile]
+# +- org.glassfish:javax.json:jar:1.1 [compile]
+# |  \- javax.json:javax.json-api:jar:1.1 [compile, optional]
+# \- org.testng:testng:jar:6.11 [compile]
+#    +- com.beust:jcommander:jar:1.64 [compile]
+#    +- org.yaml:snakeyaml:jar:1.17 [compile]
+#    +- junit:junit:jar:4.12 [compile, optional]
+#    +- org.apache.ant:ant:jar:1.9.7 [compile, optional]
+#    \- org.apache-extras.beanshell:bsh:jar:2.0b6 [compile, optional]
+
+_java_test(
+    name = "verify_config_sha256",
+    size = "small",
+    args = [
+        "--config-file",
+        "$(rootpath //third_party/java:dependencies.yml)",
+        "--quiet",
+        "hash",
+        "--verify-sha256",
+        _CONFIG_SHA256,
+    ],
+    data = ["//third_party/java:dependencies.yml"],
+    main_class = "org.realityforge.bazel.depgen.Main",
+    use_testrunner = False,
+    visibility = ["//visibility:private"],
+    runtime_deps = [":bazel_depgen"],
+)
+
+_java_binary(
+    name = "update_depgen_generated_outputs",
+    args = [
+        "--config-file",
+        "$(rootpath //third_party/java:dependencies.yml)",
+        "--quiet",
+        "generate",
+    ],
+    data = ["//third_party/java:dependencies.yml"],
+    main_class = "org.realityforge.bazel.depgen.Main",
+    tags = [
+        "local",
+        "manual",
+        "no-cache",
+        "no-remote",
+        "no-sandbox",
+    ],
+    visibility = ["//visibility:private"],
+    runtime_deps = [":bazel_depgen"],
+)
+
+_java_import(
+    name = "jcommander",
+    jars = ["@jcommander//file"],
+    tags = ["maven_coordinates=com.beust:jcommander:1.64"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "jsinterop_annotations",
+    jars = ["@jsinterop_annotations//file"],
+    tags = ["maven_coordinates=com.google.jsinterop:jsinterop-annotations:2.0.0"],
+)
+
+_java_import(
+    name = "javax_json_api",
+    jars = ["@javax_json_api//file"],
+    tags = ["maven_coordinates=javax.json:javax.json-api:1.1"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "junit",
+    jars = ["@junit//file"],
+    tags = ["maven_coordinates=junit:junit:4.12"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "bsh",
+    jars = ["@bsh//file"],
+    tags = ["maven_coordinates=org.apache-extras.beanshell:bsh:2.0b6"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "ant",
+    jars = ["@ant//file"],
+    tags = ["maven_coordinates=org.apache.ant:ant:1.9.7"],
+    visibility = ["//visibility:private"],
+)
+
+_java_import(
+    name = "javax_json",
+    jars = ["@javax_json//file"],
+    tags = ["maven_coordinates=org.glassfish:javax.json:1.1"],
+)
+
+_java_import(
+    name = "bazel_depgen",
+    jars = ["@bazel_depgen//file"],
+    tags = ["maven_coordinates=org.realityforge.bazel.depgen:bazel-depgen:0.27"],
+)
+
+_java_import(
+    name = "javax_annotation",
+    jars = ["@javax_annotation//file"],
+    tags = ["maven_coordinates=org.realityforge.javax.annotation:javax.annotation:1.1.1"],
+)
+
+_java_import(
+    name = "testng",
+    jars = ["@testng//file"],
+    tags = ["maven_coordinates=org.testng:testng:6.11"],
+    deps = [
+        ":jcommander",
+        ":snakeyaml",
+    ],
+)
+
+_java_import(
+    name = "snakeyaml",
+    jars = ["@snakeyaml//file"],
+    tags = ["maven_coordinates=org.yaml:snakeyaml:1.17"],
+    visibility = ["//visibility:private"],
+)
+
+# --- depgen-generated targets end ---

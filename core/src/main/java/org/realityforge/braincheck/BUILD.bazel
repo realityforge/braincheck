@@ -1,0 +1,27 @@
+load("//third_party/java:rules.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "core",
+    srcs = [
+        "BrainCheckConfig.java",
+        "BrainCheckTestUtil.java",
+        "BrainCheckUtil.java",
+        "DebuggerUtil.java",
+        "Guards.java",
+        "GwtIncompatible.java",
+        "StackTraceUtil.java",
+        "package-info.java",
+    ],
+    resources = [
+        "BrainCheck.gwt.xml",
+        "BrainCheckConfig.native.js",
+        "BrainCheckDev.gwt.xml",
+        "braincheck.js",
+    ],
+    deps = [
+        "//third_party/java:javax_annotation",
+        "//third_party/java:jsinterop_annotations",
+    ],
+)

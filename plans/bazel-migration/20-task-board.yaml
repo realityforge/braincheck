@@ -1,0 +1,275 @@
+meta:
+  project: braincheck-bazel-migration
+  status: accepted
+  accepted_on: "2026-07-17"
+  last_updated: "2026-07-17"
+  required_full_gates:
+    - tools/check.sh
+  statuses:
+    - pending
+    - in_progress
+    - completed
+    - cancelled
+
+current_focus: T03
+
+tasks:
+  - id: T01
+    title: Copy repository instructions
+    status: completed
+    priority: high
+    depends_on: []
+    acceptance_criteria:
+      - AGENTS.md matches bazel-depgen/AGENTS.md byte-for-byte
+    files_touched:
+      - AGENTS.md
+    evidence:
+      - command: cmp -s AGENTS.md /Users/peter/Code/realityforge/bazel-depgen/AGENTS.md
+        result: pass
+    commit:
+      hash: 4b1f8f7
+      message: Initialize AGENTS.md
+
+  - id: T02
+    title: Add basic Bazel build
+    status: completed
+    priority: high
+    depends_on: [T01]
+    acceptance_criteria:
+      - Bazel 9.2.0 builds core, jre, and testng targets at Java 17
+      - Conventions are imported from bazel-depgen commit d14bde397d5a1442b2f1e717214c5c9d2a1ab4b7
+      - DepGen-generated dependencies are current
+      - Core and TestNG tests pass without guiceyloops
+      - Basic artifact targets include required classes and resources
+    files_touched:
+      - .bazelrc
+      - .bazelversion
+      - BUILD.bazel
+      - MODULE.bazel
+      - MODULE.bazel.lock
+      - core/**/BUILD.bazel
+      - jre/**/BUILD.bazel
+      - testng/**/BUILD.bazel
+      - third_party/java/**
+      - tools/check.sh
+      - tools/update_java_deps.sh
+    evidence:
+      - command: tools/check.sh
+        result: pass
+      - command: javap -verbose -classpath libcore.jar org.realityforge.braincheck.BrainCheckConfig
+        result: pass (major version 61 / Java 17)
+      - command: jar tf libcore.jar and jar tf libtestng.jar
+        result: pass (compiled classes and core GWT/JavaScript resources present)
+      - command: rg guiceyloops MODULE.bazel third_party tools BUILD.bazel core jre testng
+        result: pass (no matches)
+
+  - id: T03
+    title: Fix Error Prone findings
+    status: in_progress
+    priority: high
+    depends_on: [T02]
+    acceptance_criteria:
+      - Source changes resolve all strict Error Prone findings excluding NullAway
+      - No commit is created when no source findings exist
+    files_touched:
+      - core/src/**/*.java
+      - jre/src/**/*.java
+      - testng/src/**/*.java
+    evidence: []
+
+  - id: T04
+    title: Enable Error Prone tooling
+    status: pending
+    priority: high
+    depends_on: [T03]
+    acceptance_criteria:
+      - Reference Error Prone checks are errors
+      - NullAway and JSpecify-specific checks remain disabled
+      - All Java targets and tests pass
+    files_touched:
+      - third_party/java/rules.bzl
+      - tools/check.sh
+      - CHANGELOG.md
+    evidence: []
+
+  - id: T05
+    title: Migrate to JSpecify and NullAway
+    status: pending
+    priority: high
+    depends_on: [T04]
+    acceptance_criteria:
+      - javax.annotation is absent from source and dependency declarations
+      - Packages use JSpecify null marking and nullable type-use annotations
+      - NullAway and explicit null-marking checks pass
+    files_touched:
+      - core/src/**/*.java
+      - testng/src/**/*.java
+      - third_party/java/**
+      - CHANGELOG.md
+    evidence: []
+
+  - id: T06
+    title: Apply Java formatting
+    status: pending
+    priority: medium
+    depends_on: [T05]
+    acceptance_criteria:
+      - Java source matches the reference formatter output
+      - Commit contains formatter-only source changes
+    files_touched:
+      - core/src/**/*.java
+      - jre/src/**/*.java
+      - testng/src/**/*.java
+    evidence: []
+
+  - id: T07
+    title: Add Java-format tooling
+    status: pending
+    priority: medium
+    depends_on: [T06]
+    acceptance_criteria:
+      - Formatter dependencies are isolated under tools/java-format
+      - tools/check.sh verifies formatting without modifying files
+    files_touched:
+      - tools/java-format/**
+      - tools/java_format.sh
+      - tools/check.sh
+      - MODULE.bazel
+    evidence: []
+
+  - id: T08
+    title: Add Bazel IntelliJ tooling
+    status: pending
+    priority: medium
+    depends_on: [T07]
+    acceptance_criteria:
+      - Bazel BSP and managed project configuration match reference conventions
+      - Legacy ipr, iml, and iws files are removed
+    files_touched:
+      - .bazelbsp/**
+      - tools/intellij/**
+      - '**/*.ipr'
+      - '**/*.iml'
+      - '**/*.iws'
+    evidence: []
+
+  - id: T09
+    title: Add Maven Central release infrastructure
+    status: pending
+    priority: high
+    depends_on: [T08]
+    acceptance_criteria:
+      - core and testng main/source/Javadoc/POM artifacts build
+      - jre main/source/POM artifacts build without adding a Javadoc artifact
+      - Archive entries and normalized POMs satisfy 30-output-contract.md
+      - The full release ZIP layout, signatures, and checksums satisfy 30-output-contract.md
+      - Release packaging and lifecycle tests pass
+    files_touched:
+      - tools/release/**
+      - tools/package_maven_central.sh
+      - CONTRIBUTING.md
+      - .bazelrc
+      - CHANGELOG.md
+    evidence: []
+
+  - id: T10
+    title: Add latest J2CL compile and link validation
+    status: pending
+    priority: high
+    depends_on: [T09]
+    acceptance_criteria:
+      - J2CL is pinned to the latest master commit observed when implemented
+      - A test compiles and links BrainCheck through J2CL
+      - Validation runs under Bazel 9.2.0
+    files_touched:
+      - MODULE.bazel
+      - MODULE.bazel.lock
+      - third_party/bazel/**
+      - core/**/BUILD.bazel
+      - tools/check.sh
+    evidence: []
+
+  - id: T11
+    title: Add GWT aspect and compiler smoke builds
+    status: pending
+    priority: high
+    depends_on: [T10]
+    acceptance_criteria:
+      - tools/gwt is imported byte-for-byte from Rose commit 77db6b5c474495c7d6bc3b6bb5cc436055901bf3
+      - BrainCheck and BrainCheckDev compiler smoke builds produce assets
+      - tools/check.sh builds both outputs
+    files_touched:
+      - tools/gwt/**
+      - core/**/BUILD.bazel
+      - third_party/java/**
+      - tools/check.sh
+    evidence: []
+
+  - id: T12
+    title: Add GitHub Actions CI
+    status: pending
+    priority: medium
+    depends_on: [T11]
+    acceptance_criteria:
+      - CI runs tools/check.sh on Ubuntu
+      - CI verifies generated files are current
+    files_touched:
+      - .github/workflows/**
+    evidence: []
+
+  - id: T13
+    title: Remove Buildr Ruby and Travis
+    status: pending
+    priority: high
+    depends_on: [T12]
+    acceptance_criteria:
+      - Buildr, Ruby, Rake, and Travis files and references are absent
+      - Bazel full gate passes after removal
+    files_touched:
+      - buildfile
+      - build.yaml
+      - Gemfile
+      - Gemfile.lock
+      - .ruby-version
+      - .travis.yml
+      - tasks/**
+      - .gitattributes
+      - .gitignore
+    evidence: []
+
+  - id: T14
+    title: Remove Node Yarn and Javadoc site deployment
+    status: pending
+    priority: medium
+    depends_on: [T13]
+    acceptance_criteria:
+      - Node, Yarn, gh-pages, and deploy:docs files and references are absent
+      - Maven Central Javadoc artifacts still build
+      - Bazel full gate passes after removal
+    files_touched:
+      - package.json
+      - yarn.lock
+      - .node-version
+      - .gitattributes
+      - .gitignore
+      - README.md
+    evidence: []
+
+  - id: T15
+    title: Review implementation and clean up plan
+    status: pending
+    priority: high
+    depends_on: [T14]
+    acceptance_criteria:
+      - Implementation alignment review has no actionable findings
+      - tools/check.sh passes from a clean worktree
+      - Plan tree is removed in a deletion-only commit
+    files_touched:
+      - plans/bazel-migration/**
+    evidence: []
+
+history:
+  - timestamp: "2026-07-17"
+    task: T01
+    commit: 4b1f8f7
+    note: Copied repository instructions byte-for-byte from the pinned reference repository.
