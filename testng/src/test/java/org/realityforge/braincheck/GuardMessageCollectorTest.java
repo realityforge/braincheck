@@ -21,13 +21,13 @@ public class GuardMessageCollectorTest extends AbstractTest {
     @Test
     public void matchExistingMessage() throws Exception {
         final Path messageTemplates = getMessageTemplatesFile();
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
         collector.onTestSuiteStart();
         invokeMatchingMessage(collector);
         collector.onTestSuiteComplete(true);
-        final var content = new String(Files.readAllBytes(messageTemplates), StandardCharsets.UTF_8);
+        final String content = new String(Files.readAllBytes(messageTemplates), StandardCharsets.UTF_8);
 
-        final var matchingCollector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector matchingCollector = new GuardMessageCollector("Arez", messageTemplates.toFile());
         matchingCollector.onTestSuiteStart();
         invokeMatchingMessage(matchingCollector);
         matchingCollector.onTestSuiteComplete(true);
@@ -45,7 +45,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
     public void recordMatchingMessage_whenSaveIfChanged() throws Exception {
         final Path messageTemplates = getMessageTemplatesFile();
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
 
         assertFalse(Files.exists(messageTemplates));
         collector.onTestSuiteStart();
@@ -74,7 +74,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
         final byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
         Files.write(messageTemplates, bytes);
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
 
         collector.onTestSuiteStart();
         collector.onTestStart();
@@ -93,7 +93,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
         final byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
         Files.write(messageTemplates, bytes);
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile(), true, false);
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile(), true, false);
 
         collector.onTestSuiteStart();
         collector.onTestStart();
@@ -112,7 +112,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
         final byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
         Files.write(messageTemplates, bytes);
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
 
         collector.onTestSuiteStart();
         collector.onTestStart();
@@ -127,7 +127,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
     public void ignoreUnmatchedMessage() throws Exception {
         final Path messageTemplates = getMessageTemplatesFile();
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
 
         collector.onTestSuiteStart();
         collector.onTestStart();
@@ -144,7 +144,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
         Files.write(messageTemplates, new byte[0]);
         Files.setPosixFilePermissions(messageTemplates, Collections.emptySet());
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
 
         final IllegalStateException exception = expectThrows(IllegalStateException.class, collector::onTestSuiteStart);
         assertEquals(exception.getMessage(), "Failed to read diagnostic messages file " + messageTemplates + ".");
@@ -159,7 +159,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
         Files.write(messageTemplates, bytes);
         Files.setPosixFilePermissions(messageTemplates, Collections.singleton(PosixFilePermission.OWNER_READ));
 
-        final var collector = new GuardMessageCollector("Spritz", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Spritz", messageTemplates.toFile());
 
         collector.onTestSuiteStart();
         collector.onTestStart();
@@ -176,7 +176,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
     public void errorWhenUnmatchedMessageRecorded() throws Exception {
         final Path messageTemplates = getMessageTemplatesFile();
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile(), false);
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile(), false);
 
         collector.onTestSuiteStart();
         collector.onTestStart();
@@ -195,7 +195,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
     public void recordMatchingMessageWithMultipleCalls() throws Exception {
         final Path messageTemplates = getMessageTemplatesFile();
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
 
         collector.onTestSuiteStart();
         collector.onTestStart();
@@ -225,7 +225,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
     public void recordMatchingMessageFromFail() throws Exception {
         final Path messageTemplates = getMessageTemplatesFile();
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
 
         collector.onTestSuiteStart();
         collector.onTestStart();
@@ -273,7 +273,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
         final byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
         Files.write(messageTemplates, bytes);
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
 
         collector.onTestSuiteStart();
         collector.onTestStart();
@@ -298,7 +298,7 @@ public class GuardMessageCollectorTest extends AbstractTest {
         final byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
         Files.write(messageTemplates, bytes);
 
-        final var collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
+        final GuardMessageCollector collector = new GuardMessageCollector("Arez", messageTemplates.toFile());
 
         collector.onTestSuiteStart();
         collector.onTestStart();

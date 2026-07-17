@@ -331,7 +331,7 @@ public final class GuardMessageCollector {
      */
     private void formatJson(final File file) throws IOException {
         final byte[] data = Files.readAllBytes(file.toPath());
-        final var jsonData = new String(data, StandardCharsets.UTF_8);
+        final String jsonData = new String(data, StandardCharsets.UTF_8);
 
         final String output = jsonData.replaceAll("(?m)^ {4}\\{", "  {")
                         .replaceAll("(?m)^ {4}}", "  }")
@@ -350,7 +350,7 @@ public final class GuardMessageCollector {
             final BrainCheckTestUtil.GuardType type,
             final String messagePattern,
             final StackTraceElement caller) {
-        final var message = new Message(_key, code, type, messagePattern, true, new HashSet<>());
+        final Message message = new Message(_key, code, type, messagePattern, true, new HashSet<>());
         message.recordCaller(caller);
         _messages.put(code, message);
     }
@@ -365,7 +365,7 @@ public final class GuardMessageCollector {
             recordDiagnosticMessage(code, type, message, caller);
         } else {
             m.recordCaller(caller);
-            final var sb = new StringBuilder();
+            final StringBuilder sb = new StringBuilder();
 
             final String messagePattern = m.getMessagePattern();
             int lastOffset = 0;

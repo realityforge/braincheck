@@ -92,7 +92,8 @@ _ERROR_PRONE_JAVACOPTS = [
     "-Xep:InterruptedExceptionSwallowed:ERROR",
     "-Xep:PrivateConstructorForUtilityClass:ERROR",
     "-Xep:UnnecessaryDefaultInEnumSwitch:ERROR",
-    "-Xep:Varifier:ERROR",
+    # Disabled until we no longer need to use GWT
+    # "-Xep:Varifier:ERROR",
 ]
 
 _TEST_ERROR_PRONE_JAVACOPTS = [

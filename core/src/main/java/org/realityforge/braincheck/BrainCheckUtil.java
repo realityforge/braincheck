@@ -41,7 +41,7 @@ final class BrainCheckUtil {
      */
     static String throwableToString(final Throwable throwable) {
         assert null != throwable;
-        final var sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         Throwable t = throwable;
         while (null != t) {
             addCausedByPrefix(sb);
