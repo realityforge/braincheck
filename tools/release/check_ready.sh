@@ -39,6 +39,11 @@ done
 
 gh auth status >/dev/null
 
+if [[ -z "${MAVEN_CENTRAL_USERNAME:-}" ]]; then
+  echo "MAVEN_CENTRAL_USERNAME must be set." >&2
+  exit 1
+fi
+
 if [[ -z "${GPG_USER:-}" ]]; then
   echo "GPG_USER must be set." >&2
   exit 1
