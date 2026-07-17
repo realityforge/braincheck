@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T04
+current_focus: T05
 
 tasks:
   - id: T01
@@ -81,10 +81,13 @@ tasks:
     evidence:
       - command: tools/check.sh with the strict Error Prone policy applied and NullAway absent
         result: pass after resolving 20 findings
+    commit:
+      hash: 7a6aef0
+      message: "fix(java): satisfy strict Error Prone checks"
 
   - id: T04
     title: Enable Error Prone tooling
-    status: in_progress
+    status: completed
     priority: high
     depends_on: [T03]
     acceptance_criteria:
@@ -95,11 +98,17 @@ tasks:
       - third_party/java/rules.bzl
       - tools/check.sh
       - CHANGELOG.md
-    evidence: []
+    evidence:
+      - command: diff strict Error Prone option block against pinned bazel-depgen rules.bzl
+        result: pass (byte-identical policy block)
+      - command: rg NullAway|RequireExplicitNullMarking third_party/java/rules.bzl
+        result: pass (no matches)
+      - command: tools/check.sh
+        result: pass
 
   - id: T05
     title: Migrate to JSpecify and NullAway
-    status: pending
+    status: in_progress
     priority: high
     depends_on: [T04]
     acceptance_criteria:
@@ -282,3 +291,7 @@ history:
     task: T02
     commit: 2f7776c
     note: Added the Bazel 9.2 build, DepGen dependency graph, Java 17 artifacts, and direct TestNG suites.
+  - timestamp: "2026-07-17"
+    task: T03
+    commit: 7a6aef0
+    note: Resolved all source findings from the strict Error Prone policy before enabling it.
