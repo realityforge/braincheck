@@ -1,0 +1,19 @@
+load("//third_party/java:rules.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "smoke",
+    srcs = [
+        "SmokeEntryPoint.java",
+        "package-info.java",
+    ],
+    resources = [
+        "BrainCheckDevSmoke.gwt.xml",
+        "BrainCheckSmoke.gwt.xml",
+    ],
+    deps = [
+        "//core/src/main/java/org/realityforge/braincheck:core",
+        "//third_party/java:gwt_user",
+    ],
+)

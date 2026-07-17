@@ -1,0 +1,5 @@
+<module>
+  <inherits name='org.realityforge.braincheck.BrainCheckDev'/>
+  <source path='' includes='SmokeEntryPoint.java'/>
+  <entry-point class='org.realityforge.braincheck.gwt.SmokeEntryPoint'/>
+</module>

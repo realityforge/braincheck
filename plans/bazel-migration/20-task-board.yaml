@@ -11,7 +11,7 @@ meta:
     - completed
     - cancelled
 
-current_focus: T11
+current_focus: T12
 
 tasks:
   - id: T01
@@ -262,10 +262,13 @@ tasks:
         result: pass (optimized 2,105-byte JavaScript link output produced under Bazel 9.2.0)
       - command: tools/check.sh
         result: pass with the latest-J2CL compile and optimized-link smoke included
+    commit:
+      hash: 0b61ef4
+      message: "test(j2cl): validate latest J2CL link"
 
   - id: T11
     title: Add GWT aspect and compiler smoke builds
-    status: in_progress
+    status: completed
     priority: high
     depends_on: [T10]
     acceptance_criteria:
@@ -277,11 +280,19 @@ tasks:
       - core/**/BUILD.bazel
       - third_party/java/**
       - tools/check.sh
-    evidence: []
+    evidence:
+      - command: cmp tools/gwt files against Rose commit 77db6b5c474495c7d6bc3b6bb5cc436055901bf3
+        result: pass (BUILD.bazel and defs.bzl are byte-identical)
+      - command: bazel build //core/src/test/gwt:braincheck_gwt_assets //core/src/test/gwt:braincheck_dev_gwt_assets
+        result: pass with GWT 2.13.1 and Java 17 source mode
+      - command: inspect compiler ZIP manifests
+        result: pass (both normalized ZIPs contain cache JavaScript, bootstrap scripts, symbol maps, and deployment metadata)
+      - command: tools/check.sh
+        result: pass with both GWT compiler outputs explicitly built
 
   - id: T12
     title: Add GitHub Actions CI
-    status: pending
+    status: in_progress
     priority: medium
     depends_on: [T11]
     acceptance_criteria:
@@ -379,3 +390,7 @@ history:
     task: T09
     commit: 7c6efad
     note: Added exact Maven Central artifacts, signed distribution packaging, and release lifecycle tooling.
+  - timestamp: "2026-07-17"
+    task: T10
+    commit: 0b61ef4
+    note: Pinned the latest observed J2CL master and added an optimized compile-and-link validation target.
