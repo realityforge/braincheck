@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Use Protobuf's prebuilt `protoc` toolchain to speed up cold Bazel builds.
+
 ### [v1.35.0](https://github.com/realityforge/braincheck/tree/v1.35.0) (2026-07-17) · [Full Changelog](https://github.com/realityforge/braincheck/compare/v1.34.0...v1.35.0)
 
 Changes in this release:
