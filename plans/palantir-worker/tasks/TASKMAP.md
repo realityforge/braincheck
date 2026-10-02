@@ -1,11 +1,11 @@
 # Task Map
 
 - Spec: [SPEC.md](../SPEC.md)
-- Status: `implementation-review`
+- Status: `reviewed`
 - Current frontier: `None`
 - Planning reviewer: `/root/planning_reviewer` (`1/3` rounds, `Findings: none`)
 - Plan checkpoint: `automatic` (completed evidence-based design tree, explicit grill/entry exception, passing planning review)
-- Implementation reviewer: `pending` (`0/5` rounds)
+- Implementation reviewer: `/root/implementation_reviewer` (`1/5` rounds, `Findings: none`)
 
 ## Full-scope validation
 
@@ -25,3 +25,7 @@ One coherent migration preserves CI through the wrapper while replacing dependen
 ## Promoted knowledge
 
 not-required: no domain documentation directories or configuration exist.
+
+## Closeout readiness
+
+Implementation review passed with no findings, including an independent formatter check. Committed plan db25b9e and implementation/evidence 82e1198 exist. All local task and full-gate validation passed. No domain knowledge promotion is required. PR publication, assignment, actual head CI, and native auto-merge follow plan removal; use a merge commit and exact-head matching after CI succeeds.
