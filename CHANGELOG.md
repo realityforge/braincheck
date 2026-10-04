@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Clean Bazel outputs and shut down its server when a Codex environment is cleaned up.
 * Use shared Palantir Java Format Bazel workers for graph-based formatting checks and add
   `tools/java_format.sh watch` and `tools/java_format_watch.sh`.
 * Use Protobuf's prebuilt `protoc` toolchain to speed up cold Bazel builds.
