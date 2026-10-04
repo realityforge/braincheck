@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Use Bazel's default workspace symlinks and repository cache location, and ignore the symlinks in Git.
 * Clean Bazel outputs and shut down its server when a Codex environment is cleaned up.
 * Use shared Palantir Java Format Bazel workers for graph-based formatting checks and add
   `tools/java_format.sh watch` and `tools/java_format_watch.sh`.
