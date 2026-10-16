@@ -96,7 +96,7 @@ artifacts:
     includeSource: true
     excludes:
       - '*:*'
-  - coord: org.jspecify:jspecify:1.0.0
+  - coord: org.jspecify:jspecify:1.0.1
     excludes:
       - '*:*'
   - coord: org.apache.ant:ant:1.9.7

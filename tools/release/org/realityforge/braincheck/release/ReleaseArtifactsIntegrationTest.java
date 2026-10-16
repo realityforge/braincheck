@@ -35,7 +35,7 @@ public final class ReleaseArtifactsIntegrationTest {
                 "braincheck-core",
                 "Core invariant verification library",
                 version,
-                Set.of("org.jspecify:jspecify:1.0.0", "com.google.jsinterop:jsinterop-annotations:2.0.0"));
+                Set.of("org.jspecify:jspecify:1.0.1", "com.google.jsinterop:jsinterop-annotations:2.0.0"));
 
         assertJarEntries(
                 resolve(Path.of(args[5])),
@@ -52,7 +52,7 @@ public final class ReleaseArtifactsIntegrationTest {
                 "TestNG support library",
                 version,
                 Set.of(
-                        "org.jspecify:jspecify:1.0.0",
+                        "org.jspecify:jspecify:1.0.1",
                         "com.google.jsinterop:jsinterop-annotations:2.0.0",
                         "org.glassfish:javax.json:1.1",
                         "org.testng:testng:6.11"));

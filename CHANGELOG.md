@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Upgrade JSpecify to version `1.0.1`.
 * Fix Bazel publication targets when Braincheck is consumed as a dependency module without development tools.
 * Move Buildifier commands to `//tools/buildifier:buildifier` and `//tools/buildifier:buildifier_check`, and the Java
   format check to `//tools/java-format:java_format_check`.

@@ -69,7 +69,7 @@ release_pom(
     out = "braincheck-core.pom",
     artifact_id = "braincheck-core",
     dependencies = [
-        "org.jspecify:jspecify:1.0.0",
+        "org.jspecify:jspecify:1.0.1",
         "com.google.jsinterop:jsinterop-annotations:2.0.0",
     ],
     description = "Core invariant verification library",
@@ -135,7 +135,7 @@ release_pom(
     out = "braincheck-testng.pom",
     artifact_id = "braincheck-testng",
     dependencies = [
-        "org.jspecify:jspecify:1.0.0",
+        "org.jspecify:jspecify:1.0.1",
         "com.google.jsinterop:jsinterop-annotations:2.0.0",
         "org.glassfish:javax.json:1.1",
         "org.testng:testng:6.11",
