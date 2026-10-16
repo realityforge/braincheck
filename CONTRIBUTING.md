@@ -25,6 +25,9 @@ When submitting pull requests, make sure to do the following:
 - Remove trailing whitespace. Many editors will do this automatically.
 - Ensure any new files have [a trailing newline](https://stackoverflow.com/questions/5813311/no-newline-at-end-of-file)
 
+Run `bazel run //tools/buildifier:buildifier` to format Bazel files and `tools/java_format.sh` to format Java files.
+Use `//tools/buildifier:buildifier_check` and `//tools/java-format:java_format_check` for their check targets.
+
 ## How to speed the merging of pull requests
 
 * Describe your changes in the CHANGELOG.md (if present).

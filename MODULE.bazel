@@ -9,7 +9,8 @@ bazel_dep(name = "protobuf", version = "33.4")
 bazel_dep(name = "rules_closure", version = "0.16.0")
 bazel_dep(name = "rules_java", version = "9.9.0")
 bazel_dep(name = "rules_jvm_external", version = "7.1")
-bazel_dep(name = "rules_palantir_java_format")
+
+bazel_dep(name = "rules_palantir_java_format", dev_dependency = True)
 
 archive_override(
     module_name = "j2cl",
