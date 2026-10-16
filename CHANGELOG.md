@@ -3,7 +3,7 @@
 ### Unreleased
 
 * Fix Bazel publication targets when Braincheck is consumed as a dependency module without development tools.
-* Move Buildifier commands to `//tools/bazel-format:buildifier` and `//tools/bazel-format:buildifier_check`, and the Java
+* Move Buildifier commands to `//tools/buildifier:buildifier` and `//tools/buildifier:buildifier_check`, and the Java
   format check to `//tools/java-format:java_format_check`.
 
 * Enable NullAway JSpecify mode and reject unrecognized JSpecify annotation locations in the Bazel Java build.
