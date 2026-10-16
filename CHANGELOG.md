@@ -2,6 +2,10 @@
 
 ### Unreleased
 
+* Fix Bazel publication targets when Braincheck is consumed as a dependency module without development tools.
+* Move Buildifier commands to `//tools/bazel-format:buildifier` and `//tools/bazel-format:buildifier_check`, and the Java
+  format check to `//tools/java-format:java_format_check`.
+
 * Enable NullAway JSpecify mode and reject unrecognized JSpecify annotation locations in the Bazel Java build.
 * Upgrade Bazel to version `9.3.0`.
 * Use Bazel's default workspace symlinks and repository cache location, and ignore the symlinks in Git.

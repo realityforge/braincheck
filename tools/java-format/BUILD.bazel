@@ -1,0 +1,12 @@
+load("@rules_palantir_java_format//:defs.bzl", "java_format_check")
+
+java_format_check(
+    name = "java_format_check",
+    testonly = True,
+    remediation = "tools/java_format.sh write",
+    targets = [
+        "//:all_tests",
+        "//core/src/test/java/org/realityforge/braincheck/gwt:smoke",
+        "//tools/release/org/realityforge/braincheck/release:javadoc_jar_builder",
+    ],
+)

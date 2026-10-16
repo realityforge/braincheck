@@ -25,6 +25,22 @@ When submitting pull requests, make sure to do the following:
 - Remove trailing whitespace. Many editors will do this automatically.
 - Ensure any new files have [a trailing newline](https://stackoverflow.com/questions/5813311/no-newline-at-end-of-file)
 
+Run `bazel run //tools/bazel-format:buildifier` to format Bazel files and `tools/java_format.sh` to format Java files.
+Use `//tools/bazel-format:buildifier_check` and `//tools/java-format:java_format_check` for their check targets.
+
+## Verification
+
+Run `tools/check.sh` for the full validation gate. Its external-module regression can also be run separately:
+
+```bash
+tools/check_external_module.sh
+```
+
+This builds the public libraries and Maven publication artifacts from a separate synthetic module, including the root
+`LICENSE` export. It uses Bazel's default dependency-module isolation and checks that both formatter modules are absent
+from the module graph. The consumer reuses Braincheck's production dependency overrides because Bazel only applies them in
+the root module. It adds no development tools or patches to Braincheck.
+
 ## How to speed the merging of pull requests
 
 * Describe your changes in the CHANGELOG.md (if present).
