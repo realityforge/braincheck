@@ -7,9 +7,8 @@ package org.realityforge.braincheck;
 public final class BrainCheckConfig {
     /**
      * The provider abstraction is needed due to limitations in the way J2CL performs dead-code elimination.
-     * In J2CL the code <code>"production" == System.getProperty( "braincheck.environment" )</code> will return
-     * true when values match while this will not work in JRE mode but will work with later versions of GWT2.x
-     * it seems. Using a pair of classes with @GwtIncompatible allows us to have the best of both worlds.
+     * J2CL uses string identity comparisons for compile-time properties, while the JVM needs value comparisons
+     * and default values. J2CL strips the JVM overrides marked with @GwtIncompatible.
      */
     private static final ConfigProvider PROVIDER = new ConfigProvider();
 
@@ -82,7 +81,7 @@ public final class BrainCheckConfig {
         @GwtIncompatible
         @Override
         boolean isProductionEnvironment() {
-            return System.getProperty("braincheck.environment", "production").equals("production");
+            return "production".equals(System.getProperty("braincheck.environment", "production"));
         }
 
         @GwtIncompatible

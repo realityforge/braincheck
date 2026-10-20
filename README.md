@@ -1,12 +1,9 @@
 # Braincheck
 
-[<img src="https://img.shields.io/maven-central/v/org.realityforge.braincheck/braincheck.svg?label=latest%20release"/>](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.realityforge.braincheck%22%20a%3A%22braincheck%22)
-![GWT3/J2CL compatible](https://img.shields.io/badge/GWT3/J2CL-compatible-brightgreen.svg)
+[<img src="https://img.shields.io/maven-central/v/org.realityforge.braincheck/braincheck-core.svg?label=latest%20release"/>](https://central.sonatype.com/artifact/org.realityforge.braincheck/braincheck-core)
 
-Braincheck is a very simple library that you can used to check invariants in code. It is designed that these invariant
-checks can be compiled out in production environments either by the JIT or the GWT compiler. Braincheck also super-sources
-`Objects.requireNonNull(...)` to call `javaemul.internal.InternalPreconditions.checkNotNull(...)` so that these guards
-can be stripped by configuring the compile-time property `jre.checks.checkLevel` to `DISABLED`.
+Braincheck checks invariants in Java 17 and J2CL applications. Invariant checks can be optimized away in production
+by the JVM's JIT or J2CL's Closure compiler. GWT is no longer supported.
 
 ## Quick Start
 
@@ -17,15 +14,12 @@ The simplest way to use Braincheck is to;
 ```xml
 <dependency>
    <groupId>org.realityforge.braincheck</groupId>
-   <artifactId>braincheck</artifactId>
+   <artifactId>braincheck-core</artifactId>
    <version>1.35.0</version>
 </dependency>
 ```
 
-* If the application is a GWT application, then inherit from `org.realityforge.braincheck.BrainCheck`
-  in your .gwt.xml for a production build or inherit `org.realityforge.braincheck.BrainCheckDev` in a
-  development build. You can also explicitly set the configuration properties to control which parts
-  of the application are optimized away during builds. See the configuration properties section below.
+* Configure checks using JVM system properties or J2CL Closure defines, as described below.
 
 * Add invariant checks to your code to verify various conditions.
 
@@ -42,7 +36,7 @@ class MyClass
     // Raise an exception if condition (first parameter) is not true
     invariant( () -> 1 == 1, () -> "Maths has broken down!" );
 
-    // Raise an exception if invariant checks enabled
+    // Always raise an exception
     fail( () -> "You have reached a failing scenario in the application" );
   }
 }
@@ -70,20 +64,22 @@ class MyTest
 
 ## Bazel
 
-Depend on `@braincheck//:core` for JVM/GWT code, `@braincheck//:core-j2cl` for J2CL code,
+Depend on `@braincheck//:core` for JVM code, `@braincheck//:core-j2cl` for J2CL code,
 and `@braincheck//:testng` for TestNG support. These are the supported public Bazel labels.
 
 ## Configuration Properties
 
-The following configuration properties can be used to configure BrainCheck. These are mainly used to optimize
-the size of applications that statically compile code (i.e. GWT) when we want to minimize code size.
+Set JVM system properties with `-Dname=value`. In J2CL builds, pass Closure compiler defines with
+`--define=name=value`. J2CL can remove disabled invariant checks and verbose messages from optimized output.
 
 * `braincheck.verbose_error_messages` which can be set to `true` or `false` and if `true`, then invariant exception
   messages will use the supplied message, otherwise no message will be passed to exception.
 * `braincheck.check_invariants` which can be set to `true` or `false` and if `false`, calls to `Guards.invariant()`
-  and `Guards.fail()` are ignored.
-* `braincheck.check_api_invariants` which can be set to `true` or `false` and if `false` or if
-  `braincheck.check_invariants` is false then calls to `Guards.apiInvariant()` are ignored.
+  are ignored. `Guards.fail()` always throws.
+* `braincheck.check_api_invariants` which can be set to `true` or `false` and if `false`, calls to
+  `Guards.apiInvariant()` are ignored. This setting is independent of `braincheck.check_invariants`.
 * `braincheck.environment` which can be set to `development` or `production` and defaults to `production`. If
   `production` then the default values for `braincheck.verbose_error_messages`, `braincheck.check_invariants`
-  and `braincheck.check_api_invariants` will be `false` otherwise they will default to be `true`.
+  and `braincheck.check_api_invariants` will be `false`. On the JVM, `development` defaults all three to `true`.
+  In J2CL, each flag defaults to `false` independently of the environment; explicitly define all three as `true`
+  for a development build.

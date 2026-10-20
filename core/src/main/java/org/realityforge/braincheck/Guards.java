@@ -43,7 +43,7 @@ public final class Guards {
      * the library.
      *
      * <p>If the condition is false then an {@link IllegalStateException} is thrown.
-     * The invariant check will be skipped unless the configuration setting {@link BrainCheckConfig#checkInvariants()}
+     * The invariant check will be skipped unless the configuration setting {@link BrainCheckConfig#checkApiInvariants()}
      * is true. A null message is used rather than supplied message unless {@link BrainCheckConfig#verboseErrorMessages()}
      * is true.</p>
      *
@@ -125,8 +125,7 @@ public final class Guards {
 
     private static void doFail(final Supplier<String> message) {
         /*
-         * This flag will only be present and set when GWT is compiling the source code and the relevant
-         * compile time property is defined. Thus this will be false in normal jre runtime environment.
+         * JavaScript applications can register this property to pause the debugger on invariant failures.
          */
         if ("ENABLED".equals(System.getProperty("jre.debugMode"))) {
             DebuggerUtil.debugger();

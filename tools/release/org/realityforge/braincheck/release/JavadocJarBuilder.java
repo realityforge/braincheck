@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
@@ -73,8 +74,9 @@ public final class JavadocJarBuilder {
             for (final JarEntry entry : entries) {
                 if (!entry.isDirectory() && entry.getName().endsWith(".java")) {
                     final var target = output.resolve(entry.getName());
-                    Files.createDirectories(target.getParent());
-                    final var content = jar.getInputStream(entry).readAllBytes();
+                    Files.createDirectories(Objects.requireNonNull(target.getParent()));
+                    final var content =
+                            Objects.requireNonNull(jar.getInputStream(entry)).readAllBytes();
                     if (Files.exists(target)) {
                         final var existing = Files.readAllBytes(target);
                         if (!java.util.Arrays.equals(existing, content)) {
@@ -133,7 +135,7 @@ public final class JavadocJarBuilder {
     }
 
     private static void writeJar(final Path output, final Path docs) throws IOException {
-        Files.createDirectories(output.toAbsolutePath().getParent());
+        Files.createDirectories(Objects.requireNonNull(output.toAbsolutePath().getParent()));
         try (JarOutputStream out = new JarOutputStream(Files.newOutputStream(output), new Manifest())) {
             final List<Path> files;
             try (Stream<Path> stream = Files.walk(docs)) {

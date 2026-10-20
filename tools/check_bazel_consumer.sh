@@ -122,7 +122,6 @@ for label in \
 done
 for entry in \
   'third_party/java:rules.bzl java_library' \
-  'tools/gwt:defs.bzl gwt_compile' \
   'tools/release:release.bzl release_jar'; do
   read -r label symbol <<< "$entry"
   printf 'load("@braincheck//%s", "%s")\nfilegroup(name = "target")\n' "$label" "$symbol" > denied/BUILD.bazel

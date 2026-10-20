@@ -28,20 +28,14 @@ final class BrainCheckUtil {
 
     /**
      * Return string converted to stack trace.
-     * This method uses explicit traversal of the throwable to be compatible with GWT.
-     *
-     * Contrast this with the following code that is not compatible with GWT.
-     * <pre>
-     * final StringWriter out = new StringWriter();
-     * t.printStackTrace( new PrintWriter( out ) );
-     * </pre>
+     * Formats each cause explicitly to keep diagnostic messages consistent between Java and J2CL.
      *
      * @param throwable the throwable to convert
      * @return the stack trace.
      */
     static String throwableToString(final Throwable throwable) {
         assert null != throwable;
-        final StringBuilder sb = new StringBuilder();
+        final var sb = new StringBuilder();
         Throwable t = throwable;
         while (null != t) {
             addCausedByPrefix(sb);

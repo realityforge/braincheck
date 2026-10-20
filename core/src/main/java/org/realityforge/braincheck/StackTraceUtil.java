@@ -10,7 +10,6 @@ final class StackTraceUtil {
     }
 
     private static final class StackTraceProvider extends AbstractStackTraceProvider {
-        @SuppressWarnings("NonJREEmulationClassesInClientCode")
         @GwtIncompatible
         @Override
         StackTraceElement[] getStackTrace(final int frameCountToDrop) {
