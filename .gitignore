@@ -1,3 +1,9 @@
 /tmp
+
 /dist
+
+# Ignore Bazel link tree
 /bazel-*
+
+# Ignore IDE configuration
+/.idea
