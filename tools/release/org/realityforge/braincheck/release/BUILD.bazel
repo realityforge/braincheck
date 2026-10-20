@@ -1,6 +1,6 @@
 load("//third_party/java:rules.bzl", "java_binary", "java_test")
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//visibility:private"])
 
 MAVEN_ARTIFACT_ARGS = [
     "$(rootpath //tools/release:release_version)",
@@ -43,6 +43,7 @@ java_binary(
         "package-info.java",
     ],
     main_class = "org.realityforge.braincheck.release.JarBuilder",
+    visibility = ["//tools/release:__pkg__"],
 )
 
 java_binary(
@@ -52,6 +53,10 @@ java_binary(
         "package-info.java",
     ],
     main_class = "org.realityforge.braincheck.release.JavadocJarBuilder",
+    visibility = [
+        "//tools/java-format:__pkg__",
+        "//tools/release:__pkg__",
+    ],
 )
 
 java_binary(
@@ -88,6 +93,7 @@ java_binary(
     ],
     data = MAVEN_ARTIFACT_DATA,
     main_class = "org.realityforge.braincheck.release.DistBuilder",
+    visibility = ["//tools/release:__pkg__"],
 )
 
 java_binary(
@@ -97,6 +103,7 @@ java_binary(
         "package-info.java",
     ],
     main_class = "org.realityforge.braincheck.release.ReleaseLifecycleTool",
+    visibility = ["//tools/release:__pkg__"],
 )
 
 java_test(
@@ -110,6 +117,7 @@ java_test(
     data = MAVEN_ARTIFACT_DATA,
     main_class = "org.realityforge.braincheck.release.ReleaseArtifactsIntegrationTest",
     use_testrunner = False,
+    visibility = ["//tools/release:__pkg__"],
 )
 
 java_test(
@@ -124,6 +132,7 @@ java_test(
     data = MAVEN_ARTIFACT_DATA + [":test-version.txt"],
     main_class = "org.realityforge.braincheck.release.DistBuilderTest",
     use_testrunner = False,
+    visibility = ["//tools/release:__pkg__"],
 )
 
 java_test(
@@ -136,6 +145,7 @@ java_test(
     ],
     main_class = "org.realityforge.braincheck.release.JarBuilderTest",
     use_testrunner = False,
+    visibility = ["//tools/release:__pkg__"],
 )
 
 java_test(
@@ -148,4 +158,5 @@ java_test(
     ],
     main_class = "org.realityforge.braincheck.release.ReleaseLifecycleToolTest",
     use_testrunner = False,
+    visibility = ["//tools/release:__pkg__"],
 )

@@ -2,6 +2,9 @@
 
 ### Unreleased
 
+* Limit the public Bazel API to `//:core`, `//:core-j2cl`, and `//:testng`; make implementation, release,
+  dependency, and build-rule labels internal.
+
 * Upgrade JSpecify to version `1.0.1`.
 * Fix Bazel publication targets when Braincheck is consumed as a dependency module without development tools.
 * Move Buildifier commands to `//tools/buildifier:buildifier` and `//tools/buildifier:buildifier_check`, and the Java

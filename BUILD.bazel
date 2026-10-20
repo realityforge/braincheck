@@ -1,6 +1,11 @@
-package(default_visibility = ["//visibility:public"])
+load("@rules_java//java:defs.bzl", "java_import")
 
-exports_files(["LICENSE"])
+package(default_visibility = ["//visibility:private"])
+
+exports_files(
+    ["LICENSE"],
+    visibility = ["//tools/release:__pkg__"],
+)
 
 filegroup(
     name = "artifacts",
@@ -17,5 +22,38 @@ test_suite(
         "//core/src/test/java/org/realityforge/braincheck:all_tests",
         "//testng/src/test/java/org/realityforge/braincheck:all_tests",
         "//tools/release:all_tests",
+    ],
+    visibility = ["//tools/java-format:__pkg__"],
+)
+
+java_import(
+    name = "core",
+    jars = ["//tools/release:braincheck_core_jar"],
+    srcjar = "//tools/release:braincheck_core_sources_jar",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//third_party/java:jsinterop_annotations",
+        "//third_party/java:jspecify",
+    ],
+)
+
+# Share the native compilation with all downstream libraries. The alias keeps
+# J2CL's generated companion targets outside the public API.
+alias(
+    name = "core-j2cl",
+    actual = "//core/src/main/java/org/realityforge/braincheck:core-j2cl",
+    visibility = ["//visibility:public"],
+)
+
+java_import(
+    name = "testng",
+    jars = ["//tools/release:braincheck_testng_jar"],
+    srcjar = "//tools/release:braincheck_testng_sources_jar",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":core",
+        "//third_party/java:javax_json",
+        "//third_party/java:jspecify",
+        "//third_party/java:testng",
     ],
 )

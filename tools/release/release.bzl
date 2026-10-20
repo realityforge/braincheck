@@ -1,5 +1,7 @@
 load("@rules_java//java/common:java_info.bzl", "JavaInfo")
 
+visibility(["//tools/release"])
+
 ReleaseVersionInfo = provider("Release version selected by //tools/release:version.", fields = ["value"])
 
 def _version_impl(ctx):

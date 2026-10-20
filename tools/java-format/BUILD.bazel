@@ -6,6 +6,8 @@ java_format_check(
     remediation = "tools/java_format.sh write",
     targets = [
         "//:all_tests",
+        "//core/src/main/java/org/realityforge/braincheck:core",
+        "//testng/src/main/java/org/realityforge/braincheck:testng",
         "//core/src/test/java/org/realityforge/braincheck/gwt:smoke",
         "//tools/release/org/realityforge/braincheck/release:javadoc_jar_builder",
     ],

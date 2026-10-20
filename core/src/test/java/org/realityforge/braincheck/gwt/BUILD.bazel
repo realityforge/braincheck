@@ -1,6 +1,6 @@
 load("//third_party/java:rules.bzl", "java_library")
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//visibility:private"])
 
 java_library(
     name = "smoke",
@@ -12,8 +12,12 @@ java_library(
         "BrainCheckDevSmoke.gwt.xml",
         "BrainCheckSmoke.gwt.xml",
     ],
+    visibility = [
+        "//core/src/test/gwt:__pkg__",
+        "//tools/java-format:__pkg__",
+    ],
     deps = [
-        "//core/src/main/java/org/realityforge/braincheck:core",
+        "//:core",
         "//third_party/java:gwt_user",
     ],
 )
