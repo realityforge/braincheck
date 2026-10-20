@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.jspecify.annotations.Nullable;
@@ -74,7 +75,7 @@ public final class ReleaseLifecycleTool {
         }
 
         final String major = matcher.group(1);
-        final String minor = matcher.group(2);
+        final String minor = Objects.requireNonNull(matcher.group(2));
         final int nextMinor = Integer.parseInt(minor) + 1;
         final String nextMinorText = padLeft(Integer.toString(nextMinor), minor.length());
         final String patch = matcher.group(3);
@@ -177,7 +178,7 @@ public final class ReleaseLifecycleTool {
         validateReleaseVersion(options.version());
         final String changelog = readString(options.changelog());
         final Matcher firstSection = SECTION_HEADING.matcher(changelog);
-        if (firstSection.find() && isUnreleasedHeading(firstSection.group())) {
+        if (firstSection.find() && isUnreleasedHeading(Objects.requireNonNull(firstSection.group()))) {
             return;
         }
 

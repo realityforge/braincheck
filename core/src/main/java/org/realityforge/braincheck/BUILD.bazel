@@ -16,9 +16,7 @@ java_library(
         "package-info.java",
     ],
     resources = [
-        "BrainCheck.gwt.xml",
         "BrainCheckConfig.native.js",
-        "BrainCheckDev.gwt.xml",
         "braincheck.js",
     ],
     visibility = [

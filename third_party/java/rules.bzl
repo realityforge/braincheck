@@ -3,7 +3,6 @@ load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_library =
 visibility([
     "//core/src/main/java/org/realityforge/braincheck",
     "//core/src/test/java/org/realityforge/braincheck",
-    "//core/src/test/java/org/realityforge/braincheck/gwt",
     "//testng/src/main/java/org/realityforge/braincheck",
     "//testng/src/test/java/org/realityforge/braincheck",
     "//tools/release/org/realityforge/braincheck/release",
@@ -13,7 +12,6 @@ _JSPECIFY = "//third_party/java:jspecify"
 _NULLAWAY_PLUGIN = "//third_party/java:nullaway_plugin"
 
 _ERROR_PRONE_JAVACOPTS = [
-    "-XepExcludedPaths:(.*/" + "external/.*|.*/_javac/.*/.*_sources/.*)",
     "-Xep:AlmostJavadoc:ERROR",
     "-Xep:AlreadyChecked:ERROR",
     "-Xep:AmbiguousMethodReference:ERROR",
@@ -101,8 +99,7 @@ _ERROR_PRONE_JAVACOPTS = [
     "-Xep:InterruptedExceptionSwallowed:ERROR",
     "-Xep:PrivateConstructorForUtilityClass:ERROR",
     "-Xep:UnnecessaryDefaultInEnumSwitch:ERROR",
-    # Disabled until we no longer need to use GWT
-    # "-Xep:Varifier:ERROR",
+    "-Xep:Varifier:ERROR",
 ]
 
 _TEST_ERROR_PRONE_JAVACOPTS = [
@@ -117,6 +114,9 @@ _JAVA_JAVACOPTS = [
     "-Xep:NullAway:ERROR",
     "-Xep:RequireExplicitNullMarking:ERROR",
     "-XepOpt:NullAway:JSpecifyMode=true",
+    "-XepOpt:NullAway:HandleWildcardGenerics=true",
+    "-XepOpt:NullAway:WarnOnGenericInferenceFailure=true",
+    "-XepOpt:NullAway:JSpecifyJDKModels=true",
     "-XepOpt:NullAway:OnlyNullMarked=true",
     "-Xlint:all,-processing,-serial,-path,-options,-classfile,-this-escape",
 ] + _ERROR_PRONE_JAVACOPTS

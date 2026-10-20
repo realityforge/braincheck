@@ -2,6 +2,9 @@
 
 ### Unreleased
 
+* Remove GWT support, supersource, and the `braincheck-jre` artifact; support Java 17 and J2CL.
+* Check all repository-owned Java with Error Prone, enable Varifier, and strengthen NullAway's wildcard,
+  generic inference, and JDK nullness checks.
 * Limit the public Bazel API to `//:core`, `//:core-j2cl`, and `//:testng`; make implementation, release,
   dependency, and build-rule labels internal.
 * Upgrade JSpecify to version `1.0.1`.

@@ -14,6 +14,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
@@ -86,7 +87,7 @@ public final class JarBuilder {
             addEntry(entries, resource.entryName(), Files.readAllBytes(resource.path()), false);
         }
 
-        Files.createDirectories(output.toAbsolutePath().getParent());
+        Files.createDirectories(Objects.requireNonNull(output.toAbsolutePath().getParent()));
         try (JarOutputStream out = new JarOutputStream(Files.newOutputStream(output), manifest(mainClass))) {
             writeEntries(out, entries, services, plexusComponents);
         }
@@ -157,7 +158,7 @@ public final class JarBuilder {
     }
 
     private static byte[] read(final JarFile jar, final ZipEntry entry) throws IOException {
-        try (InputStream input = jar.getInputStream(entry)) {
+        try (InputStream input = Objects.requireNonNull(jar.getInputStream(entry))) {
             return input.readAllBytes();
         }
     }

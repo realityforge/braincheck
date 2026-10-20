@@ -8,7 +8,6 @@ import org.testng.TestListenerAdapter;
 /**
  * A base class for creating a TestNG listener to attach to tests.
  */
-@GwtIncompatible
 public abstract class AbstractTestNGMessageCollector extends TestListenerAdapter implements ITestListener {
     private final GuardMessageCollector _messages = createCollector();
 

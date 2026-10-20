@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class BrainCheckTestUtilTest extends AbstractTest {
     @Test
     public void onGuardListenerReceivesMessages() {
-        final GuardRecorder recorder = new GuardRecorder();
+        final var recorder = new GuardRecorder();
         BrainCheckTestUtil.setOnGuardListener(recorder);
 
         assertEquals(recorder.toString(), "");

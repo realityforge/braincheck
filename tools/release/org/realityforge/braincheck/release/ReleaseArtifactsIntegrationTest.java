@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
@@ -21,8 +22,8 @@ public final class ReleaseArtifactsIntegrationTest {
     private ReleaseArtifactsIntegrationTest() {}
 
     public static void main(final String[] args) throws Exception {
-        if (args.length != 12) {
-            throw new IllegalArgumentException("Expected version file and eleven Maven artifact paths");
+        if (args.length != 9) {
+            throw new IllegalArgumentException("Expected version file and eight Maven artifact paths");
         }
         final String version = Files.readString(resolve(Path.of(args[0])), StandardCharsets.UTF_8)
                 .trim();
@@ -37,17 +38,11 @@ public final class ReleaseArtifactsIntegrationTest {
                 version,
                 Set.of("org.jspecify:jspecify:1.0.1", "com.google.jsinterop:jsinterop-annotations:2.0.0"));
 
-        assertJarEntries(
-                resolve(Path.of(args[5])),
-                Set.of("META-INF/MANIFEST.MF", "META-INF/LICENSE", PACKAGE_PATH + "super/java/util/Objects.java"));
-        assertJarEntries(resolve(Path.of(args[6])), Set.of("META-INF/MANIFEST.MF"));
-        assertPom(resolve(Path.of(args[7])), "braincheck-jre", "Super-source jre classes", version, Set.of());
-
-        assertJarEntries(resolve(Path.of(args[8])), testngMainEntries());
-        assertJarEntries(resolve(Path.of(args[9])), testngSourceEntries());
-        assertJarContains(resolve(Path.of(args[10])), PACKAGE_PATH + "GuardMessageCollector.html");
+        assertJarEntries(resolve(Path.of(args[5])), testngMainEntries());
+        assertJarEntries(resolve(Path.of(args[6])), testngSourceEntries());
+        assertJarContains(resolve(Path.of(args[7])), PACKAGE_PATH + "GuardMessageCollector.html");
         assertPom(
-                resolve(Path.of(args[11])),
+                resolve(Path.of(args[8])),
                 "braincheck-testng",
                 "TestNG support library",
                 version,
@@ -62,12 +57,10 @@ public final class ReleaseArtifactsIntegrationTest {
         final var entries = new LinkedHashSet<>(coreSourceEntries());
         entries.add("META-INF/LICENSE");
         entries.addAll(List.of(
-                PACKAGE_PATH + "BrainCheck.gwt.xml",
                 PACKAGE_PATH + "BrainCheckConfig$AbstractConfigProvider.class",
                 PACKAGE_PATH + "BrainCheckConfig$ConfigProvider.class",
                 PACKAGE_PATH + "BrainCheckConfig.class",
                 PACKAGE_PATH + "BrainCheckConfig.native.js",
-                PACKAGE_PATH + "BrainCheckDev.gwt.xml",
                 PACKAGE_PATH + "BrainCheckTestUtil$GuardType.class",
                 PACKAGE_PATH + "BrainCheckTestUtil$OnGuardListener.class",
                 PACKAGE_PATH + "BrainCheckTestUtil.class",
@@ -134,7 +127,9 @@ public final class ReleaseArtifactsIntegrationTest {
                 throw new AssertionError(
                         "Unexpected entries in " + path + "\nExpected: " + expected + "\nActual: " + actual);
             }
-            final String manifestVersion = jar.getManifest().getMainAttributes().getValue("Manifest-Version");
+            final String manifestVersion = Objects.requireNonNull(jar.getManifest())
+                    .getMainAttributes()
+                    .getValue("Manifest-Version");
             if (!"1.0".equals(manifestVersion)) {
                 throw new AssertionError("Unexpected manifest version in " + path + ": " + manifestVersion);
             }

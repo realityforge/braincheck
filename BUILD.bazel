@@ -11,7 +11,6 @@ filegroup(
     name = "artifacts",
     srcs = [
         "//core/src/main/java/org/realityforge/braincheck:core",
-        "//jre/src/main/super/org/realityforge/braincheck/super/java/util:jre_sources",
         "//testng/src/main/java/org/realityforge/braincheck:testng",
     ],
 )

@@ -7,8 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation use to mark code as incompatible with GWT.
- * The Name of the annotation is all that matters.
+ * Marks JVM-only code for removal by J2CL, which recognizes the annotation's simple name.
  */
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE, ElementType.METHOD})

@@ -21,7 +21,6 @@ public final class DistBuilder {
     private static final String DIST_ID = "braincheck";
     private static final Map<String, List<String>> ARTIFACTS = Map.of(
             "braincheck-core", List.of("jar", "sources", "javadoc", "pom"),
-            "braincheck-jre", List.of("jar", "sources", "pom"),
             "braincheck-testng", List.of("jar", "sources", "javadoc", "pom"));
     private static final long STABLE_TIME = 0L;
 

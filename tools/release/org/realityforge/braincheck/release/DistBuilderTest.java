@@ -12,13 +12,13 @@ import java.util.Set;
 import java.util.zip.ZipFile;
 
 public final class DistBuilderTest {
-    private static final List<String> ARTIFACTS = List.of("braincheck-core", "braincheck-jre", "braincheck-testng");
+    private static final List<String> ARTIFACTS = List.of("braincheck-core", "braincheck-testng");
 
     private DistBuilderTest() {}
 
     public static void main(final String[] args) throws Exception {
-        if (args.length != 12) {
-            throw new IllegalArgumentException("Expected version file and eleven Maven artifact paths");
+        if (args.length != 9) {
+            throw new IllegalArgumentException("Expected version file and eight Maven artifact paths");
         }
         final Path root = Files.createTempDirectory("dist-builder-test");
         try {
@@ -70,9 +70,6 @@ public final class DistBuilderTest {
             "braincheck-core:sources",
             "braincheck-core:javadoc",
             "braincheck-core:pom",
-            "braincheck-jre:jar",
-            "braincheck-jre:sources",
-            "braincheck-jre:pom",
             "braincheck-testng:jar",
             "braincheck-testng:sources",
             "braincheck-testng:javadoc",
@@ -87,10 +84,7 @@ public final class DistBuilderTest {
     private static Set<String> expectedEntries(final String version) {
         final var entries = new LinkedHashSet<String>();
         for (final String artifact : ARTIFACTS) {
-            final List<String> kinds = "braincheck-jre".equals(artifact)
-                    ? List.of("jar", "sources", "pom")
-                    : List.of("jar", "sources", "javadoc", "pom");
-            for (final String kind : kinds) {
+            for (final String kind : List.of("jar", "sources", "javadoc", "pom")) {
                 final String filename;
                 if ("jar".equals(kind)) {
                     filename = artifact + "-" + version + ".jar";
@@ -105,8 +99,8 @@ public final class DistBuilderTest {
                 }
             }
         }
-        if (entries.size() != 66) {
-            throw new AssertionError("Expected a 66-file distribution manifest, got " + entries.size());
+        if (entries.size() != 48) {
+            throw new AssertionError("Expected a 48-file distribution manifest, got " + entries.size());
         }
         return entries;
     }

@@ -87,7 +87,6 @@ import javax.json.stream.JsonGeneratorFactory;
  * location in the source file where the invariant checks are generated. This makes it easy to
  * generate errors with cross references as required.</p>
  */
-@GwtIncompatible
 public final class GuardMessageCollector {
     private final Map<Integer, Message> _messages = new HashMap<>();
     private final String _key;
@@ -209,8 +208,8 @@ public final class GuardMessageCollector {
         final Matcher matcher =
                 Pattern.compile("^" + _key + "-(\\d\\d\\d\\d): (.*)$").matcher(message);
         if (matcher.matches()) {
-            final int code = Integer.parseInt(matcher.group(1));
-            final String msg = matcher.group(2);
+            final int code = Integer.parseInt(Objects.requireNonNull(matcher.group(1)));
+            final String msg = Objects.requireNonNull(matcher.group(2));
 
             matchOrRecordDiagnosticMessage(code, type, msg, stackTrace[0]);
         }
@@ -331,7 +330,7 @@ public final class GuardMessageCollector {
      */
     private void formatJson(final File file) throws IOException {
         final byte[] data = Files.readAllBytes(file.toPath());
-        final String jsonData = new String(data, StandardCharsets.UTF_8);
+        final var jsonData = new String(data, StandardCharsets.UTF_8);
 
         final String output = jsonData.replaceAll("(?m)^ {4}\\{", "  {")
                         .replaceAll("(?m)^ {4}}", "  }")
@@ -350,7 +349,7 @@ public final class GuardMessageCollector {
             final BrainCheckTestUtil.GuardType type,
             final String messagePattern,
             final StackTraceElement caller) {
-        final Message message = new Message(_key, code, type, messagePattern, true, new HashSet<>());
+        final var message = new Message(_key, code, type, messagePattern, true, new HashSet<>());
         message.recordCaller(caller);
         _messages.put(code, message);
     }
@@ -365,7 +364,7 @@ public final class GuardMessageCollector {
             recordDiagnosticMessage(code, type, message, caller);
         } else {
             m.recordCaller(caller);
-            final StringBuilder sb = new StringBuilder();
+            final var sb = new StringBuilder();
 
             final String messagePattern = m.getMessagePattern();
             int lastOffset = 0;
@@ -396,7 +395,6 @@ public final class GuardMessageCollector {
     /**
      * Class representing a message of a single code.
      */
-    @GwtIncompatible
     private static final class Message {
         private final String _key;
         private final int _code;
