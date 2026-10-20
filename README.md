@@ -72,8 +72,6 @@ class MyTest
 
 Depend on `@braincheck//:core` for JVM/GWT code, `@braincheck//:core-j2cl` for J2CL code,
 and `@braincheck//:testng` for TestNG support. These are the supported public Bazel labels.
-The J2CL label shares one native compilation across downstream libraries. Release artifacts, source files,
-third-party dependencies, and Starlark modules are internal. The JRE super-source artifact remains available via Maven.
 
 ## Configuration Properties
 
