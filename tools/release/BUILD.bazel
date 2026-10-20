@@ -8,7 +8,7 @@ load(
     "release_version_file",
 )
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//visibility:private"])
 
 CORE = "//core/src/main/java/org/realityforge/braincheck:core"
 
@@ -46,12 +46,20 @@ release_jar(
     java_targets = [CORE],
     resource_entries = ["META-INF/LICENSE"],
     resource_files = ["//:LICENSE"],
+    visibility = [
+        "//:__pkg__",
+        "//tools/release/org/realityforge/braincheck/release:__pkg__",
+    ],
 )
 
 release_source_jar(
     name = "braincheck_core_sources_jar",
     out = "braincheck-core-sources.jar",
     java_targets = [CORE],
+    visibility = [
+        "//:__pkg__",
+        "//tools/release/org/realityforge/braincheck/release:__pkg__",
+    ],
 )
 
 release_javadoc_jar(
@@ -62,6 +70,7 @@ release_javadoc_jar(
         "@jspecify//file",
     ],
     java_targets = [CORE],
+    visibility = ["//tools/release/org/realityforge/braincheck/release:__pkg__"],
 )
 
 release_pom(
@@ -74,6 +83,7 @@ release_pom(
     ],
     description = "Core invariant verification library",
     display_name = "Core invariant verification library",
+    visibility = ["//tools/release/org/realityforge/braincheck/release:__pkg__"],
 )
 
 release_jar(
@@ -87,11 +97,13 @@ release_jar(
         "//jre/src/main/super/org/realityforge/braincheck/super/java/util:jre_sources",
         "//:LICENSE",
     ],
+    visibility = ["//tools/release/org/realityforge/braincheck/release:__pkg__"],
 )
 
 release_source_jar(
     name = "braincheck_jre_sources_jar",
     out = "braincheck-jre-sources.jar",
+    visibility = ["//tools/release/org/realityforge/braincheck/release:__pkg__"],
 )
 
 release_pom(
@@ -100,6 +112,7 @@ release_pom(
     artifact_id = "braincheck-jre",
     description = "Super-source jre classes",
     display_name = "Super-source jre classes",
+    visibility = ["//tools/release/org/realityforge/braincheck/release:__pkg__"],
 )
 
 release_jar(
@@ -109,12 +122,20 @@ release_jar(
     java_targets = [TESTNG],
     resource_entries = ["META-INF/LICENSE"],
     resource_files = ["//:LICENSE"],
+    visibility = [
+        "//:__pkg__",
+        "//tools/release/org/realityforge/braincheck/release:__pkg__",
+    ],
 )
 
 release_source_jar(
     name = "braincheck_testng_sources_jar",
     out = "braincheck-testng-sources.jar",
     java_targets = [TESTNG],
+    visibility = [
+        "//:__pkg__",
+        "//tools/release/org/realityforge/braincheck/release:__pkg__",
+    ],
 )
 
 release_javadoc_jar(
@@ -128,6 +149,7 @@ release_javadoc_jar(
         "@testng//file",
     ],
     java_targets = [TESTNG],
+    visibility = ["//tools/release/org/realityforge/braincheck/release:__pkg__"],
 )
 
 release_pom(
@@ -142,11 +164,13 @@ release_pom(
     ],
     description = "TestNG support library",
     display_name = "TestNG support library",
+    visibility = ["//tools/release/org/realityforge/braincheck/release:__pkg__"],
 )
 
 release_version_file(
     name = "release_version",
     out = "release-version.txt",
+    visibility = ["//tools/release/org/realityforge/braincheck/release:__pkg__"],
 )
 
 filegroup(
@@ -189,4 +213,5 @@ test_suite(
         ":release_lifecycle_tool_test",
         "//tools/release/org/realityforge/braincheck/release:jar_builder_test",
     ],
+    visibility = ["//:__pkg__"],
 )

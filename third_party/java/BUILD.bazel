@@ -1,10 +1,19 @@
 load("@j2cl//build_defs:rules.bzl", "j2cl_import")
 load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_import = "java_import", _java_plugin = "java_plugin", _java_test = "java_test")
+load(":rules.bzl", exports_files = "private_files")
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//visibility:private"])
 
 _java_plugin(
     name = "nullaway_plugin",
+    visibility = [
+        "//core/src/main/java/org/realityforge/braincheck:__pkg__",
+        "//core/src/test/java/org/realityforge/braincheck:__pkg__",
+        "//core/src/test/java/org/realityforge/braincheck/gwt:__pkg__",
+        "//testng/src/main/java/org/realityforge/braincheck:__pkg__",
+        "//testng/src/test/java/org/realityforge/braincheck:__pkg__",
+        "//tools/release/org/realityforge/braincheck/release:__pkg__",
+    ],
     deps = [":nullaway"],
 )
 
@@ -13,7 +22,7 @@ _java_plugin(
 # DO NOT EDIT: Content is auto-generated from //third_party/java:dependencies.yml by https://github.com/realityforge/bazel-depgen version 0.27
 
 # SHA256 of the configuration content that generated this content
-_CONFIG_SHA256 = "23930AD88F814DE5424F2585A32EE3B0445DABAA1BF3DE0FF049F3410FF003B8"
+_CONFIG_SHA256 = "7265F15500301EF36B0F7648200136078556D0D4468260801FD3989B1F431247"
 
 exports_files(["dependencies.yml"])
 
@@ -117,6 +126,7 @@ _java_import(
     name = "colt",
     jars = ["@colt//file"],
     tags = ["maven_coordinates=colt:colt:1.2.0"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
@@ -130,12 +140,14 @@ _java_import(
     name = "jsr305",
     jars = ["@jsr305//file"],
     tags = ["maven_coordinates=com.google.code.findbugs:jsr305:3.0.2"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "gson",
     jars = ["@gson//file"],
     tags = ["maven_coordinates=com.google.code.gson:gson:2.11.0"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
@@ -185,18 +197,25 @@ _java_import(
     name = "jsinterop_annotations",
     jars = ["@jsinterop_annotations//file"],
     tags = ["maven_coordinates=com.google.jsinterop:jsinterop-annotations:2.0.0"],
+    visibility = [
+        "//:__pkg__",
+        "//core/src/main/java/org/realityforge/braincheck:__pkg__",
+        "//core/src/test/gwt:__pkg__",
+    ],
 )
 
 _java_import(
     name = "icu4j",
     jars = ["@icu4j//file"],
     tags = ["maven_coordinates=com.ibm.icu:icu4j:71.1"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "nullaway",
     jars = ["@nullaway//file"],
     tags = ["maven_coordinates=com.uber.nullaway:nullaway:0.14.2"],
+    visibility = ["//visibility:private"],
     runtime_deps = [
         ":dataflow_nullaway",
         ":guava",
@@ -208,18 +227,21 @@ _java_import(
     name = "commons_collections",
     jars = ["@commons_collections//file"],
     tags = ["maven_coordinates=commons-collections:commons-collections:3.2.2"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "commons_io",
     jars = ["@commons_io//file"],
     tags = ["maven_coordinates=commons-io:commons-io:2.4"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "javax_annotation_api",
     jars = ["@javax_annotation_api//file"],
     tags = ["maven_coordinates=javax.annotation:javax.annotation-api:1.2"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
@@ -233,12 +255,14 @@ _java_import(
     name = "javax_servlet_api",
     jars = ["@javax_servlet_api//file"],
     tags = ["maven_coordinates=javax.servlet:javax.servlet-api:3.1.0"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "validation_api",
     jars = ["@validation_api//file"],
     tags = ["maven_coordinates=javax.validation:validation-api:1.0.0.GA"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
@@ -259,6 +283,7 @@ _java_import(
     name = "ant",
     jars = ["@ant//file"],
     tags = ["maven_coordinates=org.apache.ant:ant:1.9.7"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
@@ -280,96 +305,116 @@ _java_import(
     name = "ecj",
     jars = ["@ecj//file"],
     tags = ["maven_coordinates=org.eclipse.jdt:ecj:3.33.0"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "org_eclipse_jdt_core",
     jars = ["@org_eclipse_jdt_core//file"],
     tags = ["maven_coordinates=org.eclipse.jdt:org.eclipse.jdt.core:3.33.0"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_annotations",
     jars = ["@jetty_annotations//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-annotations:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_continuation",
     jars = ["@jetty_continuation//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-continuation:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_http",
     jars = ["@jetty_http//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-http:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_io",
     jars = ["@jetty_io//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-io:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_jndi",
     jars = ["@jetty_jndi//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-jndi:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_plus",
     jars = ["@jetty_plus//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-plus:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_security",
     jars = ["@jetty_security//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-security:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_server",
     jars = ["@jetty_server//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-server:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_servlet",
     jars = ["@jetty_servlet//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-servlet:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_servlets",
     jars = ["@jetty_servlets//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-servlets:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_util",
     jars = ["@jetty_util//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-util:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_webapp",
     jars = ["@jetty_webapp//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-webapp:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "jetty_xml",
     jars = ["@jetty_xml//file"],
     tags = ["maven_coordinates=org.eclipse.jetty:jetty-xml:9.4.58.v20250814"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "javax_json",
     jars = ["@javax_json//file"],
     tags = ["maven_coordinates=org.glassfish:javax.json:1.1"],
+    visibility = [
+        "//:__pkg__",
+        "//testng/src/main/java/org/realityforge/braincheck:__pkg__",
+        "//testng/src/test/java/org/realityforge/braincheck:__pkg__",
+    ],
 )
 
 _java_import(
@@ -377,6 +422,7 @@ _java_import(
     jars = ["@gwt_dev//file"],
     srcjar = "@gwt_dev__sources//file",
     tags = ["maven_coordinates=org.gwtproject:gwt-dev:2.13.1"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
@@ -384,42 +430,60 @@ _java_import(
     jars = ["@gwt_user//file"],
     srcjar = "@gwt_user__sources//file",
     tags = ["maven_coordinates=org.gwtproject:gwt-user:2.13.1"],
+    visibility = [
+        "//core/src/test/gwt:__pkg__",
+        "//core/src/test/java/org/realityforge/braincheck/gwt:__pkg__",
+    ],
 )
 
 _java_import(
     name = "jspecify",
     jars = ["@jspecify//file"],
     tags = ["maven_coordinates=org.jspecify:jspecify:1.0.1"],
+    visibility = [
+        "//:__pkg__",
+        "//core/src/main/java/org/realityforge/braincheck:__pkg__",
+        "//core/src/test/java/org/realityforge/braincheck:__pkg__",
+        "//core/src/test/java/org/realityforge/braincheck/gwt:__pkg__",
+        "//testng/src/main/java/org/realityforge/braincheck:__pkg__",
+        "//testng/src/test/java/org/realityforge/braincheck:__pkg__",
+        "//tools/release/org/realityforge/braincheck/release:__pkg__",
+    ],
 )
 
 _java_import(
     name = "asm",
     jars = ["@asm//file"],
     tags = ["maven_coordinates=org.ow2.asm:asm:9.7.1"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "asm_analysis",
     jars = ["@asm_analysis//file"],
     tags = ["maven_coordinates=org.ow2.asm:asm-analysis:9.7.1"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "asm_commons",
     jars = ["@asm_commons//file"],
     tags = ["maven_coordinates=org.ow2.asm:asm-commons:9.7.1"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "asm_tree",
     jars = ["@asm_tree//file"],
     tags = ["maven_coordinates=org.ow2.asm:asm-tree:9.7.1"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
     name = "asm_util",
     jars = ["@asm_util//file"],
     tags = ["maven_coordinates=org.ow2.asm:asm-util:9.7.1"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
@@ -432,6 +496,12 @@ _java_import(
     name = "testng",
     jars = ["@testng//file"],
     tags = ["maven_coordinates=org.testng:testng:6.11"],
+    visibility = [
+        "//:__pkg__",
+        "//core/src/test/java/org/realityforge/braincheck:__pkg__",
+        "//testng/src/main/java/org/realityforge/braincheck:__pkg__",
+        "//testng/src/test/java/org/realityforge/braincheck:__pkg__",
+    ],
     deps = [
         ":jcommander",
         ":snakeyaml",
@@ -442,6 +512,7 @@ _java_import(
     name = "sac",
     jars = ["@sac//file"],
     tags = ["maven_coordinates=org.w3c.css:sac:1.3"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 _java_import(
@@ -455,6 +526,7 @@ _java_import(
     name = "tapestry",
     jars = ["@tapestry//file"],
     tags = ["maven_coordinates=tapestry:tapestry:4.0.2"],
+    visibility = ["//core/src/test/gwt:__pkg__"],
 )
 
 # --- depgen-generated targets end ---
@@ -462,9 +534,11 @@ _java_import(
 j2cl_import(
     name = "jspecify-j2cl",
     jar = ":jspecify",
+    visibility = ["//core/src/main/java/org/realityforge/braincheck:__pkg__"],
 )
 
 alias(
     name = "jsinterop_annotations-j2cl",
     actual = "@j2cl//:jsinterop-annotations-j2cl",
+    visibility = ["//core/src/main/java/org/realityforge/braincheck:__pkg__"],
 )

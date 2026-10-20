@@ -1,5 +1,7 @@
 load("@rules_java//java:defs.bzl", "JavaInfo", "java_common")
 
+visibility(["//core/src/test/gwt"])
+
 GwtJavaInfo = provider(
     doc = "Java classpath and source jars collected for GWT compilation.",
     fields = {

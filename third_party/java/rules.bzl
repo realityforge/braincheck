@@ -1,5 +1,14 @@
 load("@rules_java//java:defs.bzl", _java_binary = "java_binary", _java_library = "java_library", _java_test = "java_test")
 
+visibility([
+    "//core/src/main/java/org/realityforge/braincheck",
+    "//core/src/test/java/org/realityforge/braincheck",
+    "//core/src/test/java/org/realityforge/braincheck/gwt",
+    "//testng/src/main/java/org/realityforge/braincheck",
+    "//testng/src/test/java/org/realityforge/braincheck",
+    "//tools/release/org/realityforge/braincheck/release",
+])
+
 _JSPECIFY = "//third_party/java:jspecify"
 _NULLAWAY_PLUGIN = "//third_party/java:nullaway_plugin"
 
@@ -171,3 +180,7 @@ def java_testng_test(name, test_classes, **kwargs):
         use_testrunner = False,
         **kwargs
     )
+
+# Depgen emits this configuration export without an explicit visibility.
+def private_files(srcs):
+    native.exports_files(srcs, visibility = ["//visibility:private"])
