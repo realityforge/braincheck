@@ -6,11 +6,18 @@ bazel_dep(name = "buildifier_prebuilt", version = "8.5.1", dev_dependency = True
 
 bazel_dep(name = "j2cl", version = "20260717")
 bazel_dep(name = "protobuf", version = "33.4")
-bazel_dep(name = "rules_closure", version = "0.16.0")
+bazel_dep(name = "rules_closure", version = "0.17.0")
 bazel_dep(name = "rules_java", version = "9.9.0")
 bazel_dep(name = "rules_jvm_external", version = "7.1")
 
 bazel_dep(name = "rules_palantir_java_format", dev_dependency = True)
+
+archive_override(
+    module_name = "rules_closure",
+    integrity = "sha256-a+8E2hTyPhwYAPs2SM7Gc2T/iVtDXFiowXrU9JpS+Ew=",
+    strip_prefix = "rules_closure-5324b6eb9b37dc08bbe5996d67e042a9e4fd57eb",
+    urls = ["https://github.com/bazelbuild/rules_closure/archive/5324b6eb9b37dc08bbe5996d67e042a9e4fd57eb.tar.gz"],
+)
 
 archive_override(
     module_name = "j2cl",

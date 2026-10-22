@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Pin rules_closure to the upstream protobuf-rule migration, following version 0.17.0.
 * Remove GWT support, supersource, and the `braincheck-jre` artifact; support Java 17 and J2CL.
 * Check all repository-owned Java with Error Prone, enable Varifier, and strengthen NullAway's wildcard,
   generic inference, and JDK nullness checks.
