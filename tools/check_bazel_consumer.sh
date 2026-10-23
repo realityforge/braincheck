@@ -39,9 +39,6 @@ awk '/^bazel_dep\(/ && !/dev_dependency/ { print }
 # A root Maven install merges J2CL and Closure's tool dependencies; otherwise
 # rules_jvm_external can select a dependency module's partial repository.
 sed -n '/^j2cl_maven = /,/^use_repo(j2cl_maven/p' "$root/MODULE.bazel" >> "$workspace/MODULE.bazel"
-mkdir -p "$workspace/third_party/bazel/patches"
-cp "$root/third_party/bazel/patches/j2cl_fix_escapevelocity_coordinate.patch" "$workspace/third_party/bazel/patches/"
-printf '%s\n' 'exports_files(["j2cl_fix_escapevelocity_coordinate.patch"], visibility = ["//:__pkg__"])' > "$workspace/third_party/bazel/patches/BUILD.bazel"
 
 cat > "$workspace/BUILD.bazel" <<'BUILD'
 load("@rules_java//java:defs.bzl", "java_binary")

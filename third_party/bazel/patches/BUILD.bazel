@@ -1,6 +1,0 @@
-package(default_visibility = ["//visibility:private"])
-
-exports_files(
-    ["j2cl_fix_escapevelocity_coordinate.patch"],
-    visibility = ["//:__pkg__"],
-)
