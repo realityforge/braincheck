@@ -30,8 +30,7 @@ local_path_override(module_name = "braincheck", path = "$root")
 MODULE
 # Reuse the root toolchain versions and required overrides, without its development dependencies.
 awk '/^bazel_dep\(/ && !/dev_dependency/ { print }
-     /^archive_override\(/ { block = $0 ORS; collecting = 1; next }
-     /^single_version_override\(/ { block = $0 ORS; collecting = 1; next }
+     /^(archive_override|git_override|single_version_override)\(/ { block = $0 ORS; collecting = 1; next }
      collecting { block = block $0 ORS; if ($0 == ")") {
        if (block !~ /rules_palantir_java_format/) printf "%s", block
        collecting = 0
