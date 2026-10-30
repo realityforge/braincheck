@@ -2,8 +2,8 @@
 
 ### Unreleased
 
-* Pin the consolidated J2CL compiler and remove the local EscapeVelocity coordinate patch.
-* Pin rules_closure to the upstream protobuf-rule migration, following version 0.17.0.
+* Pin refreshed J2CL and Closure integration snapshots, with the local EscapeVelocity patch and legacy
+  worker-protocol and Go overrides removed.
 * Remove GWT support, supersource, and the `braincheck-jre` artifact; support Java 17 and J2CL.
 * Check all repository-owned Java with Error Prone, enable Varifier, and strengthen NullAway's wildcard,
   generic inference, and JDK nullness checks.
