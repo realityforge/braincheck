@@ -38,10 +38,10 @@ public final class JarBuilderTest {
         merge(output, first, second);
 
         try (JarFile jar = new JarFile(output.toFile())) {
-            final long manifestTime =
-                    Objects.requireNonNull(jar.getJarEntry(JarFile.MANIFEST_NAME)).getTime();
-            final long entryTime =
-                    Objects.requireNonNull(jar.getJarEntry("com/example/First.class")).getTime();
+            final long manifestTime = Objects.requireNonNull(jar.getJarEntry(JarFile.MANIFEST_NAME))
+                    .getTime();
+            final long entryTime = Objects.requireNonNull(jar.getJarEntry("com/example/First.class"))
+                    .getTime();
             if (manifestTime != entryTime) {
                 throw new AssertionError("Expected manifest timestamp " + manifestTime + " to equal " + entryTime);
             }
