@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+* Give release jar manifests a stable timestamp so repeated builds produce identical jars.
 * Pin refreshed J2CL and Closure integration snapshots, with the local EscapeVelocity patch and legacy
   worker-protocol and Go overrides removed.
 * Remove GWT support, supersource, and the `braincheck-jre` artifact; support Java 17 and J2CL.
