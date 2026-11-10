@@ -8,13 +8,13 @@ cd "${ROOT}"
 
 case "${MODE}" in
   write)
-    exec bazel run @rules_palantir_java_format//:java_format -- --root=core --root=jre --root=testng --root=tools
+    exec bazel run @rules_palantir_java_format//:java_format -- --root=core --root=testng --root=tools
     ;;
   check)
     exec bazel build //tools/java-format:java_format_check
     ;;
   watch)
-    exec bazel run @rules_palantir_java_format//:java_format_watch -- --root=core --root=jre --root=testng --root=tools
+    exec bazel run @rules_palantir_java_format//:java_format_watch -- --root=core --root=testng --root=tools
     ;;
   *)
     echo "usage: tools/java_format.sh [write|check|watch]" >&2
